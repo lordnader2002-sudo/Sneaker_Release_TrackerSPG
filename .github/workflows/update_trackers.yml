@@ -41,7 +41,8 @@ jobs:
 
       - name: Run primary fetcher
         run: |
-          node fetch_releases_primary.js --days 35 --output data/primary_releases.json
+          node mkdir -p data
+          node fetch_releases_primary.js --days 35 --output data/primary_releases.json || echo "[]" > data/primary_releases.json
 
       - name: Run fallback fetcher
         run: |

@@ -1,0 +1,95 @@
+name: Update Sneaker Trackers
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "15 11 * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sneaker-tracker-update
+  cancel-in-progress: false
+
+jobs:
+  build-trackers:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install Node dependencies
+        run: npm install
+
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+          python -m playwright install chromium
+
+      - name: Run primary fetcher
+        run: |
+          node fetch_releases_primary.js --days 35 --output data/primary_releases.json
+
+      - name: Run fallback fetcher
+        run: |
+          python fetch_release_fallback.py --days 35 --output data/fallback_releases.json
+
+      - name: Merge, score, and compare
+        run: |
+          python merge_and_compare.py \
+            --primary data/primary_releases.json \
+            --fallback data/fallback_releases.json \
+            --previous data/final_releases.json \
+            --output data/final_releases.json \
+            --changes data/changes.json \
+            --archive-dir archive
+
+      - name: Validate final output
+        run: |
+          python merge_and_compare.py --validate-only --primary data/final_releases.json
+
+      - name: Build workbooks
+        run: |
+          python build_tracker_workbook.py \
+            data/final_releases.json \
+            --changes data/changes.json \
+            --weekly-output output/weekly_tracker.xlsx \
+            --monthly-output output/monthly_tracker.xlsx
+
+      - name: Upload generated files
+        uses: actions/upload-artifact@v4
+        with:
+          name: sneaker-trackers
+          path: |
+            data/final_releases.json
+            data/changes.json
+            output/weekly_tracker.xlsx
+            output/monthly_tracker.xlsx
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Commit generated files
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/final_releases.json data/changes.json output/weekly_tracker.xlsx output/monthly_tracker.xlsx archive
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+            exit 0
+          fi
+          git commit -m "Automated tracker update"
+          git push

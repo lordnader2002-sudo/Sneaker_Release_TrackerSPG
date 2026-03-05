@@ -40,8 +40,9 @@ jobs:
           python -m playwright install chromium
 
       - name: Run primary fetcher
+        shell: bash
         run: |
-          node mkdir -p data
+          mkdir -p data
           node fetch_releases_primary.js --days 35 --output data/primary_releases.json || echo "[]" > data/primary_releases.json
 
       - name: Run fallback fetcher

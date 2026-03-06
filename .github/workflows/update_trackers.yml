@@ -126,6 +126,7 @@ jobs:
             output/monthly_tracker.xlsx
             data/sneakernews_debug.txt
             data/sneakernews_debug.html
+            public/last_updated.txt
           if-no-files-found: error
           retention-days: 14
 

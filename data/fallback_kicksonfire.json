@@ -181,6 +181,18 @@
   },
   {
     "releaseDate": "2026-03-10",
+    "shoeName": "Balenciaga Hamptons Platform WMNS Black",
+    "brand": "Unknown",
+    "retailPrice": 0,
+    "estimatedMarketValue": null,
+    "imageUrl": null,
+    "sourcePrimary": "kicksonfire",
+    "sourceSecondary": "https://www.kicksonfire.com/sneaker-release-dates",
+    "sourceUrl": "https://www.kicksonfire.com/sneaker-release-dates",
+    "releaseUrl": "/balenciaga-hamptons-platform-wmns-black"
+  },
+  {
+    "releaseDate": "2026-03-10",
     "shoeName": "Balenciaga Hamptons Platform WMNS White",
     "brand": "Unknown",
     "retailPrice": 0,
@@ -274,17 +286,5 @@
     "sourceSecondary": "https://www.kicksonfire.com/sneaker-release-dates",
     "sourceUrl": "https://www.kicksonfire.com/sneaker-release-dates",
     "releaseUrl": "/balenciaga-triple-s-canvas-blue"
-  },
-  {
-    "releaseDate": "2026-03-10",
-    "shoeName": "Balenciaga Triple S Sporty Suede WMNS Brown",
-    "brand": "Unknown",
-    "retailPrice": 0,
-    "estimatedMarketValue": null,
-    "imageUrl": null,
-    "sourcePrimary": "kicksonfire",
-    "sourceSecondary": "https://www.kicksonfire.com/sneaker-release-dates",
-    "sourceUrl": "https://www.kicksonfire.com/sneaker-release-dates",
-    "releaseUrl": "/balenciaga-triple-s-sporty-suede-wmns-brown"
   }
 ]

@@ -5,7 +5,9 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
-from datetime import date, datetime
+import re
+from datetime import date, datetime, timedelta
+from difflib import SequenceMatcher
 from pathlib import Path
 from typing import Any
 
@@ -38,25 +40,56 @@ COLLAB_KEYWORDS = {
 LIMITED_KEYWORDS = {"limited", "exclusive", "special box", "qs", "pe", "promo"}
 HOT_MODELS = {"jordan 1", "jordan 3", "jordan 4", "jordan 11", "dunk", "sb dunk", "air max 95", "kobe"}
 
+MONTH_WORDS = (
+    "jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "sept", "oct", "nov", "dec",
+    "january", "february", "march", "april", "june", "july", "august", "september", "october", "november", "december"
+)
+
+STOPWORDS = {
+    "the", "and", "with", "of", "for", "to", "in", "on",
+    "mens", "men", "women", "woman", "wmns",
+    "gs", "ps", "td", "infant", "toddler", "kids", "youth",
+    "grade", "school", "boys", "girls",
+    "shoe", "shoes", "sneaker", "sneakers",
+    "coming", "soon", "release", "calendar", "launch",
+    "from",
+}
+
+ROMAN_MAP = {
+    "i": "1", "ii": "2", "iii": "3", "iv": "4", "v": "5", "vi": "6", "vii": "7", "viii": "8",
+    "ix": "9", "x": "10", "xi": "11", "xii": "12", "xiii": "13", "xiv": "14", "xv": "15",
+    "xvi": "16", "xvii": "17", "xviii": "18", "xix": "19", "xx": "20",
+}
+
+PUNCT_PAT = re.compile(r"[^a-z0-9\s]+")
+WS_PAT = re.compile(r"\s+")
+CURRENCY_PAT = re.compile(r"(?:(?:usd|cad|aud|eur|gbp)\s*)?[$£€]\s*\d{2,4}(?:\.\d{2})?", re.I)
+COUNTDOWN_PAT = re.compile(r"\b\d{1,3}d:\d{1,2}h:\d{1,2}m:\d{1,2}s\b", re.I)
+LEADING_MONTH_PAT = re.compile(
+    r"^\s*(?:(" + "|".join(MONTH_WORDS) + r")\s+\d{1,2})(?:\s+\d{4})?\s+",
+    re.I
+)
+COLOR_BLOB_PAT = re.compile(
+    r"\b(?:white|black|red|blue|green|grey|gray|pink|purple|orange|yellow|brown|tan|beige|cream|navy|sail)\b"
+    r"(?:\s*/\s*\b(?:white|black|red|blue|green|grey|gray|pink|purple|orange|yellow|brown|tan|beige|cream|navy|sail)\b)+",
+    re.I
+)
+JORDAN_PAT = re.compile(r"\b(?:air\s+)?jordan\b", re.I)
+
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(
-        description="Merge primary + multiple fallback sources, compare changes, archive snapshots, and validate quality."
-    )
-    parser.add_argument("--primary", type=Path, required=True, help="Primary JSON file.")
-    parser.add_argument(
-        "--fallback",
-        type=Path,
-        action="append",
-        default=[],
-        help="Fallback JSON file. Repeatable: --fallback a.json --fallback b.json",
-    )
-    parser.add_argument("--previous", type=Path, default=None, help="Previous final JSON for change detection.")
-    parser.add_argument("--output", type=Path, default=None, help="Output path for merged final JSON.")
-    parser.add_argument("--changes", type=Path, default=None, help="Output path for changes JSON.")
-    parser.add_argument("--archive-dir", type=Path, default=None, help="Archive directory for snapshots.")
-    parser.add_argument("--validate-only", action="store_true", help="Only validate --primary (expects final JSON).")
-    parser.add_argument("--min-records", type=int, default=3, help="Minimum records required to pass validation.")
+    parser = argparse.ArgumentParser(description="Merge sources, compare changes, archive snapshots, validate quality.")
+    parser.add_argument("--primary", type=Path, required=True)
+    parser.add_argument("--fallback", type=Path, action="append", default=[])
+    parser.add_argument("--previous", type=Path, default=None)
+    parser.add_argument("--output", type=Path, default=None)
+    parser.add_argument("--changes", type=Path, default=None)
+    parser.add_argument("--archive-dir", type=Path, default=None)
+    parser.add_argument("--validate-only", action="store_true")
+    parser.add_argument("--min-records", type=int, default=3)
+    # Dedup tuning
+    parser.add_argument("--fuzzy-threshold", type=float, default=0.92)
+    parser.add_argument("--date-fuzz-days", type=int, default=1)  # merge within +/- N days
     return parser.parse_args()
 
 
@@ -137,6 +170,76 @@ def parse_price(value: Any) -> int:
         return max(0, int(round(float(str(value).replace("$", "").replace(",", "").strip()))))
     except ValueError:
         return 0
+
+
+def _basic_clean(s: str) -> str:
+    s = s.lower().strip()
+    s = s.replace("&", "and")
+
+    s = COUNTDOWN_PAT.sub(" ", s)
+    s = CURRENCY_PAT.sub(" ", s)
+    s = COLOR_BLOB_PAT.sub(" ", s)
+    s = LEADING_MONTH_PAT.sub("", s)
+
+    s = JORDAN_PAT.sub("air jordan", s)
+
+    s = PUNCT_PAT.sub(" ", s)
+    s = WS_PAT.sub(" ", s).strip()
+    return s
+
+
+def canonicalize_shoe_name(name: str, brand: str) -> str:
+    """
+    Aggressive canonicalizer to collapse:
+      - 'Jordan Retro 13 BOYS GRADE SCHOOL ... $165' -> 'air jordan 13 retro'
+      - 'Air Jordan 13 Retro White and University Red' -> 'air jordan 13 retro white university red'
+    """
+    raw = _basic_clean(name)
+
+    tokens: list[str] = []
+    for tok in raw.split():
+        tok = ROMAN_MAP.get(tok, tok)
+        if tok in STOPWORDS:
+            continue
+        tokens.append(tok)
+
+    # Collapse 'air jordan' into marker for ordering rules
+    out: list[str] = []
+    i = 0
+    while i < len(tokens):
+        if i + 1 < len(tokens) and tokens[i] == "air" and tokens[i + 1] == "jordan":
+            out.append("airjordan")
+            i += 2
+            continue
+        out.append(tokens[i])
+        i += 1
+    tokens = out
+
+    # Jordan ordering: airjordan <num> retro/og ...
+    if "airjordan" in tokens:
+        nums = [t for t in tokens if t.isdigit()]
+        num = nums[0] if nums else ""
+        tokens_wo_nums = [t for t in tokens if not t.isdigit()]
+        rest = [t for t in tokens_wo_nums if t != "airjordan"]
+        retro_bits = [t for t in rest if t in ("retro", "og")]
+        rest = [t for t in rest if t not in ("retro", "og")]
+
+        rebuilt = ["airjordan"]
+        if num:
+            rebuilt.append(num)
+        if retro_bits:
+            rebuilt.extend(retro_bits)
+        # Keep a few remaining tokens but sort them to reduce ordering noise
+        rebuilt.extend(sorted(rest))
+
+        return " ".join(rebuilt).replace("airjordan", "air jordan").strip()
+
+    # Generic: sort tokens to reduce “wording” differences
+    return " ".join(sorted(tokens)).strip()
+
+
+def similarity(a: str, b: str) -> float:
+    return SequenceMatcher(None, a, b).ratio()
 
 
 def score_hype(brand: str, style: str, retail: int, resale: int | None) -> tuple[int, str]:
@@ -236,10 +339,11 @@ def derive_tags(style: str) -> list[str]:
 
 
 def make_key(record: dict[str, Any]) -> tuple[str, str]:
-    return (
-        normalize_text(record.get("releaseDate")),
-        normalize_text(record.get("shoeName")).lower(),
-    )
+    d = normalize_text(record.get("releaseDate"))
+    name = normalize_text(record.get("shoeName"))
+    brand = normalize_text(record.get("brand"))
+    canonical = canonicalize_shoe_name(name, brand)
+    return (d, canonical)
 
 
 def choose_better(a: dict[str, Any], b: dict[str, Any]) -> dict[str, Any]:
@@ -265,7 +369,7 @@ def normalize_record(row: dict[str, Any], default_source: str) -> dict[str, Any]
 
     source_primary = normalize_text(row.get("sourcePrimary")) or normalize_text(row.get("source")) or default_source
 
-    normalized = {
+    return {
         "releaseDate": release_date,
         "shoeName": shoe_name,
         "brand": normalize_brand(row.get("brand"), shoe_name),
@@ -279,10 +383,22 @@ def normalize_record(row: dict[str, Any], default_source: str) -> dict[str, Any]
         "sourceUrl": normalize_text(row.get("sourceUrl")) or None,
         "releaseUrl": normalize_text(row.get("releaseUrl") or row.get("sourceUrl")) or None,
     }
-    return normalized
 
 
-def merge_records(primary: list[dict[str, Any]], fallbacks: list[list[dict[str, Any]]]) -> list[dict[str, Any]]:
+def _dates_within(a: str, b: str, days: int) -> bool:
+    da = parse_date(a)
+    db = parse_date(b)
+    if da is None or db is None:
+        return False
+    return abs((da - db).days) <= days
+
+
+def merge_records(
+    primary: list[dict[str, Any]],
+    fallbacks: list[list[dict[str, Any]]],
+    fuzzy_threshold: float,
+    date_fuzz_days: int,
+) -> list[dict[str, Any]]:
     merged: dict[tuple[str, str], dict[str, Any]] = {}
 
     sources = [("primary", primary)]
@@ -295,6 +411,21 @@ def merge_records(primary: list[dict[str, Any]], fallbacks: list[list[dict[str, 
                 continue
 
             key = make_key(normalized)
+
+            # Fuzzy match across existing keys within +/- date_fuzz_days
+            if key not in merged:
+                best_k = None
+                best_s = 0.0
+                for k in merged.keys():
+                    if not _dates_within(key[0], k[0], date_fuzz_days):
+                        continue
+                    s = similarity(key[1], k[1])
+                    if s > best_s:
+                        best_s = s
+                        best_k = k
+                if best_k and best_s >= fuzzy_threshold:
+                    key = best_k
+
             existing = merged.get(key)
 
             if existing is None:
@@ -322,12 +453,7 @@ def merge_records(primary: list[dict[str, Any]], fallbacks: list[list[dict[str, 
 
     final_rows: list[dict[str, Any]] = []
     for row in merged.values():
-        hype_score, hype = score_hype(
-            brand=row["brand"],
-            style=row["shoeName"],
-            retail=row["retailPrice"],
-            resale=row["estimatedMarketValue"],
-        )
+        hype_score, hype = score_hype(row["brand"], row["shoeName"], row["retailPrice"], row["estimatedMarketValue"])
         confidence_score, confidence = score_confidence(row)
 
         row["hypeScore"] = hype_score
@@ -382,6 +508,7 @@ def compare_changes(previous: list[dict[str, Any]], current: list[dict[str, Any]
 
         old = previous_map[key]
         fields = [
+            ("releaseDate", "DATE_CHANGED"),
             ("retailPrice", "RETAIL_CHANGED"),
             ("estimatedMarketValue", "MARKET_CHANGED"),
             ("sourcePrimary", "SOURCE_CHANGED"),
@@ -419,14 +546,7 @@ def compare_changes(previous: list[dict[str, Any]], current: list[dict[str, Any]
                 }
             )
 
-    return sorted(
-        changes,
-        key=lambda i: (
-            i.get("date") or "",
-            i.get("changeType") or "",
-            (i.get("style") or "").lower(),
-        ),
-    )
+    return sorted(changes, key=lambda i: (i.get("date") or "", i.get("changeType") or "", (i.get("style") or "").lower()))
 
 
 def validate_records(rows: list[dict[str, Any]], min_records: int) -> None:
@@ -466,7 +586,12 @@ def main() -> None:
     fallback_rows = [load_json(p) for p in (args.fallback or [])]
     previous_rows = load_json(args.previous)
 
-    merged_rows = merge_records(primary_rows, fallback_rows)
+    merged_rows = merge_records(
+        primary_rows,
+        fallback_rows,
+        fuzzy_threshold=float(args.fuzzy_threshold),
+        date_fuzz_days=int(args.date_fuzz_days),
+    )
     changes = compare_changes(previous_rows, merged_rows)
 
     validate_records(merged_rows, min_records=args.min_records)

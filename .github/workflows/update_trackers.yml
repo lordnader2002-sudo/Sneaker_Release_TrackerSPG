@@ -89,7 +89,7 @@ jobs:
       - name: Enrich retail prices (best effort)
         shell: bash
         run: |
-          python enrich_retail_prices.py data/final_releases.json --max 120 --timeout 25 --sleep 0.2 || true
+          python enrich_retail_prices.py data/final_releases.json --max 120 --timeout 25 --sleep 0.2 | tee data/retail_enrich_log.txt || true
           
       - name: Build workbooks
         run: |
@@ -104,6 +104,7 @@ jobs:
         with:
           name: sneaker-trackers
           path: |
+            data/retail_enrich_log.txt
             data/primary_releases.json
             data/fallback_nike.json
             data/fallback_sneakernews.json

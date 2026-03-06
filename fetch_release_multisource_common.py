@@ -100,14 +100,27 @@ def infer_brand(name: str) -> str:
     return "Unknown"
 
 
-_PRICE_RE = re.compile(r"(?:USD\s*)?\$\s*([0-9]{2,4})(?:\.[0-9]{2})?", re.I)
+# ---- price + title cleaning ----
+
 _COUNTDOWN_RE = re.compile(r"\b\d{1,3}D:\d{1,2}H:\d{1,2}M:\d{1,2}S\b", re.I)
+_PRICE_RE = re.compile(r"(?:USD\s*)?\$\s*([0-9]{2,4})(?:\.[0-9]{2})?", re.I)
+
+_LABELED_PRICE_RE = re.compile(
+    r"\b(?:retail\s*price|msrp|price)\b\s*[:\-]?\s*(?:USD\s*)?\$\s*([0-9]{2,4})(?:\.[0-9]{2})?",
+    re.I,
+)
 
 
 def extract_retail_price(text: str) -> int:
+    """
+    Returns retail price ONLY if clearly labeled (Retail Price / MSRP / Price).
+    Prevents garbage like "$180" showing everywhere.
+    """
     if not text:
         return 0
-    m = _PRICE_RE.search(text.replace(",", ""))
+
+    cleaned = text.replace(",", " ")
+    m = _LABELED_PRICE_RE.search(cleaned)
     if not m:
         return 0
     try:
@@ -118,23 +131,22 @@ def extract_retail_price(text: str) -> int:
 
 def clean_title(text: str) -> str:
     """
-    Removes common garbage that sources prepend/append:
-    - "Mar 07 ..." / "March 7 ..." leading date
+    Removes garbage that sources prepend/append:
+    - leading date like "Mar 07 ..." / "March 7, 2026 ..."
     - countdowns like "01D:06H:12M:03S"
     - "COMING SOON"
     - inline prices like "$130.00"
-    - trailing size/gender markers like "(GS)", "GS", "(PS)", "(TD)", "(WMNS)"
+    - trailing size markers like "(GS)" "GS" "(PS)" "(TD)" "WMNS"
     """
     t = normalize_text(text)
     if not t:
         return t
 
-    # Remove countdown + "COMING SOON" + prices anywhere
     t = _COUNTDOWN_RE.sub(" ", t)
     t = re.sub(r"\bCOMING\s+SOON\b", " ", t, flags=re.I)
     t = _PRICE_RE.sub(" ", t)
 
-    # Remove leading date like "Mar 07" / "March 7, 2026" / "Mar 7"
+    # strip leading date text
     t = re.sub(
         r"^\s*(?:"
         r"(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Sept|Oct|Nov|Dec)"
@@ -145,10 +157,9 @@ def clean_title(text: str) -> str:
         flags=re.I,
     )
 
-    # Remove trailing size/gender markers like "(GS)" "GS" "(PS)" "(TD)" "WMNS" etc.
+    # strip trailing markers
     t = re.sub(r"\(\s*(gs|ps|td|w|wmns|mens|youth|kids)\s*\)\s*$", "", t, flags=re.I)
     t = re.sub(r"\b(gs|ps|td|wmns|womens|mens|youth|kids)\b\s*$", "", t, flags=re.I)
 
-    # Final cleanup
     t = normalize_text(t.strip(" -|:•"))
     return t

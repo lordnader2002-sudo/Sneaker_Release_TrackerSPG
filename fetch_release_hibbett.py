@@ -11,16 +11,27 @@ from typing import Any
 
 from bs4 import BeautifulSoup
 
-from fetch_release_multisource_common import infer_brand, normalize_text, parse_date_flexible, render_html, window_filter
+from fetch_release_multisource_common import (
+    clean_title,
+    extract_retail_price,
+    infer_brand,
+    normalize_text,
+    parse_date_flexible,
+    render_html,
+    window_filter,
+)
 
 SOURCE_URL = "https://www.hibbett.com/launch-calendar/"
 SOURCE_NAME = "hibbett"
 
-DATE_RE = re.compile(r"\b(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec|January|February|March|April|June|July|August|September|October|November|December)\b\.?\s+(\d{1,2})(?:,\s*(\d{4}))?\b", re.I)
+DATE_RE = re.compile(
+    r"\b(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec|January|February|March|April|June|July|August|September|October|November|December)\b\.?\s+(\d{1,2})(?:,\s*(\d{4}))?\b",
+    re.I,
+)
 
 
 def parse_args() -> argparse.Namespace:
-    p = argparse.ArgumentParser(description="Fetch release calendar from Hibbett (Playwright).")
+    p = argparse.ArgumentParser()
     p.add_argument("--days", type=int, default=35)
     p.add_argument("--timeout-ms", type=int, default=60000)
     p.add_argument("-o", "--output", type=Path, default=Path("data/fallback_hibbett.json"))
@@ -32,7 +43,7 @@ def extract_rows(soup: BeautifulSoup) -> list[dict[str, Any]]:
     default_year = date.today().year
 
     for a in soup.find_all("a", href=True):
-        title = normalize_text(a.get_text(" ", strip=True))
+        title = clean_title(normalize_text(a.get_text(" ", strip=True)))
         if len(title) < 8:
             continue
 
@@ -54,9 +65,12 @@ def extract_rows(soup: BeautifulSoup) -> list[dict[str, Any]]:
         day = m.group(2)
         year = m.group(3)
         date_text = f"{month} {day} {year}" if year else f"{month} {day}"
+
         d = parse_date_flexible(date_text, default_year=default_year)
         if not d:
             continue
+
+        retail = extract_retail_price(blob)
 
         href = a["href"]
         if href.startswith("/"):
@@ -67,7 +81,7 @@ def extract_rows(soup: BeautifulSoup) -> list[dict[str, Any]]:
                 "releaseDate": d.isoformat(),
                 "shoeName": title,
                 "brand": infer_brand(title),
-                "retailPrice": 0,
+                "retailPrice": retail,
                 "estimatedMarketValue": None,
                 "imageUrl": None,
                 "sourcePrimary": SOURCE_NAME,
@@ -86,7 +100,7 @@ def dedupe(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
         key = (r.get("releaseDate", ""), str(r.get("shoeName", "")).lower())
         if not key[0] or not key[1]:
             continue
-        if key not in best:
+        if key not in best or (r.get("retailPrice") or 0) > (best[key].get("retailPrice") or 0):
             best[key] = r
     return sorted(best.values(), key=lambda x: (x["releaseDate"], x.get("brand", ""), x["shoeName"].lower()))
 

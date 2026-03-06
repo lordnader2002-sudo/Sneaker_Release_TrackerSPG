@@ -85,7 +85,12 @@ jobs:
       - name: Validate final output
         run: |
           python merge_and_compare.py --validate-only --primary data/final_releases.json --min-records 1
-
+          
+      - name: Enrich retail prices (best effort)
+        shell: bash
+        run: |
+          python enrich_retail_prices.py data/final_releases.json --max 120 --timeout 25 --sleep 0.2 || true
+          
       - name: Build workbooks
         run: |
           python build_tracker_workbook.py \

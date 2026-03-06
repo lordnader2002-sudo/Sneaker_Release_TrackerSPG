@@ -684,7 +684,7 @@
     "releaseDate": "2026-03-07",
     "shoeName": "Adidas Anthony Edwards 2 Georgia Bulldogs",
     "brand": "Adidas",
-    "retailPrice": 219,
+    "retailPrice": 0,
     "estimatedMarketValue": null,
     "imageUrl": null,
     "sourcePrimary": "kicksonfire",
@@ -698,8 +698,7 @@
     "confidence": "MED",
     "priority": "Low Priority",
     "tags": [],
-    "recordHash": "e572541d6357dd39265bee48641463f0429c10af122aa750ae57e3ba1d7c74a0",
-    "retailSource": "https://www.kicksonfire.com/adidas-anthony-edwards-2-georgia-bulldogs"
+    "recordHash": "e572541d6357dd39265bee48641463f0429c10af122aa750ae57e3ba1d7c74a0"
   },
   {
     "releaseDate": "2026-03-07",
@@ -728,7 +727,7 @@
     "releaseDate": "2026-03-07",
     "shoeName": "Air Jordan 1 High OG Pale Ivory / Psychic Blue",
     "brand": "Air Jordan",
-    "retailPrice": 299,
+    "retailPrice": 0,
     "estimatedMarketValue": null,
     "imageUrl": null,
     "sourcePrimary": "kicksonfire",
@@ -744,8 +743,7 @@
     "tags": [
       "hot-model"
     ],
-    "recordHash": "32e74adc40a0c865fdd6c38373f45a7f6a00ae4819f11e88adc989ddaeac4f96",
-    "retailSource": "https://www.kicksonfire.com/air-jordan-1-high-og-pale-ivory-psychic-blue"
+    "recordHash": "32e74adc40a0c865fdd6c38373f45a7f6a00ae4819f11e88adc989ddaeac4f96"
   },
   {
     "releaseDate": "2026-03-07",
@@ -887,7 +885,7 @@
     "releaseDate": "2026-03-07",
     "shoeName": "Air Jordan 4 OG Lakers",
     "brand": "Air Jordan",
-    "retailPrice": 400,
+    "retailPrice": 0,
     "estimatedMarketValue": null,
     "imageUrl": null,
     "sourcePrimary": "kicksonfire",
@@ -903,8 +901,7 @@
     "tags": [
       "hot-model"
     ],
-    "recordHash": "4d695db241060446a1a541c158f7979c652e5071dc9be26d2e7279b774390e23",
-    "retailSource": "https://www.kicksonfire.com/air-jordan-4-og-lakers"
+    "recordHash": "4d695db241060446a1a541c158f7979c652e5071dc9be26d2e7279b774390e23"
   },
   {
     "releaseDate": "2026-03-07",

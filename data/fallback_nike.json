@@ -1,0 +1,123 @@
+[
+  {
+    "releaseDate": "2026-03-07",
+    "shoeName": "Air Jordan 13 Retro White and University Red",
+    "brand": "Air Jordan",
+    "retailPrice": 0,
+    "estimatedMarketValue": null,
+    "imageUrl": null,
+    "sourcePrimary": "playwright-linkscan",
+    "sourceSecondary": "https://www.nike.com/launch",
+    "sourceUrl": "/launch/t/air-jordan-13-retro-white-and-university-red"
+  },
+  {
+    "releaseDate": "2026-03-07",
+    "shoeName": "Air Jordan 4 Imperial Purple",
+    "brand": "Air Jordan",
+    "retailPrice": 0,
+    "estimatedMarketValue": null,
+    "imageUrl": null,
+    "sourcePrimary": "playwright-linkscan",
+    "sourceSecondary": "https://www.nike.com/launch",
+    "sourceUrl": "/launch/t/air-jordan-4-imperial-purple"
+  },
+  {
+    "releaseDate": "2026-03-07",
+    "shoeName": "Mar 7 Baby/Toddler Shoes Jordan 1 Retro High OG",
+    "brand": "Air Jordan",
+    "retailPrice": 0,
+    "estimatedMarketValue": null,
+    "imageUrl": null,
+    "sourcePrimary": "playwright-linkscan",
+    "sourceSecondary": "https://www.nike.com/launch/upcoming",
+    "sourceUrl": "/launch/t/womens-air-jordan-1-high-og-psychic-blue-and-pale-ivory"
+  },
+  {
+    "releaseDate": "2026-03-07",
+    "shoeName": "Mar 7 Baby/Toddler Shoes Jordan 4 Retro \"Imperial Purple\"",
+    "brand": "Air Jordan",
+    "retailPrice": 0,
+    "estimatedMarketValue": null,
+    "imageUrl": null,
+    "sourcePrimary": "playwright-linkscan",
+    "sourceSecondary": "https://www.nike.com/launch/upcoming",
+    "sourceUrl": "/launch/t/air-jordan-4-imperial-purple"
+  },
+  {
+    "releaseDate": "2026-03-07",
+    "shoeName": "Converse x Hello Kitty Chuck Taylor 70 Swarovski\u00ae",
+    "brand": "Converse",
+    "retailPrice": 0,
+    "estimatedMarketValue": null,
+    "imageUrl": null,
+    "sourcePrimary": "playwright-linkscan",
+    "sourceSecondary": "https://www.nike.com/launch",
+    "sourceUrl": "/launch/t/converse-hello-kitty-chuck-taylor-70-swarovski"
+  },
+  {
+    "releaseDate": "2026-03-07",
+    "shoeName": "Air Max Ishod Iron Grey and Photon Dust",
+    "brand": "Nike",
+    "retailPrice": 0,
+    "estimatedMarketValue": null,
+    "imageUrl": null,
+    "sourcePrimary": "playwright-linkscan",
+    "sourceSecondary": "https://www.nike.com/launch",
+    "sourceUrl": "/launch/t/air-max-ishod-iron-grey-and-photon-dust-1"
+  },
+  {
+    "releaseDate": "2026-03-07",
+    "shoeName": "Nike SB Ishod Apparel Collection",
+    "brand": "Nike",
+    "retailPrice": 0,
+    "estimatedMarketValue": null,
+    "imageUrl": null,
+    "sourcePrimary": "playwright-linkscan",
+    "sourceSecondary": "https://www.nike.com/launch",
+    "sourceUrl": "/launch/t/nike-sb-ishod-apparel-collection-static"
+  },
+  {
+    "releaseDate": "2026-03-07",
+    "shoeName": "Zoom Vomero 5 Hyper Royal",
+    "brand": "Nike",
+    "retailPrice": 0,
+    "estimatedMarketValue": null,
+    "imageUrl": null,
+    "sourcePrimary": "playwright-linkscan",
+    "sourceSecondary": "https://www.nike.com/launch",
+    "sourceUrl": "/launch/t/zoom-vomero-5-hyper-royal"
+  },
+  {
+    "releaseDate": "2026-03-10",
+    "shoeName": "Mar 10 Zoom Vomero 5 Hyper Royal",
+    "brand": "Nike",
+    "retailPrice": 0,
+    "estimatedMarketValue": null,
+    "imageUrl": null,
+    "sourcePrimary": "playwright-linkscan",
+    "sourceSecondary": "https://www.nike.com/launch/upcoming",
+    "sourceUrl": "/launch/t/zoom-vomero-5-hyper-royal"
+  },
+  {
+    "releaseDate": "2026-03-14",
+    "shoeName": "Mar 14 Infant/Toddler Shoes Jordan 13 Retro",
+    "brand": "Air Jordan",
+    "retailPrice": 0,
+    "estimatedMarketValue": null,
+    "imageUrl": null,
+    "sourcePrimary": "playwright-linkscan",
+    "sourceSecondary": "https://www.nike.com/launch/upcoming",
+    "sourceUrl": "/launch/t/air-jordan-13-retro-white-and-university-red"
+  },
+  {
+    "releaseDate": "2026-03-14",
+    "shoeName": "Mar 14 Shoes Air Jordan 13 Retro",
+    "brand": "Air Jordan",
+    "retailPrice": 0,
+    "estimatedMarketValue": null,
+    "imageUrl": null,
+    "sourcePrimary": "playwright-linkscan",
+    "sourceSecondary": "https://www.nike.com/launch/upcoming",
+    "sourceUrl": "/launch/t/air-jordan-13-retro-white-and-university-red"
+  }
+]

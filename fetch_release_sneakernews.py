@@ -1,3 +1,5 @@
+# file: fetch_release_sneakernews.py
+
 from __future__ import annotations
 
 import argparse
@@ -19,24 +21,44 @@ from fetch_release_multisource_common import (
 SOURCE_URL = "https://sneakernews.com/release-dates/"
 SOURCE_NAME = "sneakernews"
 
+DATE_RE = re.compile(r"\b([A-Z][a-z]+)\s+(\d{1,2}),\s*(\d{4})\b")  # March 05, 2026
+RETAIL_RE = re.compile(r"Retail Price:\s*\$\s*([0-9]{2,4})", re.I)
+
 
 def parse_args() -> argparse.Namespace:
-    p = argparse.ArgumentParser()
+    p = argparse.ArgumentParser(description="Fetch release calendar from SneakerNews (Playwright).")
     p.add_argument("--days", type=int, default=35)
     p.add_argument("--timeout-ms", type=int, default=60000)
     p.add_argument("-o", "--output", type=Path, default=Path("data/fallback_sneakernews.json"))
     return p.parse_args()
 
 
-DATE_RE = re.compile(r"\b([A-Z][a-z]+)\s+(\d{1,2}),\s*(\d{4})\b")  # March 05, 2026
-
-
 def extract_rows(soup: BeautifulSoup) -> list[dict[str, Any]]:
     rows: list[dict[str, Any]] = []
 
-    # SneakerNews "release-dates" page has repeated sections containing:
-    # "March 05, 2026" and then an H2 link like "Nike Air Max 95"
-    for h2 in soup.find_all("h2"):
+    # Strategy:
+    # 1) Find elements whose text contains "Month DD, YYYY"
+    # 2) For each, find the next <h2> with <a> = the sneaker name
+    # 3) Grab "Retail Price: $X" from the nearby section
+
+    for tag in soup.find_all(True):
+        text = normalize_text(tag.get_text(" ", strip=True))
+        if not text:
+            continue
+
+        m = DATE_RE.search(text)
+        if not m:
+            continue
+
+        date_text = m.group(0)
+        d = parse_date_flexible(date_text)
+        if not d:
+            continue
+
+        h2 = tag.find_next("h2")
+        if not h2:
+            continue
+
         a = h2.find("a", href=True)
         if not a:
             continue
@@ -45,39 +67,17 @@ def extract_rows(soup: BeautifulSoup) -> list[dict[str, Any]]:
         if not title:
             continue
 
-        # Find the nearest preceding text in the document that looks like "March 05, 2026"
-        container = h2.parent
-        blob = normalize_text(container.get_text(" ", strip=True)) if container else ""
-        m = DATE_RE.search(blob)
-        if not m:
-            # try scanning a few previous elements
-            prev = h2
-            found = None
-            for _ in range(8):
-                prev = prev.find_previous()
-                if not prev:
-                    break
-                t = normalize_text(prev.get_text(" ", strip=True))
-                mm = DATE_RE.search(t)
-                if mm:
-                    found = mm.group(0)
-                    break
-            if not found:
-                continue
-            date_text = found
-        else:
-            date_text = m.group(0)
-
-        d = parse_date_flexible(date_text)
-        if not d:
-            continue
+        # retail price is usually within the same “release block”
+        block_text = normalize_text(h2.parent.get_text(" ", strip=True)) if h2.parent else ""
+        m_price = RETAIL_RE.search(block_text)
+        retail = int(m_price.group(1)) if m_price else 0
 
         rows.append(
             {
                 "releaseDate": d.isoformat(),
                 "shoeName": title,
                 "brand": infer_brand(title),
-                "retailPrice": 0,
+                "retailPrice": retail,
                 "estimatedMarketValue": None,
                 "imageUrl": None,
                 "sourcePrimary": SOURCE_NAME,
@@ -96,8 +96,15 @@ def dedupe(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
         key = (r.get("releaseDate", ""), str(r.get("shoeName", "")).lower())
         if not key[0] or not key[1]:
             continue
+
         if key not in best:
             best[key] = r
+            continue
+
+        # prefer one with retail
+        if (r.get("retailPrice") or 0) > (best[key].get("retailPrice") or 0):
+            best[key] = r
+
     return sorted(best.values(), key=lambda x: (x["releaseDate"], x.get("brand", ""), x["shoeName"].lower()))
 
 
@@ -111,6 +118,7 @@ def main() -> None:
 
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(rows, indent=2), encoding="utf-8")
+
     print(f"{SOURCE_NAME} saved: {len(rows)} -> {args.output}")
 
 

@@ -31,7 +31,7 @@ DATE_RE = re.compile(
 
 
 def parse_args() -> argparse.Namespace:
-    p = argparse.ArgumentParser()
+    p = argparse.ArgumentParser(description="Fetch release calendar from Foot Locker (Playwright).")
     p.add_argument("--days", type=int, default=35)
     p.add_argument("--timeout-ms", type=int, default=60000)
     p.add_argument("-o", "--output", type=Path, default=Path("data/fallback_footlocker.json"))
@@ -70,7 +70,9 @@ def extract_rows(soup: BeautifulSoup) -> list[dict[str, Any]]:
         if not d:
             continue
 
-        retail = extract_retail_price(blob)
+        # tight context; labeled-only price extractor
+        ctx = normalize_text(blob[:1200])
+        retail = extract_retail_price(ctx)
 
         href = a["href"]
         if href.startswith("/"):

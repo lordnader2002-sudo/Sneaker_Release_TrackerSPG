@@ -28,7 +28,7 @@ ANCHOR_RE = re.compile(r"^(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s+(\
 
 
 def parse_args() -> argparse.Namespace:
-    p = argparse.ArgumentParser()
+    p = argparse.ArgumentParser(description="Fetch release calendar from The Drop Date (Playwright).")
     p.add_argument("--days", type=int, default=35)
     p.add_argument("--timeout-ms", type=int, default=60000)
     p.add_argument("-o", "--output", type=Path, default=Path("data/fallback_thedropdate.json"))
@@ -40,8 +40,8 @@ def extract_rows(soup: BeautifulSoup) -> list[dict[str, Any]]:
     default_year = date.today().year
 
     for a in soup.find_all("a", href=True):
-        text = normalize_text(a.get_text(" ", strip=True))
-        m = ANCHOR_RE.match(text)
+        raw = normalize_text(a.get_text(" ", strip=True))
+        m = ANCHOR_RE.match(raw)
         if not m:
             continue
 
@@ -54,9 +54,8 @@ def extract_rows(soup: BeautifulSoup) -> list[dict[str, Any]]:
         if not d:
             continue
 
-        container = a.parent
-        blob = normalize_text(container.get_text(" ", strip=True)) if container else text
-        retail = extract_retail_price(blob)
+        ctx = normalize_text((a.parent.get_text(" ", strip=True) if a.parent else raw)[:800])
+        retail = extract_retail_price(ctx)
 
         title = clean_title(raw_title)
 

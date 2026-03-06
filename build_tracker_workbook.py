@@ -1,12 +1,18 @@
+# file: build_tracker_workbook.py
+
 from __future__ import annotations
-import argparse, json
+
+import argparse
+import json
 from dataclasses import dataclass
 from datetime import date, datetime, timedelta
 from pathlib import Path
 from typing import Any
+
 from openpyxl import Workbook
 from openpyxl.styles import Alignment, Border, Font, PatternFill, Side
 from openpyxl.utils import get_column_letter
+
 
 @dataclass(frozen=True)
 class ReleaseRow:
@@ -20,12 +26,14 @@ class ReleaseRow:
     tags: str
     source_primary: str
     source_secondary: str
+    source_count: int
     release_url: str
     image_url: str
     notes: str
     hype_score: int
     confidence_score: int
     estimated_market_value: int | None
+
 
 def parse_args() -> argparse.Namespace:
     p = argparse.ArgumentParser()
@@ -35,11 +43,13 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--monthly-output", type=Path, default=Path("output/monthly_tracker.xlsx"))
     return p.parse_args()
 
+
 def load_json(path: Path | None) -> list[dict[str, Any]]:
     if path is None or not path.exists():
         return []
     data = json.loads(path.read_text(encoding="utf-8"))
     return [row for row in data if isinstance(row, dict)] if isinstance(data, list) else []
+
 
 def parse_date(value: Any) -> date | None:
     if value is None:
@@ -55,8 +65,11 @@ def parse_date(value: Any) -> date | None:
     except ValueError:
         return None
 
+
 def parse_int(value: Any) -> int:
     if value in (None, ""):
+        return 0
+    if isinstance(value, bool):
         return 0
     if isinstance(value, (int, float)):
         return int(round(value))
@@ -65,15 +78,27 @@ def parse_int(value: Any) -> int:
     except ValueError:
         return 0
 
+
 def normalize_text(value: Any) -> str:
     return " ".join(value.split()).strip() if isinstance(value, str) else ""
+
 
 def normalize_row(record: dict[str, Any]) -> ReleaseRow | None:
     release_date = parse_date(record.get("releaseDate"))
     if release_date is None:
         return None
+
     tags_value = record.get("tags", [])
-    tags = ", ".join(str(x) for x in tags_value if str(x).strip()) if isinstance(tags_value, list) else normalize_text(tags_value)
+    tags = (
+        ", ".join(str(x) for x in tags_value if str(x).strip())
+        if isinstance(tags_value, list)
+        else normalize_text(tags_value)
+    )
+
+    source_count = parse_int(record.get("matchedSources") or record.get("sourceCount") or 1)
+    if source_count <= 0:
+        source_count = 1
+
     return ReleaseRow(
         release_date=release_date,
         retail=parse_int(record.get("retailPrice")),
@@ -85,18 +110,29 @@ def normalize_row(record: dict[str, Any]) -> ReleaseRow | None:
         tags=tags,
         source_primary=normalize_text(record.get("sourcePrimary")),
         source_secondary=normalize_text(record.get("sourceSecondary")),
+        source_count=source_count,
         release_url=normalize_text(record.get("releaseUrl") or record.get("sourceUrl")),
         image_url=normalize_text(record.get("imageUrl")),
         notes=normalize_text(record.get("notes")),
         hype_score=parse_int(record.get("hypeScore")),
         confidence_score=parse_int(record.get("confidenceScore")),
-        estimated_market_value=parse_int(record.get("estimatedMarketValue")) if record.get("estimatedMarketValue") not in (None, "") else None,
+        estimated_market_value=(
+            parse_int(record.get("estimatedMarketValue"))
+            if record.get("estimatedMarketValue") not in (None, "")
+            else None
+        ),
     )
+
 
 def filter_window(rows: list[ReleaseRow], days: int) -> list[ReleaseRow]:
     start = date.today()
     end = start + timedelta(days=days)
-    return [r for r in sorted(rows, key=lambda x: (x.release_date, x.brand.lower(), x.style.lower())) if start <= r.release_date < end]
+    return [
+        r
+        for r in sorted(rows, key=lambda x: (x.release_date, x.brand.lower(), x.style.lower()))
+        if start <= r.release_date < end
+    ]
+
 
 def make_title(rows: list[ReleaseRow]) -> str:
     if not rows:
@@ -104,6 +140,7 @@ def make_title(rows: list[ReleaseRow]) -> str:
     first_month = rows[0].release_date.strftime("%B %Y")
     last_month = rows[-1].release_date.strftime("%B %Y")
     return f"{first_month} Shoe Releases" if first_month == last_month else f"{first_month} - {last_month} Shoe Releases"
+
 
 def autosize(ws: Any) -> None:
     widths: dict[int, int] = {}
@@ -113,9 +150,11 @@ def autosize(ws: Any) -> None:
                 continue
             size = 10 if isinstance(cell.value, (datetime, date)) else len(str(cell.value))
             widths[cell.column] = max(widths.get(cell.column, 0), size)
+
     for col_idx, width in widths.items():
-        bonus = 6 if col_idx in (7, 8, 11, 12, 13, 14) else 2
-        ws.column_dimensions[get_column_letter(col_idx)].width = min(width + bonus, 60)
+        bonus = 6 if col_idx in (7, 8, 12, 13, 14, 15) else 2
+        ws.column_dimensions[get_column_letter(col_idx)].width = min(width + bonus, 70)
+
 
 def apply_theme(ws: Any, title: str, end_col: int) -> None:
     dark_fill = PatternFill("solid", fgColor="0B1C3A")
@@ -152,7 +191,9 @@ def apply_theme(ws: Any, title: str, end_col: int) -> None:
             cell.font = white_font
             cell.border = border
             cell.alignment = Alignment(horizontal="center", vertical="center")
-        for col in (7, 8, 11, 12, 13, 14):
+
+        # Left-align long-text columns: Style, Tags, Release URL, Image URL, Notes
+        for col in (7, 8, 12, 13, 14):
             ws.cell(row=row, column=col).alignment = Alignment(horizontal="left", vertical="center")
 
         hype_cell = ws.cell(row=row, column=3)
@@ -163,31 +204,70 @@ def apply_theme(ws: Any, title: str, end_col: int) -> None:
         confidence_value = str(confidence_cell.value or "").upper()
         priority_value = str(priority_cell.value or "").upper()
 
-        hype_cell.font = Font(color="FF4D4D" if hype_value == "HIGH" else ("FFC000" if hype_value == "MED" else "00E676"), bold=True)
-        confidence_cell.font = Font(color="7CFCFF" if confidence_value == "HIGH" else ("FFD966" if confidence_value == "MED" else "FFFFFF"), bold=True)
-        priority_cell.font = Font(color="FF8080" if priority_value == "MUST WATCH" else ("FFE699" if priority_value == "WATCH" else "FFFFFF"), bold=True)
+        hype_cell.font = Font(
+            color="FF4D4D" if hype_value == "HIGH" else ("FFC000" if hype_value == "MED" else "00E676"),
+            bold=True,
+        )
+        confidence_cell.font = Font(
+            color="7CFCFF" if confidence_value == "HIGH" else ("FFD966" if confidence_value == "MED" else "FFFFFF"),
+            bold=True,
+        )
+        priority_cell.font = Font(
+            color="FF8080" if priority_value == "MUST WATCH" else ("FFE699" if priority_value == "WATCH" else "FFFFFF"),
+            bold=True,
+        )
 
     ws.row_dimensions[1].height = 24
     ws.row_dimensions[2].height = 22
     ws.row_dimensions[3].height = 20
     ws.freeze_panes = "A4"
 
+
 def write_tracker_sheet(ws: Any, title: str, rows: list[ReleaseRow]) -> None:
-    headers = ["Date","Retail","Hype","Confidence","Priority","Brand","Style","Tags","Source Primary","Source Secondary","Release URL","Image URL","Notes","Market Value"]
+    headers = [
+        "Date",
+        "Retail",
+        "Hype",
+        "Confidence",
+        "Priority",
+        "Brand",
+        "Style",
+        "Tags",
+        "Source Primary",
+        "Source Secondary",
+        "Source Count",
+        "Release URL",
+        "Image URL",
+        "Notes",
+        "Market Value",
+    ]
     for idx, header in enumerate(headers, start=1):
         ws.cell(row=3, column=idx, value=header)
 
     for row_idx, row in enumerate(rows, start=4):
         values = [
-            row.release_date, row.retail if row.retail else "", row.hype, row.confidence, row.priority, row.brand,
-            row.style, row.tags, row.source_primary, row.source_secondary, row.release_url, row.image_url, row.notes,
-            row.estimated_market_value if row.estimated_market_value is not None else ""
+            row.release_date,
+            row.retail if row.retail else "",
+            row.hype,
+            row.confidence,
+            row.priority,
+            row.brand,
+            row.style,
+            row.tags,
+            row.source_primary,
+            row.source_secondary,
+            row.source_count,
+            row.release_url,
+            row.image_url,
+            row.notes,
+            row.estimated_market_value if row.estimated_market_value is not None else "",
         ]
         for col_idx, value in enumerate(values, start=1):
             ws.cell(row=row_idx, column=col_idx, value=value)
+
         ws.cell(row=row_idx, column=1).number_format = "m/d/yyyy"
         ws.cell(row=row_idx, column=2).number_format = '"$"#,##0'
-        ws.cell(row=row_idx, column=14).number_format = '"$"#,##0'
+        ws.cell(row=row_idx, column=15).number_format = '"$"#,##0'
 
     if not rows:
         ws.cell(row=4, column=1, value="No releases found for this window.")
@@ -195,81 +275,134 @@ def write_tracker_sheet(ws: Any, title: str, rows: list[ReleaseRow]) -> None:
     apply_theme(ws, title, len(headers))
     autosize(ws)
 
+
 def write_changes_sheet(ws: Any, changes: list[dict[str, Any]]) -> None:
-    headers = ["Change Type","Date","Brand","Style","Field Changed","Old Value","New Value","Detected At"]
+    headers = ["Change Type", "Date", "Brand", "Style", "Field Changed", "Old Value", "New Value", "Detected At"]
     for idx, header in enumerate(headers, start=1):
         ws.cell(row=1, column=idx, value=header)
+
     for row_idx, change in enumerate(changes, start=2):
         vals = [
-            normalize_text(change.get("changeType")), normalize_text(change.get("date")), normalize_text(change.get("brand")),
-            normalize_text(change.get("style")), normalize_text(change.get("fieldChanged")), str(change.get("oldValue","")),
-            str(change.get("newValue","")), normalize_text(change.get("detectedAt"))
+            normalize_text(change.get("changeType")),
+            normalize_text(change.get("date")),
+            normalize_text(change.get("brand")),
+            normalize_text(change.get("style")),
+            normalize_text(change.get("fieldChanged")),
+            str(change.get("oldValue", "")),
+            str(change.get("newValue", "")),
+            normalize_text(change.get("detectedAt")),
         ]
         for col_idx, value in enumerate(vals, start=1):
             ws.cell(row=row_idx, column=col_idx, value=value)
+
     ws.freeze_panes = "A2"
     autosize(ws)
 
+
 def write_raw_sheet(ws: Any, rows: list[ReleaseRow]) -> None:
-    headers = ["Release Date","Retail","Hype","Confidence","Priority","Brand","Style","Tags","Source Primary","Source Secondary","Release URL","Image URL","Notes","Hype Score","Confidence Score","Market Value"]
+    headers = [
+        "Release Date",
+        "Retail",
+        "Hype",
+        "Confidence",
+        "Priority",
+        "Brand",
+        "Style",
+        "Tags",
+        "Source Primary",
+        "Source Secondary",
+        "Source Count",
+        "Release URL",
+        "Image URL",
+        "Notes",
+        "Hype Score",
+        "Confidence Score",
+        "Market Value",
+    ]
     for idx, header in enumerate(headers, start=1):
         ws.cell(row=1, column=idx, value=header)
+
     for row_idx, row in enumerate(rows, start=2):
         vals = [
-            row.release_date, row.retail, row.hype, row.confidence, row.priority, row.brand, row.style, row.tags,
-            row.source_primary, row.source_secondary, row.release_url, row.image_url, row.notes, row.hype_score,
-            row.confidence_score, row.estimated_market_value if row.estimated_market_value is not None else ""
+            row.release_date,
+            row.retail,
+            row.hype,
+            row.confidence,
+            row.priority,
+            row.brand,
+            row.style,
+            row.tags,
+            row.source_primary,
+            row.source_secondary,
+            row.source_count,
+            row.release_url,
+            row.image_url,
+            row.notes,
+            row.hype_score,
+            row.confidence_score,
+            row.estimated_market_value if row.estimated_market_value is not None else "",
         ]
         for col_idx, value in enumerate(vals, start=1):
             ws.cell(row=row_idx, column=col_idx, value=value)
         ws.cell(row=row_idx, column=1).number_format = "m/d/yyyy"
+
     ws.freeze_panes = "A2"
     autosize(ws)
+
 
 def write_high_hype_sheet(ws: Any, rows: list[ReleaseRow]) -> None:
     write_tracker_sheet(ws, "High Hype Releases", [r for r in rows if r.hype.upper() == "HIGH"])
 
+
 def write_summary_sheet(ws: Any, weekly_rows: list[ReleaseRow], monthly_rows: list[ReleaseRow]) -> None:
     ws["A1"] = "Summary"
-    ws["A3"] = "Weekly Releases"; ws["B3"] = len(weekly_rows)
-    ws["A4"] = "Monthly Releases"; ws["B4"] = len(monthly_rows)
+    ws["A3"] = "Weekly Releases"
+    ws["B3"] = len(weekly_rows)
+    ws["A4"] = "Monthly Releases"
+    ws["B4"] = len(monthly_rows)
 
-    by_brand, by_hype, by_conf = {}, {}, {}
-    for row in monthly_rows:
-        by_brand[row.brand] = by_brand.get(row.brand, 0) + 1
-        by_hype[row.hype] = by_hype.get(row.hype, 0) + 1
-        by_conf[row.confidence] = by_conf.get(row.confidence, 0) + 1
+    by_brand: dict[str, int] = {}
+    by_hype: dict[str, int] = {}
+    by_conf: dict[str, int] = {}
 
-    r = 6
-    ws.cell(row=r, column=1, value="By Brand"); r += 1
+    for r in monthly_rows:
+        by_brand[r.brand] = by_brand.get(r.brand, 0) + 1
+        by_hype[r.hype] = by_hype.get(r.hype, 0) + 1
+        by_conf[r.confidence] = by_conf.get(r.confidence, 0) + 1
+
+    row = 6
+    ws.cell(row=row, column=1, value="By Brand")
+    row += 1
     for brand, count in sorted(by_brand.items(), key=lambda x: (-x[1], x[0])):
-        ws.cell(row=r, column=1, value=brand); ws.cell(row=r, column=2, value=count); r += 1
+        ws.cell(row=row, column=1, value=brand)
+        ws.cell(row=row, column=2, value=count)
+        row += 1
 
-    r += 1
-    ws.cell(row=r, column=1, value="Hype Breakdown"); r += 1
+    row += 1
+    ws.cell(row=row, column=1, value="Hype Breakdown")
+    row += 1
     for label in ("HIGH", "MED", "LOW"):
-        ws.cell(row=r, column=1, value=label); ws.cell(row=r, column=2, value=by_hype.get(label, 0)); r += 1
+        ws.cell(row=row, column=1, value=label)
+        ws.cell(row=row, column=2, value=by_hype.get(label, 0))
+        row += 1
 
-    r += 1
-    ws.cell(row=r, column=1, value="Confidence Breakdown"); r += 1
+    row += 1
+    ws.cell(row=row, column=1, value="Confidence Breakdown")
+    row += 1
     for label in ("HIGH", "MED", "LOW"):
-        ws.cell(row=r, column=1, value=label); ws.cell(row=r, column=2, value=by_conf.get(label, 0)); r += 1
+        ws.cell(row=row, column=1, value=label)
+        ws.cell(row=row, column=2, value=by_conf.get(label, 0))
+        row += 1
 
-    r += 1
-    ws.cell(row=r, column=1, value="Top Must Watch"); r += 1
-    for item in [x for x in monthly_rows if x.priority == "Must Watch"][:10]:
-        ws.cell(row=r, column=1, value=item.release_date)
-        ws.cell(row=r, column=2, value=item.brand)
-        ws.cell(row=r, column=3, value=item.style)
-        ws.cell(row=r, column=4, value=item.hype)
-        ws.cell(row=r, column=5, value=item.confidence)
-        r += 1
     autosize(ws)
+
 
 def build_workbook(rows: list[ReleaseRow], changes: list[dict[str, Any]], output_path: Path, days: int) -> None:
     output_path.parent.mkdir(parents=True, exist_ok=True)
+
     filtered_rows = filter_window(rows, days)
     wb = Workbook()
+
     tracker = wb.active
     tracker.title = "Tracker"
     write_tracker_sheet(tracker, make_title(filtered_rows), filtered_rows)
@@ -292,17 +425,22 @@ def build_workbook(rows: list[ReleaseRow], changes: list[dict[str, Any]], output
 
     wb.save(output_path)
 
+
 def main() -> None:
     args = parse_args()
     raw_rows = load_json(args.input_json)
-    changes = load_json(args.changes)
+    change_rows = load_json(args.changes)
+
     rows = [r for r in (normalize_row(item) for item in raw_rows) if r]
-    build_workbook(rows, changes, args.weekly_output, 14)
-    build_workbook(rows, changes, args.monthly_output, 35)
+
+    build_workbook(rows, change_rows, args.weekly_output, 14)
+    build_workbook(rows, change_rows, args.monthly_output, 35)
+
     print(f"Loaded rows: {len(raw_rows)}")
     print(f"Normalized rows: {len(rows)}")
     print(f"Saved weekly workbook: {args.weekly_output.resolve()}")
     print(f"Saved monthly workbook: {args.monthly_output.resolve()}")
+
 
 if __name__ == "__main__":
     main()

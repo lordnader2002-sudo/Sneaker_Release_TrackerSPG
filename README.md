@@ -1,165 +1,115 @@
-# Sneaker Release Tracker
+# Sneaker Release Trackers (Auto-Updated)
 
-Automated sneaker release tracking that pulls release data, merges multiple free sources, scores each release, tracks changes, and generates clean Excel files for weekly and monthly review.
+This repo automatically generates **two Excel trackers** for sneaker releases:
 
-## How scoring works
+- **Weekly Tracker** (next ~14 days)
+- **Monthly Tracker** (next ~30–35 days)
 
-### Hype
-Hype is an estimate of how important or in-demand a release may be.
+✅ **Updated automatically twice per day**  
+**12:00 PM** and **12:00 AM** Eastern (every day)
 
-It is based on things like:
-- **brand strength** (Nike / Air Jordan usually score higher)
-- **collab keywords** (like Travis Scott, Union, Off-White, etc.)
-- **popular models** (like Jordan 1/3/4, Dunks, Air Max 95, Kobe)
-- **retail vs resale spread** when resale data exists
-- **limited / exclusive wording**
+---
 
-Hype is labeled as:
+## Download the trackers
+
+### Option 1 (recommended): One-click download page
+If this repo has GitHub Pages enabled, use the website link in the repo (usually in the “About” section).  
+From there you can download:
+
+- `Weekly Tracker (Excel)`
+- `Monthly Tracker (Excel)`
+
+### Option 2: Download from the repo files
+Go to the `output/` folder in this repo and download:
+
+- `weekly_tracker.xlsx`
+- `monthly_tracker.xlsx`
+
+### Option 3 (backup): Download from Actions artifacts
+1. Click the **Actions** tab
+2. Open the most recent workflow run
+3. Download the **artifact** called `sneaker-trackers`
+
+---
+
+## What’s inside the Excel tracker?
+
+Each row is a sneaker release. The workbook includes helpful tabs:
+
+- **Tracker** – main view (easy filtering/sorting)
+- **Monthly** – longer lookahead
+- **Changes** – what changed since the last run
+- **High Hype** – only the most important releases
+- **Summary** – quick totals/breakdowns
+- **Raw Data** – full merged dataset
+
+---
+
+## How “Hype” is determined
+
+**Hype** is a simple score that estimates demand/importance.
+
+It uses signals like:
+- popular brands/models (Nike, Jordan, Dunk, etc.)
+- collaboration keywords (Travis Scott, Off-White, etc.)
+- limited/exclusive wording
+- resale spread (when available)
+
+Hype labels:
 - **LOW**
 - **MED**
 - **HIGH**
 
-### Confidence
-Confidence is an estimate of how reliable the release data is.
+---
 
-It is based on things like:
-- whether the release appeared in **more than one source**
-- whether a **retail price** was found
-- whether an **image URL** was found
-- whether there is a **secondary source**
-- whether there is a usable **release/source URL**
+## How “Confidence” is determined
 
-Confidence is labeled as:
+**Confidence** estimates how reliable the row’s data is.
+
+It looks at:
+- how many sources agreed on the release (**Source Count**)
+- whether retail price was found
+- whether a release URL exists
+- whether an image URL exists
+
+Confidence labels:
 - **LOW**
 - **MED**
 - **HIGH**
 
-### Priority
-Priority is the practical “how much should we care?” label.
+---
 
-It is based on **Hype + Confidence**:
-- **Must Watch**
-- **Watch**
-- **Low Priority**
+## What “Source Count” means
+
+**Source Count** = how many different sources matched that release.
+
+Higher = more verified.
 
 ---
 
-## What this project does
+## Notes on accuracy
 
-This repo is built to replace manual sneaker release spreadsheets with an automated workflow.
+This tracker uses free public sources. Sometimes release dates shift or listings change.
 
-It:
-
-- pulls sneaker release data automatically
-- uses a **primary source** and a **fallback source**
-- merges and cleans duplicate records
-- scores each release for:
-  - **Hype**
-  - **Confidence**
-  - **Priority**
-- tracks changes from previous runs
-- archives snapshots
-- generates polished Excel files
-- runs automatically with **GitHub Actions**
+Best practice:
+- Check the **Changes** tab first
+- Treat **HIGH confidence** rows as “most reliable”
+- Treat **LOW confidence** rows as “needs quick review”
 
 ---
 
-## Data flow
+## For maintainers (optional)
 
-The workflow runs in this order:
-
-1. **Primary fetcher**
-   - `fetch_releases_primary.js`
-   - Uses **Sneaks-API**
-   - Pulls broad sneaker/product data
-
-2. **Fallback fetcher**
-   - `fetch_release_fallback.py`
-   - Uses **Playwright**
-   - Scrapes public release pages if the primary source is weak or fails
-
-3. **Merge + compare**
-   - `merge_and_compare.py`
-   - Merges primary and fallback records
-   - Deduplicates entries
-   - Calculates hype, confidence, priority, and tags
-   - Detects changes from the previous run
-   - Writes archive snapshots
-
-4. **Workbook builder**
-   - `build_tracker_workbook.py`
-   - Generates:
-     - `output/weekly_tracker.xlsx`
-     - `output/monthly_tracker.xlsx`
-
-5. **GitHub Actions**
-   - `.github/workflows/update_trackers.yml`
-   - Runs the pipeline automatically on a schedule or manually
-   - Uploads files as workflow artifacts
-   - Commits updated outputs back into the repo
-
----
-
-## Output files
-
-After a successful run, the repo generates:
-
-### Data files
-- `data/primary_releases.json`
-- `data/fallback_releases.json`
-- `data/final_releases.json`
-- `data/changes.json`
-
-### Excel files
+The automation runs through GitHub Actions and produces:
 - `output/weekly_tracker.xlsx`
 - `output/monthly_tracker.xlsx`
 
-### Archive
-- timestamped snapshots in `archive/`
+If it ever fails:
+- open **Actions → latest run → logs**
+- identify which step failed (fetch → merge → build)
 
 ---
 
-## Workbook tabs
+## Contact / Requests
 
-The generated workbook includes:
-
-- **Tracker**
-  - main weekly action sheet
-
-- **Monthly**
-  - broader release window
-
-- **Changes**
-  - new, removed, or updated releases
-
-- **Raw Data**
-  - normalized merged records
-
-- **High Hype**
-  - high-priority filtered view
-
-- **Summary**
-  - quick counts and breakdowns
-
----
-
-## Repo structure
-
-```text
-.github/workflows/update_trackers.yml
-.gitignore
-README.md
-package.json
-requirements.txt
-
-fetch_releases_primary.js
-fetch_release_fallback.py
-merge_and_compare.py
-build_tracker_workbook.py
-
-setup_local.bat
-run_local_full.bat
-
-data/
-output/
-archive/
+If you want new sources, new columns, or a different layout, open an issue in this repo.

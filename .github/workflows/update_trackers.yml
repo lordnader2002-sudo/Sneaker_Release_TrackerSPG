@@ -78,7 +78,9 @@ jobs:
             --output data/final_releases.json \
             --changes data/changes.json \
             --archive-dir archive \
-            --min-records 1
+            --min-records 1 \
+            --fuzzy-threshold 0.92 \
+            --date-fuzz-days 1
 
       - name: Validate final output
         run: |

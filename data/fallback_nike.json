@@ -23,6 +23,17 @@
   },
   {
     "releaseDate": "2026-03-08",
+    "shoeName": "Air Jordan 1 Low OG Sail and Coconut Milk",
+    "brand": "Air Jordan",
+    "retailPrice": 0,
+    "estimatedMarketValue": null,
+    "imageUrl": null,
+    "sourcePrimary": "playwright-linkscan",
+    "sourceSecondary": "https://www.nike.com/launch",
+    "sourceUrl": "/launch/t/air-jordan-1-low-og-sail-and-coconut-milk"
+  },
+  {
+    "releaseDate": "2026-03-08",
     "shoeName": "Air Jordan 13 Retro White and University Red",
     "brand": "Air Jordan",
     "retailPrice": 0,
@@ -42,17 +53,6 @@
     "sourcePrimary": "playwright-linkscan",
     "sourceSecondary": "https://www.nike.com/launch",
     "sourceUrl": "/launch/t/air-jordan-4-imperial-purple"
-  },
-  {
-    "releaseDate": "2026-03-08",
-    "shoeName": "Converse x Hello Kitty Chuck Taylor 70 Swarovski\u00ae",
-    "brand": "Converse",
-    "retailPrice": 0,
-    "estimatedMarketValue": null,
-    "imageUrl": null,
-    "sourcePrimary": "playwright-linkscan",
-    "sourceSecondary": "https://www.nike.com/launch",
-    "sourceUrl": "/launch/t/converse-hello-kitty-chuck-taylor-70-swarovski"
   },
   {
     "releaseDate": "2026-03-08",
@@ -121,6 +121,17 @@
     "sourceUrl": "/launch/t/air-jordan-13-retro-white-and-university-red"
   },
   {
+    "releaseDate": "2026-03-18",
+    "shoeName": "Mar 18 Air Jordan 1 Low OG Sail and Coconut Milk",
+    "brand": "Air Jordan",
+    "retailPrice": 0,
+    "estimatedMarketValue": null,
+    "imageUrl": null,
+    "sourcePrimary": "playwright-linkscan",
+    "sourceSecondary": "https://www.nike.com/launch/upcoming",
+    "sourceUrl": "/launch/t/air-jordan-1-low-og-sail-and-coconut-milk"
+  },
+  {
     "releaseDate": "2026-03-27",
     "shoeName": "Mar 27 Baby/Toddler Shoes Nike Little Posite Pro",
     "brand": "Nike",
@@ -130,16 +141,5 @@
     "sourcePrimary": "playwright-linkscan",
     "sourceSecondary": "https://www.nike.com/launch/upcoming",
     "sourceUrl": "/launch/t/air-foamposite-pro-university-blue-and-white"
-  },
-  {
-    "releaseDate": "2026-04-03",
-    "shoeName": "Apr 3 Basketball Shoes LeBron XXIII Elite \"Good Intentions\"",
-    "brand": "Nike",
-    "retailPrice": 0,
-    "estimatedMarketValue": null,
-    "imageUrl": null,
-    "sourcePrimary": "playwright-linkscan",
-    "sourceSecondary": "https://www.nike.com/launch/upcoming",
-    "sourceUrl": "/launch/t/lebron-xxiii-elite-good-intentions-hyper-pink-and-black"
   }
 ]

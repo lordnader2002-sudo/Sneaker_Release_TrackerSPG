@@ -3,50 +3,20 @@
     "changeType": "NEW",
     "date": "2026-03-10",
     "brand": "Unknown",
-    "style": "Balenciaga Monday Ultra WMNS Brown / White",
+    "style": "Balenciaga 3xl Extreme Lace Eggshell / Multicolor",
     "fieldChanged": "",
     "oldValue": "",
     "newValue": "",
-    "detectedAt": "2026-03-08T16:56:59Z"
+    "detectedAt": "2026-03-08T17:51:33Z"
   },
   {
     "changeType": "REMOVED",
     "date": "2026-03-10",
     "brand": "Unknown",
-    "style": "Balenciaga 3xl Extreme Lace Eggshell / Multicolor",
+    "style": "Balenciaga Monday Ultra WMNS Brown / White",
     "fieldChanged": "",
     "oldValue": "",
     "newValue": "",
-    "detectedAt": "2026-03-08T16:56:59Z"
-  },
-  {
-    "changeType": "NEW",
-    "date": "2026-03-12",
-    "brand": "Crocs",
-    "style": "ENTRIES OPEN App entry Crocs Classic Clog Zoro One Piece MENS \u2022 GREEN/BLACK",
-    "fieldChanged": "",
-    "oldValue": "",
-    "newValue": "",
-    "detectedAt": "2026-03-08T16:56:59Z"
-  },
-  {
-    "changeType": "REMOVED",
-    "date": "2026-03-12",
-    "brand": "Crocs",
-    "style": "Crocs Classic Clog Zoro One Piece MENS \u2022 GREEN/BLACK",
-    "fieldChanged": "",
-    "oldValue": "",
-    "newValue": "",
-    "detectedAt": "2026-03-08T16:56:59Z"
-  },
-  {
-    "changeType": "NEW",
-    "date": "2026-04-03",
-    "brand": "Nike",
-    "style": "Apr 3 Basketball Shoes LeBron XXIII Elite \"Good Intentions\"",
-    "fieldChanged": "",
-    "oldValue": "",
-    "newValue": "",
-    "detectedAt": "2026-03-08T16:56:59Z"
+    "detectedAt": "2026-03-08T17:51:33Z"
   }
 ]

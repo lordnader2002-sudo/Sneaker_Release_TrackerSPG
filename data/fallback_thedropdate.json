@@ -1,5 +1,17 @@
 [
   {
+    "releaseDate": "2026-03-10",
+    "shoeName": "Nike LeBron 23 'LeBronto'",
+    "brand": "Nike",
+    "retailPrice": 0,
+    "estimatedMarketValue": null,
+    "imageUrl": null,
+    "sourcePrimary": "thedropdate",
+    "sourceSecondary": "https://thedropdate.com/releases",
+    "sourceUrl": "https://thedropdate.com/releases",
+    "releaseUrl": "https://thedropdate.com/sneakers/nike-lebron-23-lebronto-ih1513-602/706595"
+  },
+  {
     "releaseDate": "2026-03-11",
     "shoeName": "New Balance 1890 'Faded Black & Utility Green' From \u00a3 160",
     "brand": "New Balance",
@@ -61,6 +73,18 @@
   },
   {
     "releaseDate": "2026-03-12",
+    "shoeName": "ASICS Gel-kayano 14 'Olive' From \u00a3 165",
+    "brand": "ASICS",
+    "retailPrice": 0,
+    "estimatedMarketValue": null,
+    "imageUrl": null,
+    "sourcePrimary": "thedropdate",
+    "sourceSecondary": "https://thedropdate.com/releases",
+    "sourceUrl": "https://thedropdate.com/releases",
+    "releaseUrl": "https://thedropdate.com/sneakers/asics-gel-kayano-14-white-1203a537-111/705592"
+  },
+  {
+    "releaseDate": "2026-03-12",
     "shoeName": "Finesse x ASICS GEL-CUMULUS 16 'Desert Rose' From \u00a3 165",
     "brand": "ASICS",
     "retailPrice": 0,
@@ -70,6 +94,30 @@
     "sourceSecondary": "https://thedropdate.com/releases",
     "sourceUrl": "https://thedropdate.com/releases",
     "releaseUrl": "https://thedropdate.com/sneakers/asics-gel-cumulus-16-finesse-desert-rose-1203b003-200/668694"
+  },
+  {
+    "releaseDate": "2026-03-12",
+    "shoeName": "CAYL x New Balance M10L 'Black Ink' From \u00a3 140",
+    "brand": "New Balance",
+    "retailPrice": 0,
+    "estimatedMarketValue": null,
+    "imageUrl": null,
+    "sourcePrimary": "thedropdate",
+    "sourceSecondary": "https://thedropdate.com/releases",
+    "sourceUrl": "https://thedropdate.com/releases",
+    "releaseUrl": "https://thedropdate.com/sneakers/new-balance-m10l-blue-mtm10lcl/671644"
+  },
+  {
+    "releaseDate": "2026-03-12",
+    "shoeName": "CAYL x New Balance UTRNCA 'Slate Grey' From \u00a3 155",
+    "brand": "New Balance",
+    "retailPrice": 0,
+    "estimatedMarketValue": null,
+    "imageUrl": null,
+    "sourcePrimary": "thedropdate",
+    "sourceSecondary": "https://thedropdate.com/releases",
+    "sourceUrl": "https://thedropdate.com/releases",
+    "releaseUrl": "https://thedropdate.com/sneakers/cayl-x-new-balance-utrnv11-slate-grey-utrnca/705387"
   },
   {
     "releaseDate": "2026-03-12",
@@ -106,6 +154,54 @@
     "sourceSecondary": "https://thedropdate.com/releases",
     "sourceUrl": "https://thedropdate.com/releases",
     "releaseUrl": "https://thedropdate.com/sneakers/nike-air-max-95-paisley-bandana-iq0620-100/705853"
+  },
+  {
+    "releaseDate": "2026-03-12",
+    "shoeName": "NikeSKIMS Rift Mesh 'Black' From \u00a3 145",
+    "brand": "Nike",
+    "retailPrice": 0,
+    "estimatedMarketValue": null,
+    "imageUrl": null,
+    "sourcePrimary": "thedropdate",
+    "sourceSecondary": "https://thedropdate.com/releases",
+    "sourceUrl": "https://thedropdate.com/releases",
+    "releaseUrl": "https://thedropdate.com/sneakers/skims-x-nike-air-rift-black-io7694-001/700295"
+  },
+  {
+    "releaseDate": "2026-03-12",
+    "shoeName": "NikeSKIMS Rift Mesh 'Light Bone' From \u00a3 145",
+    "brand": "Nike",
+    "retailPrice": 0,
+    "estimatedMarketValue": null,
+    "imageUrl": null,
+    "sourcePrimary": "thedropdate",
+    "sourceSecondary": "https://thedropdate.com/releases",
+    "sourceUrl": "https://thedropdate.com/releases",
+    "releaseUrl": "https://thedropdate.com/sneakers/nikeskims-rift-mesh-light-bone-io7694-002/706596"
+  },
+  {
+    "releaseDate": "2026-03-12",
+    "shoeName": "NikeSKIMS Rift Mesh 'Velvet Brown' From \u00a3 145",
+    "brand": "Nike",
+    "retailPrice": 0,
+    "estimatedMarketValue": null,
+    "imageUrl": null,
+    "sourcePrimary": "thedropdate",
+    "sourceSecondary": "https://thedropdate.com/releases",
+    "sourceUrl": "https://thedropdate.com/releases",
+    "releaseUrl": "https://thedropdate.com/sneakers/skims-x-nike-air-rift-velvet-brown-io7694-200/700297"
+  },
+  {
+    "releaseDate": "2026-03-13",
+    "shoeName": "adidas Anthony Edwards 2 'Georgia Bulldogs' From \u00a3 120",
+    "brand": "Adidas",
+    "retailPrice": 0,
+    "estimatedMarketValue": null,
+    "imageUrl": null,
+    "sourcePrimary": "thedropdate",
+    "sourceSecondary": "https://thedropdate.com/releases",
+    "sourceUrl": "https://thedropdate.com/releases",
+    "releaseUrl": "https://thedropdate.com/sneakers/adidas-anthony-edwards-2-georgia-bulldogs-jq9497/706523"
   },
   {
     "releaseDate": "2026-03-13",
@@ -168,6 +264,78 @@
     "releaseUrl": "https://thedropdate.com/sneakers/air-jordan-x-travis-scott-jumpman-jack-green-spark-im9113-300/704688"
   },
   {
+    "releaseDate": "2026-03-16",
+    "shoeName": "Jacquemus x Nike Moon Shoe SP 'Fauna Brown' From \u00a3 163",
+    "brand": "Nike",
+    "retailPrice": 0,
+    "estimatedMarketValue": null,
+    "imageUrl": null,
+    "sourcePrimary": "thedropdate",
+    "sourceSecondary": "https://thedropdate.com/releases",
+    "sourceUrl": "https://thedropdate.com/releases",
+    "releaseUrl": "https://thedropdate.com/sneakers/jacquemus-x-nike-moon-shoe-sp-fauna-brown-hv8547-200/705860"
+  },
+  {
+    "releaseDate": "2026-03-16",
+    "shoeName": "Jacquemus x Nike Moon Shoe SP 'Soft Pearl' From \u00a3 163",
+    "brand": "Nike",
+    "retailPrice": 0,
+    "estimatedMarketValue": null,
+    "imageUrl": null,
+    "sourcePrimary": "thedropdate",
+    "sourceSecondary": "https://thedropdate.com/releases",
+    "sourceUrl": "https://thedropdate.com/releases",
+    "releaseUrl": "https://thedropdate.com/sneakers/jacquemus-x-nike-moon-shoe-sp-soft-pearl-hv8547-002/705859"
+  },
+  {
+    "releaseDate": "2026-03-17",
+    "shoeName": "adidas Hyperboost Edge 'White & Pure Ruby' From \u00a3 170",
+    "brand": "Adidas",
+    "retailPrice": 0,
+    "estimatedMarketValue": null,
+    "imageUrl": null,
+    "sourcePrimary": "thedropdate",
+    "sourceSecondary": "https://thedropdate.com/releases",
+    "sourceUrl": "https://thedropdate.com/releases",
+    "releaseUrl": "https://thedropdate.com/sneakers/adidas-hyperboost-edge-white-pure-ruby-ki1913/706498"
+  },
+  {
+    "releaseDate": "2026-03-17",
+    "shoeName": "Dashawn Jordan x Nike SB Dunk Low 'Bright Spruce' From \u00a3 120",
+    "brand": "Air Jordan",
+    "retailPrice": 0,
+    "estimatedMarketValue": null,
+    "imageUrl": null,
+    "sourcePrimary": "thedropdate",
+    "sourceSecondary": "https://thedropdate.com/releases",
+    "sourceUrl": "https://thedropdate.com/releases",
+    "releaseUrl": "https://thedropdate.com/sneakers/nike-sb-x-dashawn-jordan-dunk-low-black-bright-spruce-ib6208-200/703258"
+  },
+  {
+    "releaseDate": "2026-03-18",
+    "shoeName": "adidas Adizero Dropset Elite 'Solar Red' From \u00a3 230",
+    "brand": "Adidas",
+    "retailPrice": 0,
+    "estimatedMarketValue": null,
+    "imageUrl": null,
+    "sourcePrimary": "thedropdate",
+    "sourceSecondary": "https://thedropdate.com/releases",
+    "sourceUrl": "https://thedropdate.com/releases",
+    "releaseUrl": "https://thedropdate.com/sneakers/adidas-adizero-dropset-elite-solar-red-la6218/706499"
+  },
+  {
+    "releaseDate": "2026-03-18",
+    "shoeName": "Air Jordan 3 'Spring Is In The Air' From \u00a3 189",
+    "brand": "Air Jordan",
+    "retailPrice": 0,
+    "estimatedMarketValue": null,
+    "imageUrl": null,
+    "sourcePrimary": "thedropdate",
+    "sourceSecondary": "https://thedropdate.com/releases",
+    "sourceUrl": "https://thedropdate.com/releases",
+    "releaseUrl": "https://thedropdate.com/sneakers/air-jordan-3-spring-is-in-the-air-if4396-100/703366"
+  },
+  {
     "releaseDate": "2026-03-18",
     "shoeName": "One Piece x Crocs Classic Clog 'Zoro'",
     "brand": "Crocs",
@@ -226,18 +394,6 @@
     "sourceSecondary": "https://thedropdate.com/releases",
     "sourceUrl": "https://thedropdate.com/releases",
     "releaseUrl": "https://thedropdate.com/sneakers/new-balance-1890-black-yellow-u18903rb/705946"
-  },
-  {
-    "releaseDate": "2026-03-28",
-    "shoeName": "Air Jordan 3 'Spring Is In The Air' From \u00a3 190",
-    "brand": "Air Jordan",
-    "retailPrice": 0,
-    "estimatedMarketValue": null,
-    "imageUrl": null,
-    "sourcePrimary": "thedropdate",
-    "sourceSecondary": "https://thedropdate.com/releases",
-    "sourceUrl": "https://thedropdate.com/releases",
-    "releaseUrl": "https://thedropdate.com/sneakers/air-jordan-3-spring-is-in-the-air-if4396-100/703366"
   },
   {
     "releaseDate": "2026-04-01",

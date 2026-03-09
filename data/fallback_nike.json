@@ -34,17 +34,6 @@
   },
   {
     "releaseDate": "2026-03-10",
-    "shoeName": "Air Max Ishod Iron Grey and Photon Dust",
-    "brand": "Nike",
-    "retailPrice": 0,
-    "estimatedMarketValue": null,
-    "imageUrl": null,
-    "sourcePrimary": "playwright-linkscan",
-    "sourceSecondary": "https://www.nike.com/launch",
-    "sourceUrl": "/launch/t/air-max-ishod-iron-grey-and-photon-dust-1"
-  },
-  {
-    "releaseDate": "2026-03-10",
     "shoeName": "Kobe 3 Low Protro Pink Quartz",
     "brand": "Nike",
     "retailPrice": 0,
@@ -64,17 +53,6 @@
     "sourcePrimary": "playwright-linkscan",
     "sourceSecondary": "https://www.nike.com/launch/upcoming",
     "sourceUrl": "/launch/t/zoom-vomero-5-hyper-royal"
-  },
-  {
-    "releaseDate": "2026-03-10",
-    "shoeName": "Nike SB Ishod Apparel Collection",
-    "brand": "Nike",
-    "retailPrice": 0,
-    "estimatedMarketValue": null,
-    "imageUrl": null,
-    "sourcePrimary": "playwright-linkscan",
-    "sourceSecondary": "https://www.nike.com/launch",
-    "sourceUrl": "/launch/t/nike-sb-ishod-apparel-collection-static"
   },
   {
     "releaseDate": "2026-03-10",
@@ -130,27 +108,5 @@
     "sourcePrimary": "playwright-linkscan",
     "sourceSecondary": "https://www.nike.com/launch/upcoming",
     "sourceUrl": "/launch/t/air-jordan-1-low-og-sail-and-coconut-milk"
-  },
-  {
-    "releaseDate": "2026-03-27",
-    "shoeName": "Mar 27 Baby/Toddler Shoes Nike Little Posite Pro",
-    "brand": "Nike",
-    "retailPrice": 0,
-    "estimatedMarketValue": null,
-    "imageUrl": null,
-    "sourcePrimary": "playwright-linkscan",
-    "sourceSecondary": "https://www.nike.com/launch/upcoming",
-    "sourceUrl": "/launch/t/air-foamposite-pro-university-blue-and-white"
-  },
-  {
-    "releaseDate": "2026-04-03",
-    "shoeName": "Apr 3 Basketball Shoes LeBron XXIII Elite \"Good Intentions\"",
-    "brand": "Nike",
-    "retailPrice": 0,
-    "estimatedMarketValue": null,
-    "imageUrl": null,
-    "sourcePrimary": "playwright-linkscan",
-    "sourceSecondary": "https://www.nike.com/launch/upcoming",
-    "sourceUrl": "/launch/t/lebron-xxiii-elite-good-intentions-hyper-pink-and-black"
   }
 ]

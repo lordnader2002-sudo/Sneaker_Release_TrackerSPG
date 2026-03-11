@@ -49,6 +49,18 @@
   },
   {
     "releaseDate": "2026-03-13",
+    "shoeName": "Converse Kentucky Wildcats 30th Anniversary",
+    "brand": "Converse",
+    "retailPrice": 0,
+    "estimatedMarketValue": null,
+    "imageUrl": null,
+    "sourcePrimary": "kicksonfire",
+    "sourceSecondary": "https://www.kicksonfire.com/sneaker-release-dates",
+    "sourceUrl": "https://www.kicksonfire.com/sneaker-release-dates",
+    "releaseUrl": "https://www.kicksonfire.com/converse-kentucky-wildcats-30th-anniversary"
+  },
+  {
+    "releaseDate": "2026-03-13",
     "shoeName": "Chet Holmgren x Nike KD 18 hunder And Reign",
     "brand": "Nike",
     "retailPrice": 0,
@@ -82,6 +94,18 @@
     "sourceSecondary": "https://www.kicksonfire.com/sneaker-release-dates",
     "sourceUrl": "https://www.kicksonfire.com/sneaker-release-dates",
     "releaseUrl": "https://www.kicksonfire.com/nike-kobe-3-low-protro-mamba-magic"
+  },
+  {
+    "releaseDate": "2026-03-13",
+    "shoeName": "Reebok Angel Navy Halo",
+    "brand": "Reebok",
+    "retailPrice": 0,
+    "estimatedMarketValue": null,
+    "imageUrl": null,
+    "sourcePrimary": "kicksonfire",
+    "sourceSecondary": "https://www.kicksonfire.com/sneaker-release-dates",
+    "sourceUrl": "https://www.kicksonfire.com/sneaker-release-dates",
+    "releaseUrl": "https://www.kicksonfire.com/reebok-angel-navy-halo"
   },
   {
     "releaseDate": "2026-03-13",
@@ -250,30 +274,6 @@
     "sourceSecondary": "https://www.kicksonfire.com/sneaker-release-dates",
     "sourceUrl": "https://www.kicksonfire.com/sneaker-release-dates",
     "releaseUrl": "https://www.kicksonfire.com/fragment-x-nike-book-2"
-  },
-  {
-    "releaseDate": "2026-03-19",
-    "shoeName": "Nike G.t. Cut 1 Orange Pulse / Persian Violet",
-    "brand": "Nike",
-    "retailPrice": 0,
-    "estimatedMarketValue": null,
-    "imageUrl": null,
-    "sourcePrimary": "kicksonfire",
-    "sourceSecondary": "https://www.kicksonfire.com/sneaker-release-dates",
-    "sourceUrl": "https://www.kicksonfire.com/sneaker-release-dates",
-    "releaseUrl": "https://www.kicksonfire.com/nike-g-t-cut-1-orange-pulse-persian-violet"
-  },
-  {
-    "releaseDate": "2026-03-19",
-    "shoeName": "Nike G.t. Future Unseen Hours",
-    "brand": "Nike",
-    "retailPrice": 0,
-    "estimatedMarketValue": null,
-    "imageUrl": null,
-    "sourcePrimary": "kicksonfire",
-    "sourceSecondary": "https://www.kicksonfire.com/sneaker-release-dates",
-    "sourceUrl": "https://www.kicksonfire.com/sneaker-release-dates",
-    "releaseUrl": "https://www.kicksonfire.com/nike-g-t-future-unseen-hours"
   },
   {
     "releaseDate": "2026-03-19",

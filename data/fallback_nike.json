@@ -1,17 +1,6 @@
 [
   {
-    "releaseDate": "2026-03-10",
-    "shoeName": "Mar 10 Zoom Vomero 5 Hyper Royal",
-    "brand": "Nike",
-    "retailPrice": 0,
-    "estimatedMarketValue": null,
-    "imageUrl": null,
-    "sourcePrimary": "playwright-linkscan",
-    "sourceSecondary": "https://www.nike.com/launch/upcoming",
-    "sourceUrl": "/launch/t/zoom-vomero-5-hyper-royal"
-  },
-  {
-    "releaseDate": "2026-03-11",
+    "releaseDate": "2026-03-12",
     "shoeName": "Air Jordan 1 Low OG Sail and Coconut Milk",
     "brand": "Air Jordan",
     "retailPrice": 0,
@@ -22,7 +11,7 @@
     "sourceUrl": "/launch/t/air-jordan-1-low-og-sail-and-coconut-milk"
   },
   {
-    "releaseDate": "2026-03-11",
+    "releaseDate": "2026-03-12",
     "shoeName": "Air Jordan 13 Retro White and University Red",
     "brand": "Air Jordan",
     "retailPrice": 0,
@@ -33,7 +22,7 @@
     "sourceUrl": "/launch/t/air-jordan-13-retro-white-and-university-red"
   },
   {
-    "releaseDate": "2026-03-11",
+    "releaseDate": "2026-03-12",
     "shoeName": "Air Jordan 14 Retro Black and University Blue",
     "brand": "Air Jordan",
     "retailPrice": 0,
@@ -44,7 +33,7 @@
     "sourceUrl": "/launch/t/air-jordan-14-retro-black-and-university-blue"
   },
   {
-    "releaseDate": "2026-03-11",
+    "releaseDate": "2026-03-12",
     "shoeName": "Air Jordan 3 x Teyana Taylor Concrete Rose",
     "brand": "Air Jordan",
     "retailPrice": 0,
@@ -55,7 +44,7 @@
     "sourceUrl": "/launch/t/air-jordan-3-teyana-taylor-concrete-rose"
   },
   {
-    "releaseDate": "2026-03-11",
+    "releaseDate": "2026-03-12",
     "shoeName": "Jordan x Teyana Taylor Apparel Collection",
     "brand": "Air Jordan",
     "retailPrice": 0,
@@ -66,7 +55,18 @@
     "sourceUrl": "/launch/t/jordan-teyana-taylor-apparel-collection-static"
   },
   {
-    "releaseDate": "2026-03-11",
+    "releaseDate": "2026-03-12",
+    "shoeName": "Converse x Anonymous Club Chuck 70",
+    "brand": "Converse",
+    "retailPrice": 0,
+    "estimatedMarketValue": null,
+    "imageUrl": null,
+    "sourcePrimary": "playwright-linkscan",
+    "sourceSecondary": "https://www.nike.com/launch",
+    "sourceUrl": "/launch/t/converse-x-anonymous-club-chuck-70-a18452c-001"
+  },
+  {
+    "releaseDate": "2026-03-12",
     "shoeName": "Kobe 3 Low Protro Pink Quartz",
     "brand": "Nike",
     "retailPrice": 0,
@@ -75,17 +75,6 @@
     "sourcePrimary": "playwright-linkscan",
     "sourceSecondary": "https://www.nike.com/launch",
     "sourceUrl": "/launch/t/kobe-3-low-protro-pink-quartz"
-  },
-  {
-    "releaseDate": "2026-03-11",
-    "shoeName": "Zoom Vomero 5 Hyper Royal",
-    "brand": "Nike",
-    "retailPrice": 0,
-    "estimatedMarketValue": null,
-    "imageUrl": null,
-    "sourcePrimary": "playwright-linkscan",
-    "sourceSecondary": "https://www.nike.com/launch",
-    "sourceUrl": "/launch/t/zoom-vomero-5-hyper-royal"
   },
   {
     "releaseDate": "2026-03-13",
@@ -165,14 +154,14 @@
     "sourceUrl": "/launch/t/jordan-teyana-taylor-apparel-collection-static"
   },
   {
-    "releaseDate": "2026-03-18",
-    "shoeName": "Mar 18 Air Jordan 1 Low OG Sail and Coconut Milk",
-    "brand": "Air Jordan",
+    "releaseDate": "2026-03-17",
+    "shoeName": "Mar 17 Converse x Anonymous Club Chuck 70",
+    "brand": "Converse",
     "retailPrice": 0,
     "estimatedMarketValue": null,
     "imageUrl": null,
     "sourcePrimary": "playwright-linkscan",
     "sourceSecondary": "https://www.nike.com/launch/upcoming",
-    "sourceUrl": "/launch/t/air-jordan-1-low-og-sail-and-coconut-milk"
+    "sourceUrl": "/launch/t/converse-x-anonymous-club-chuck-a19255c-020"
   }
 ]

@@ -909,7 +909,7 @@
     "releaseDate": "2026-03-12",
     "shoeName": "Nike Sabrina 3 Oregon Ducks",
     "brand": "Nike",
-    "retailPrice": 399,
+    "retailPrice": 0,
     "estimatedMarketValue": null,
     "imageUrl": null,
     "sourcePrimary": "kicksonfire",
@@ -925,8 +925,7 @@
     "tags": [
       "basketball"
     ],
-    "recordHash": "2cacb503c03466b2765cc84a677c38ae74d9cefba72443c92a67c28a233f6e64",
-    "retailSource": "https://www.kicksonfire.com/nike-sabrina-3-oregon-ducks"
+    "recordHash": "2cacb503c03466b2765cc84a677c38ae74d9cefba72443c92a67c28a233f6e64"
   },
   {
     "releaseDate": "2026-03-12",
@@ -1466,7 +1465,7 @@
     "releaseDate": "2026-03-14",
     "shoeName": "Air Jordan 13 Chicago",
     "brand": "Air Jordan",
-    "retailPrice": 375,
+    "retailPrice": 0,
     "estimatedMarketValue": null,
     "imageUrl": null,
     "sourcePrimary": "kicksonfire",
@@ -1482,8 +1481,7 @@
     "tags": [
       "hot-model"
     ],
-    "recordHash": "f571c68a8dfb0b140671a28dcf1269200934e3934931cd6aa4f53bc858e766a8",
-    "retailSource": "https://www.kicksonfire.com/air-jordan-13-chicago"
+    "recordHash": "f571c68a8dfb0b140671a28dcf1269200934e3934931cd6aa4f53bc858e766a8"
   },
   {
     "releaseDate": "2026-03-14",
@@ -1787,7 +1785,7 @@
     "releaseDate": "2026-03-18",
     "shoeName": "Air Jordan 1 Low OG Sail / Off White",
     "brand": "Air Jordan",
-    "retailPrice": 329,
+    "retailPrice": 0,
     "estimatedMarketValue": null,
     "imageUrl": null,
     "sourcePrimary": "kicksonfire",
@@ -1803,8 +1801,7 @@
     "tags": [
       "hot-model"
     ],
-    "recordHash": "5e2fc8f4f65fc6651819a0d0a41893461e6004a768c78a2270e7ce121aa58ac6",
-    "retailSource": "https://www.kicksonfire.com/air-jordan-1-low-og-sail-off-white"
+    "recordHash": "5e2fc8f4f65fc6651819a0d0a41893461e6004a768c78a2270e7ce121aa58ac6"
   },
   {
     "releaseDate": "2026-03-18",

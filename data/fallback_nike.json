@@ -1,17 +1,6 @@
 [
   {
     "releaseDate": "2026-03-13",
-    "shoeName": "Air Jordan 1 Low OG Sail and Coconut Milk",
-    "brand": "Air Jordan",
-    "retailPrice": 0,
-    "estimatedMarketValue": null,
-    "imageUrl": null,
-    "sourcePrimary": "playwright-linkscan",
-    "sourceSecondary": "https://www.nike.com/launch",
-    "sourceUrl": "/launch/t/air-jordan-1-low-og-sail-and-coconut-milk"
-  },
-  {
-    "releaseDate": "2026-03-13",
     "shoeName": "Air Jordan 13 Retro White and University Red",
     "brand": "Air Jordan",
     "retailPrice": 0,
@@ -56,14 +45,14 @@
   },
   {
     "releaseDate": "2026-03-13",
-    "shoeName": "Converse x Anonymous Club Chuck 70",
-    "brand": "Converse",
+    "shoeName": "Air Max 95 Big Bubble Volt and University Red",
+    "brand": "Nike",
     "retailPrice": 0,
     "estimatedMarketValue": null,
     "imageUrl": null,
     "sourcePrimary": "playwright-linkscan",
     "sourceSecondary": "https://www.nike.com/launch",
-    "sourceUrl": "/launch/t/converse-x-anonymous-club-chuck-70-a18452c-001"
+    "sourceUrl": "/launch/t/air-max-95-big-bubble-volt-and-university-red"
   },
   {
     "releaseDate": "2026-03-13",

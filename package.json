@@ -5,10 +5,8 @@
   "description": "Automated sneaker release tracker",
   "type": "commonjs",
   "scripts": {
-    "fetch:primary": "node fetch_releases_primary.js --days 35 --output data/primary_releases.json",
+    "fetch:primary": "python fetch_releases_primary.py --days 35 --output data/primary_releases.json",
     "build:all": "python build_tracker_workbook.py data/final_releases.json --weekly-output output/weekly_tracker.xlsx --monthly-output output/monthly_tracker.xlsx"
   },
-  "dependencies": {
-    "sneaks-api": "^1.0.11"
-  }
+  "dependencies": {}
 }

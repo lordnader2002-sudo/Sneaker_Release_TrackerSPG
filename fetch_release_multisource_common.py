@@ -159,6 +159,10 @@ _LABELED_PRICE_RE = re.compile(
     re.I,
 )
 
+# Valid retail sneaker price range (avoids stray page numbers, counts, zip codes)
+_PRICE_MIN = 40
+_PRICE_MAX = 650
+
 
 def extract_retail_price(text: str) -> int:
     """
@@ -176,6 +180,95 @@ def extract_retail_price(text: str) -> int:
         return int(m.group(1))
     except ValueError:
         return 0
+
+
+def extract_price_smart(text: str) -> int:
+    """
+    Smarter price extractor for scraper contexts.
+    1. Tries labeled patterns first (Retail Price: $130, MSRP $130).
+    2. Falls back to any bare $XXX value in [_PRICE_MIN, _PRICE_MAX].
+       When multiple bare prices exist, picks the most-common value.
+    Returns 0 if nothing plausible found.
+    """
+    if not text:
+        return 0
+
+    cleaned = text.replace(",", " ")
+
+    # Labeled wins immediately
+    m = _LABELED_PRICE_RE.search(cleaned)
+    if m:
+        try:
+            val = int(m.group(1))
+            if _PRICE_MIN <= val <= _PRICE_MAX:
+                return val
+        except ValueError:
+            pass
+
+    # Collect all bare $XXX in range
+    candidates: list[int] = []
+    for m in _PRICE_RE.finditer(cleaned):
+        try:
+            val = int(m.group(1))
+            if _PRICE_MIN <= val <= _PRICE_MAX:
+                candidates.append(val)
+        except ValueError:
+            pass
+
+    if not candidates:
+        return 0
+    if len(candidates) == 1:
+        return candidates[0]
+
+    # Most common value wins (handles "$130 … $130 … was $150" → 130)
+    from collections import Counter
+    return Counter(candidates).most_common(1)[0][0]
+
+
+# ---- image extraction ----
+
+_IMG_SRC_ATTRS = ("data-src", "src", "data-lazy-src", "data-original", "data-srcset", "srcset")
+_IMG_SKIP = ("1x1", "pixel", "placeholder", "blank", "spacer", "loading", "transparent", "logo", "icon")
+
+
+def extract_image_url(container: Any, base_url: str = "") -> str | None:
+    """
+    Find the best product image URL from a BeautifulSoup element.
+    Walks up to 7 ancestor levels looking for an <img> tag.
+    Skips SVGs, data URIs, tracking pixels, and tiny icons.
+    Returns an absolute URL or None.
+    """
+    if container is None or not hasattr(container, "find"):
+        return None
+
+    elem = container
+    for _ in range(7):
+        if elem is None or not hasattr(elem, "find_all"):
+            break
+
+        for img in elem.find_all("img"):
+            for attr in _IMG_SRC_ATTRS:
+                src = img.get(attr) or ""
+                if isinstance(src, list):
+                    src = src[0] if src else ""
+                # srcset → take first URL before space/comma
+                src = src.strip().split(",")[0].split(" ")[0].strip()
+                if not src or src.startswith("data:") or src.lower().endswith(".svg"):
+                    continue
+                src_lower = src.lower()
+                if any(skip in src_lower for skip in _IMG_SKIP):
+                    continue
+                # Resolve relative URLs
+                if src.startswith("//"):
+                    return "https:" + src
+                if src.startswith("/") and base_url:
+                    return base_url.rstrip("/") + src
+                if src.startswith("http"):
+                    return src
+
+        elem = elem.parent  # type: ignore[assignment]
+
+    return None
 
 
 def clean_title(text: str) -> str:

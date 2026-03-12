@@ -454,9 +454,21 @@ def main() -> None:
     args = parse_args()
     collected: list[dict[str, Any]] = []
 
+    UA = (
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+        "AppleWebKit/537.36 (KHTML, like Gecko) "
+        "Chrome/124.0.0.0 Safari/537.36"
+    )
     with sync_playwright() as playwright:
-        browser = playwright.chromium.launch(headless=True)
-        context = browser.new_context()
+        browser = playwright.chromium.launch(
+            headless=True,
+            args=["--no-sandbox", "--disable-setuid-sandbox", "--disable-gpu"],
+        )
+        context = browser.new_context(
+            user_agent=UA,
+            viewport={"width": 1280, "height": 800},
+            locale="en-US",
+        )
         page = context.new_page()
 
         for source in DEFAULT_SOURCES:

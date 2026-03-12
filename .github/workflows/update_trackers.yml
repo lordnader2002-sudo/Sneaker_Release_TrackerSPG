@@ -24,30 +24,22 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      - name: Set up Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: "20"
-
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
 
-      - name: Install Node dependencies
-        run: npm install
-
       - name: Install Python dependencies
         run: |
           python -m pip install --upgrade pip
           python -m pip install -r requirements.txt
-          python -m playwright install chromium
+          python -m playwright install chromium --with-deps
 
-      - name: Run primary fetcher
+      - name: Run primary fetcher (GOAT via Playwright)
         shell: bash
         run: |
           mkdir -p data
-          node fetch_releases_primary.js --days 35 --output data/primary_releases.json || echo "[]" > data/primary_releases.json
+          python fetch_releases_primary.py --days 35 --limit 300 --timeout 45 --output data/primary_releases.json || echo "[]" > data/primary_releases.json
 
       - name: Run all fallback fetchers (parallel)
         shell: bash

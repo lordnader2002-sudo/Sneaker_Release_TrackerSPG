@@ -13,7 +13,8 @@ from bs4 import BeautifulSoup
 
 from fetch_release_multisource_common import (
     clean_title,
-    extract_retail_price,
+    extract_image_url,
+    extract_price_smart,
     infer_brand,
     normalize_text,
     parse_date_flexible,
@@ -55,7 +56,7 @@ def extract_rows(soup: BeautifulSoup) -> list[dict[str, Any]]:
             continue
 
         ctx = normalize_text((a.parent.get_text(" ", strip=True) if a.parent else raw)[:800])
-        retail = extract_retail_price(ctx)
+        retail = extract_price_smart(ctx)
 
         title = clean_title(raw_title)
 
@@ -70,7 +71,7 @@ def extract_rows(soup: BeautifulSoup) -> list[dict[str, Any]]:
                 "brand": infer_brand(title),
                 "retailPrice": retail,
                 "estimatedMarketValue": None,
-                "imageUrl": None,
+                "imageUrl": extract_image_url(a.parent, base_url="https://thedropdate.com"),
                 "sourcePrimary": SOURCE_NAME,
                 "sourceSecondary": SOURCE_URL,
                 "sourceUrl": SOURCE_URL,

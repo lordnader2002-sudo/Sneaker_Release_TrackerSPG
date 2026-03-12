@@ -1,93 +1,263 @@
 [
   {
-    "changeType": "NEW",
+    "changeType": "REMOVED",
     "date": "2026-03-11",
     "brand": "Nike",
     "style": "Nike Air Force 1 Low 'Dark Team Red' - Patent Leather Pack From \u00a3 110",
     "fieldChanged": "",
     "oldValue": "",
     "newValue": "",
-    "detectedAt": "2026-03-11T18:12:15Z"
+    "detectedAt": "2026-03-12T06:37:46Z"
   },
   {
-    "changeType": "NEW",
+    "changeType": "REMOVED",
     "date": "2026-03-11",
     "brand": "Nike",
     "style": "Nike Air Force 1 Low 'Mystic Navy' - Patent Leather Pack From \u00a3 110",
     "fieldChanged": "",
     "oldValue": "",
     "newValue": "",
-    "detectedAt": "2026-03-11T18:12:15Z"
+    "detectedAt": "2026-03-12T06:37:46Z"
   },
   {
-    "changeType": "NEW",
+    "changeType": "REMOVED",
     "date": "2026-03-11",
     "brand": "Nike",
     "style": "Nike Air Force 1 Low 'Topaz Gold' - Patent Leather Pack From \u00a3 110",
     "fieldChanged": "",
     "oldValue": "",
     "newValue": "",
-    "detectedAt": "2026-03-11T18:12:15Z"
+    "detectedAt": "2026-03-12T06:37:46Z"
   },
   {
-    "changeType": "REMOVED",
-    "date": "2026-03-11",
+    "changeType": "CONFIDENCE_CHANGED",
+    "date": "2026-03-12",
     "brand": "New Balance",
-    "style": "New Balance ABZORB 2000 'Grey Matter' From \u00a3 170",
-    "fieldChanged": "",
-    "oldValue": "",
-    "newValue": "",
-    "detectedAt": "2026-03-11T18:12:15Z"
-  },
-  {
-    "changeType": "REMOVED",
-    "date": "2026-03-11",
-    "brand": "New Balance",
-    "style": "New Balance ABZORB 2000 'Ice Wine' From \u00a3 170",
-    "fieldChanged": "",
-    "oldValue": "",
-    "newValue": "",
-    "detectedAt": "2026-03-11T18:12:15Z"
-  },
-  {
-    "changeType": "REMOVED",
-    "date": "2026-03-11",
-    "brand": "Nike",
-    "style": "Nike Vomero Premium 'Black' From \u00a3 200",
-    "fieldChanged": "",
-    "oldValue": "",
-    "newValue": "",
-    "detectedAt": "2026-03-11T18:12:15Z"
+    "style": "New Balance 1890 'Faded Black & Utility Green' From \u00a3 160",
+    "fieldChanged": "confidence",
+    "oldValue": "HIGH",
+    "newValue": "MED",
+    "detectedAt": "2026-03-12T06:37:46Z"
   },
   {
     "changeType": "NEW",
     "date": "2026-03-12",
-    "brand": "Air Jordan",
-    "style": "Jordan Air Jordan 1 Retro Low OG MENS \u2022 SAIL/OFF WHITE/COCONUT MILK",
+    "brand": "Converse",
+    "style": "App entry Converse Grade School SHAI 001 Blush BOYS GRADE SCHOOL \u2022 OX TICKEKLED PINK/GERANIUM PINK",
     "fieldChanged": "",
     "oldValue": "",
     "newValue": "",
-    "detectedAt": "2026-03-11T18:12:15Z"
+    "detectedAt": "2026-03-12T06:37:46Z"
+  },
+  {
+    "changeType": "REMOVED",
+    "date": "2026-03-12",
+    "brand": "Air Jordan",
+    "style": "Air Jordan 1 Low OG Sail and Coconut Milk",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-12T06:37:46Z"
+  },
+  {
+    "changeType": "REMOVED",
+    "date": "2026-03-12",
+    "brand": "Air Jordan",
+    "style": "Air Jordan 13 Retro White and University Red",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-12T06:37:46Z"
+  },
+  {
+    "changeType": "REMOVED",
+    "date": "2026-03-12",
+    "brand": "Air Jordan",
+    "style": "Air Jordan 14 Retro Black and University Blue",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-12T06:37:46Z"
+  },
+  {
+    "changeType": "REMOVED",
+    "date": "2026-03-12",
+    "brand": "Air Jordan",
+    "style": "Air Jordan 3 x Teyana Taylor Concrete Rose",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-12T06:37:46Z"
+  },
+  {
+    "changeType": "REMOVED",
+    "date": "2026-03-12",
+    "brand": "Converse",
+    "style": "Converse Shai 001 Pink",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-12T06:37:46Z"
+  },
+  {
+    "changeType": "REMOVED",
+    "date": "2026-03-12",
+    "brand": "Converse",
+    "style": "Converse x Anonymous Club Chuck 70",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-12T06:37:46Z"
+  },
+  {
+    "changeType": "REMOVED",
+    "date": "2026-03-12",
+    "brand": "Converse",
+    "style": "ENTRIES OPEN App entry Converse Grade School SHAI 001 Blush BOYS GRADE SCHOOL \u2022 OX TICKEKLED PINK/GERANIUM PINK",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-12T06:37:46Z"
+  },
+  {
+    "changeType": "REMOVED",
+    "date": "2026-03-12",
+    "brand": "Air Jordan",
+    "style": "Jordan x Teyana Taylor Apparel Collection",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-12T06:37:46Z"
   },
   {
     "changeType": "REMOVED",
     "date": "2026-03-12",
     "brand": "Nike",
-    "style": "Nike Air Force 1 \u201907 'Cherry Blossom' From \u00a3 120",
+    "style": "Kobe 3 Low Protro Pink Quartz",
     "fieldChanged": "",
     "oldValue": "",
     "newValue": "",
-    "detectedAt": "2026-03-11T18:12:15Z"
+    "detectedAt": "2026-03-12T06:37:46Z"
   },
   {
-    "changeType": "RETAIL_CHANGED",
+    "changeType": "REMOVED",
     "date": "2026-03-12",
     "brand": "Nike",
     "style": "Nike Sabrina 3 Oregon Ducks",
-    "fieldChanged": "retailPrice",
-    "oldValue": 399,
-    "newValue": 0,
-    "detectedAt": "2026-03-11T18:12:15Z"
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-12T06:37:46Z"
+  },
+  {
+    "changeType": "REMOVED",
+    "date": "2026-03-12",
+    "brand": "Nike",
+    "style": "Nikeskims Rift Mesh Light Bone / Light Orewood Brown",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-12T06:37:46Z"
+  },
+  {
+    "changeType": "SOURCE_CHANGED",
+    "date": "2026-03-12",
+    "brand": "New Balance",
+    "style": "New Balance 1890 'Faded Black & Utility Green' From \u00a3 160",
+    "fieldChanged": "sourcePrimary",
+    "oldValue": "kicksonfire",
+    "newValue": "thedropdate",
+    "detectedAt": "2026-03-12T06:37:46Z"
+  },
+  {
+    "changeType": "SOURCE_CHANGED",
+    "date": "2026-03-12",
+    "brand": "New Balance",
+    "style": "New Balance 1890 'Faded Black & Utility Green' From \u00a3 160",
+    "fieldChanged": "sourceSecondary",
+    "oldValue": "https://www.kicksonfire.com/sneaker-release-dates",
+    "newValue": "https://thedropdate.com/releases",
+    "detectedAt": "2026-03-12T06:37:46Z"
+  },
+  {
+    "changeType": "NEW",
+    "date": "2026-03-13",
+    "brand": "Air Jordan",
+    "style": "Air Jordan 1 Low OG Sail and Coconut Milk",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-12T06:37:46Z"
+  },
+  {
+    "changeType": "NEW",
+    "date": "2026-03-13",
+    "brand": "Air Jordan",
+    "style": "Air Jordan 13 Retro White and University Red",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-12T06:37:46Z"
+  },
+  {
+    "changeType": "NEW",
+    "date": "2026-03-13",
+    "brand": "Air Jordan",
+    "style": "Air Jordan 14 Retro Black and University Blue",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-12T06:37:46Z"
+  },
+  {
+    "changeType": "NEW",
+    "date": "2026-03-13",
+    "brand": "Air Jordan",
+    "style": "Air Jordan 3 x Teyana Taylor Concrete Rose",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-12T06:37:46Z"
+  },
+  {
+    "changeType": "NEW",
+    "date": "2026-03-13",
+    "brand": "Converse",
+    "style": "Converse x Anonymous Club Chuck 70",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-12T06:37:46Z"
+  },
+  {
+    "changeType": "NEW",
+    "date": "2026-03-13",
+    "brand": "Air Jordan",
+    "style": "Jordan x Teyana Taylor Apparel Collection",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-12T06:37:46Z"
+  },
+  {
+    "changeType": "NEW",
+    "date": "2026-03-13",
+    "brand": "Nike",
+    "style": "Kobe 3 Low Protro Pink Quartz",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-12T06:37:46Z"
+  },
+  {
+    "changeType": "REMOVED",
+    "date": "2026-03-14",
+    "brand": "Air Jordan",
+    "style": "Mar 14 Air Jordan 3 x Teyana Taylor Concrete Rose",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-12T06:37:46Z"
   },
   {
     "changeType": "RETAIL_CHANGED",
@@ -95,9 +265,9 @@
     "brand": "Air Jordan",
     "style": "Air Jordan 13 Chicago",
     "fieldChanged": "retailPrice",
-    "oldValue": 375,
+    "oldValue": 372,
     "newValue": 0,
-    "detectedAt": "2026-03-11T18:12:15Z"
+    "detectedAt": "2026-03-12T06:37:46Z"
   },
   {
     "changeType": "RETAIL_CHANGED",
@@ -107,46 +277,56 @@
     "fieldChanged": "retailPrice",
     "oldValue": 329,
     "newValue": 0,
-    "detectedAt": "2026-03-11T18:12:15Z"
+    "detectedAt": "2026-03-12T06:37:46Z"
   },
   {
     "changeType": "NEW",
-    "date": "2026-03-23",
+    "date": "2026-03-19",
     "brand": "Nike",
-    "style": "Nike Air Force 1 Low 'Team USA' From \u00a3 110",
+    "style": "Nike G.t. Cut 1 Orange Pulse / Persian Violet",
     "fieldChanged": "",
     "oldValue": "",
     "newValue": "",
-    "detectedAt": "2026-03-11T18:12:15Z"
+    "detectedAt": "2026-03-12T06:37:46Z"
   },
   {
     "changeType": "NEW",
-    "date": "2026-03-23",
+    "date": "2026-03-19",
     "brand": "Nike",
-    "style": "Nike Air Max 95 SE 'England'",
+    "style": "Nike G.t. Future Unseen Hours",
     "fieldChanged": "",
     "oldValue": "",
     "newValue": "",
-    "detectedAt": "2026-03-11T18:12:15Z"
-  },
-  {
-    "changeType": "NEW",
-    "date": "2026-03-23",
-    "brand": "Nike",
-    "style": "Nike Air Max Plus 'French Football Federation' From \u00a3 185",
-    "fieldChanged": "",
-    "oldValue": "",
-    "newValue": "",
-    "detectedAt": "2026-03-11T18:12:15Z"
+    "detectedAt": "2026-03-12T06:37:46Z"
   },
   {
     "changeType": "REMOVED",
-    "date": "2026-04-01",
+    "date": "2026-03-19",
     "brand": "Nike",
-    "style": "Nike Mind 001 Slide 'Black' From \u00a3 80",
+    "style": "Nike GT Future Unseen Hours",
     "fieldChanged": "",
     "oldValue": "",
     "newValue": "",
-    "detectedAt": "2026-03-11T18:12:15Z"
+    "detectedAt": "2026-03-12T06:37:46Z"
+  },
+  {
+    "changeType": "NEW",
+    "date": "2026-03-20",
+    "brand": "Nike",
+    "style": "Nike Book 2 Must Be The Denim",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-12T06:37:46Z"
+  },
+  {
+    "changeType": "NEW",
+    "date": "2026-03-20",
+    "brand": "Nike",
+    "style": "Nike First Sight Noir WMNS Electric Green / Racer Blue",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-12T06:37:46Z"
   }
 ]

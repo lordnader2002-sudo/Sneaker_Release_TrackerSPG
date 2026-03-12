@@ -1,53 +1,5 @@
 [
   {
-    "releaseDate": "2026-03-12",
-    "shoeName": "Converse Shai 001 Pink",
-    "brand": "Converse",
-    "retailPrice": 0,
-    "estimatedMarketValue": null,
-    "imageUrl": null,
-    "sourcePrimary": "kicksonfire",
-    "sourceSecondary": "https://www.kicksonfire.com/sneaker-release-dates",
-    "sourceUrl": "https://www.kicksonfire.com/sneaker-release-dates",
-    "releaseUrl": "https://www.kicksonfire.com/converse-shai-001-pink"
-  },
-  {
-    "releaseDate": "2026-03-12",
-    "shoeName": "New Balance 1890 Faded Black / Utility Green",
-    "brand": "New Balance",
-    "retailPrice": 0,
-    "estimatedMarketValue": null,
-    "imageUrl": null,
-    "sourcePrimary": "kicksonfire",
-    "sourceSecondary": "https://www.kicksonfire.com/sneaker-release-dates",
-    "sourceUrl": "https://www.kicksonfire.com/sneaker-release-dates",
-    "releaseUrl": "https://www.kicksonfire.com/new-balance-1890-faded-black-utility-green"
-  },
-  {
-    "releaseDate": "2026-03-12",
-    "shoeName": "Nike Sabrina 3 Oregon Ducks",
-    "brand": "Nike",
-    "retailPrice": 0,
-    "estimatedMarketValue": null,
-    "imageUrl": null,
-    "sourcePrimary": "kicksonfire",
-    "sourceSecondary": "https://www.kicksonfire.com/sneaker-release-dates",
-    "sourceUrl": "https://www.kicksonfire.com/sneaker-release-dates",
-    "releaseUrl": "https://www.kicksonfire.com/nike-sabrina-3-oregon-ducks"
-  },
-  {
-    "releaseDate": "2026-03-12",
-    "shoeName": "Nikeskims Rift Mesh Light Bone / Light Orewood Brown",
-    "brand": "Nike",
-    "retailPrice": 0,
-    "estimatedMarketValue": null,
-    "imageUrl": null,
-    "sourcePrimary": "kicksonfire",
-    "sourceSecondary": "https://www.kicksonfire.com/sneaker-release-dates",
-    "sourceUrl": "https://www.kicksonfire.com/sneaker-release-dates",
-    "releaseUrl": "https://www.kicksonfire.com/nikeskims-rift-mesh-light-bone-light-orewood-brown"
-  },
-  {
     "releaseDate": "2026-03-13",
     "shoeName": "Converse Kentucky Wildcats 30th Anniversary",
     "brand": "Converse",
@@ -277,6 +229,30 @@
   },
   {
     "releaseDate": "2026-03-19",
+    "shoeName": "Nike G.t. Cut 1 Orange Pulse / Persian Violet",
+    "brand": "Nike",
+    "retailPrice": 0,
+    "estimatedMarketValue": null,
+    "imageUrl": null,
+    "sourcePrimary": "kicksonfire",
+    "sourceSecondary": "https://www.kicksonfire.com/sneaker-release-dates",
+    "sourceUrl": "https://www.kicksonfire.com/sneaker-release-dates",
+    "releaseUrl": "https://www.kicksonfire.com/nike-g-t-cut-1-orange-pulse-persian-violet"
+  },
+  {
+    "releaseDate": "2026-03-19",
+    "shoeName": "Nike G.t. Future Unseen Hours",
+    "brand": "Nike",
+    "retailPrice": 0,
+    "estimatedMarketValue": null,
+    "imageUrl": null,
+    "sourcePrimary": "kicksonfire",
+    "sourceSecondary": "https://www.kicksonfire.com/sneaker-release-dates",
+    "sourceUrl": "https://www.kicksonfire.com/sneaker-release-dates",
+    "releaseUrl": "https://www.kicksonfire.com/nike-g-t-future-unseen-hours"
+  },
+  {
+    "releaseDate": "2026-03-19",
     "shoeName": "Nike GT Future Unseen Hours",
     "brand": "Nike",
     "retailPrice": 0,
@@ -286,5 +262,29 @@
     "sourceSecondary": "https://www.kicksonfire.com/sneaker-release-dates",
     "sourceUrl": "https://www.kicksonfire.com/sneaker-release-dates",
     "releaseUrl": "https://www.kicksonfire.com/nike-gt-future-unseen-hours"
+  },
+  {
+    "releaseDate": "2026-03-20",
+    "shoeName": "Nike Book 2 Must Be The Denim",
+    "brand": "Nike",
+    "retailPrice": 0,
+    "estimatedMarketValue": null,
+    "imageUrl": null,
+    "sourcePrimary": "kicksonfire",
+    "sourceSecondary": "https://www.kicksonfire.com/sneaker-release-dates",
+    "sourceUrl": "https://www.kicksonfire.com/sneaker-release-dates",
+    "releaseUrl": "https://www.kicksonfire.com/nike-book-2-must-be-the-denim"
+  },
+  {
+    "releaseDate": "2026-03-20",
+    "shoeName": "Nike First Sight Noir WMNS Electric Green / Racer Blue",
+    "brand": "Nike",
+    "retailPrice": 0,
+    "estimatedMarketValue": null,
+    "imageUrl": null,
+    "sourcePrimary": "kicksonfire",
+    "sourceSecondary": "https://www.kicksonfire.com/sneaker-release-dates",
+    "sourceUrl": "https://www.kicksonfire.com/sneaker-release-dates",
+    "releaseUrl": "https://www.kicksonfire.com/nike-first-sight-noir-wmns-electric-green-racer-blue"
   }
 ]

@@ -14,10 +14,11 @@ from bs4 import BeautifulSoup
 from fetch_release_multisource_common import (
     clean_title,
     extract_image_url,
-    extract_price_smart,
+    extract_retail_price,
     infer_brand,
     normalize_text,
     parse_date_flexible,
+    purge_placeholder_images,
     render_html,
     window_filter,
 )
@@ -55,8 +56,8 @@ def extract_rows(soup: BeautifulSoup) -> list[dict[str, Any]]:
         if not d:
             continue
 
-        ctx = normalize_text((a.parent.get_text(" ", strip=True) if a.parent else raw)[:800])
-        retail = extract_price_smart(ctx)
+        ctx = normalize_text((a.parent.get_text(" ", strip=True) if a.parent else raw)[:400])
+        retail = extract_retail_price(ctx)
 
         title = clean_title(raw_title)
 
@@ -83,6 +84,7 @@ def extract_rows(soup: BeautifulSoup) -> list[dict[str, Any]]:
 
 
 def dedupe(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    purge_placeholder_images(rows)
     best: dict[tuple[str, str], dict[str, Any]] = {}
     for r in rows:
         key = (r.get("releaseDate", ""), str(r.get("shoeName", "")).lower())

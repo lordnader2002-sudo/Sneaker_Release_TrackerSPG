@@ -33,6 +33,7 @@ class ReleaseRow:
     hype_score: int
     confidence_score: int
     estimated_market_value: int | None
+    flip_score: int | None
 
 
 def parse_args() -> argparse.Namespace:
@@ -119,6 +120,11 @@ def normalize_row(record: dict[str, Any]) -> ReleaseRow | None:
         estimated_market_value=(
             parse_int(record.get("estimatedMarketValue"))
             if record.get("estimatedMarketValue") not in (None, "")
+            else None
+        ),
+        flip_score=(
+            int(record["flipScore"])
+            if record.get("flipScore") not in (None, "")
             else None
         ),
     )
@@ -230,6 +236,7 @@ def write_tracker_sheet(ws: Any, title: str, rows: list[ReleaseRow]) -> None:
         "Date",
         "Retail",
         "Market Value",
+        "Flip %",
         "Hype",
         "Hype Score",
         "Confidence",
@@ -247,10 +254,16 @@ def write_tracker_sheet(ws: Any, title: str, rows: list[ReleaseRow]) -> None:
         ws.cell(row=3, column=idx, value=header)
 
     for row_idx, row in enumerate(rows, start=4):
+        flip_str = (
+            f"+{row.flip_score}%" if row.flip_score is not None and row.flip_score >= 0
+            else f"{row.flip_score}%" if row.flip_score is not None
+            else ""
+        )
         values = [
             row.release_date,
             row.retail if row.retail else "",
             row.estimated_market_value if row.estimated_market_value is not None else "",
+            flip_str,
             row.hype,
             row.hype_score,
             row.confidence,

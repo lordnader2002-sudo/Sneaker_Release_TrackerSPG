@@ -665,6 +665,14 @@ def merge_records(
         row["priority"] = derive_priority(hype, confidence)
         row["tags"] = derive_tags(row["shoeName"], row.get("brand", ""))
 
+        _retail = row.get("retailPrice") or 0
+        _market = row.get("estimatedMarketValue") or 0
+        row["flipScore"] = (
+            round((_market - _retail) / _retail * 100)
+            if _retail > 0 and _market > 0
+            else None
+        )
+
         row["recordHash"] = hashlib.sha256(
             json.dumps(
                 {

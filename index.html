@@ -233,6 +233,48 @@
       .card-date { font-size: 12px; color: var(--cyan); font-weight: 600; }
       .card-price { font-size: 13px; font-weight: 700; color: var(--text); }
       .card-price .resale { font-size: 11px; color: var(--text-dim); font-weight: 400; }
+      .flip-pos { font-size: 11px; font-weight: 700; color: var(--green); margin-left: 5px; }
+      .flip-neg { font-size: 11px; color: var(--text-mute); margin-left: 5px; }
+      .flip-warn { font-size: 11px; color: var(--amber); margin-left: 5px; }
+
+      /* ── Calendar View ── */
+      .cal-wrap { margin-top: 4px; }
+      .cal-months { display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 16px; }
+      .cal-month { flex: 1; min-width: 260px; max-width: 400px; }
+      .cal-month-title { font-weight: 700; font-size: 14px; padding: 0 0 10px; color: var(--text); }
+      .cal-nav-row { display: flex; align-items: center; gap: 8px; padding: 4px 0 14px; }
+      .cal-nav-btn {
+        background: var(--surface2); border: 1px solid var(--border);
+        color: var(--text); border-radius: var(--radius-sm);
+        width: 26px; height: 26px; cursor: pointer; font-size: 15px;
+        display: flex; align-items: center; justify-content: center;
+        transition: background .15s;
+      }
+      .cal-nav-btn:hover { background: var(--surface3); }
+      .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; }
+      .cal-dow { text-align: center; font-size: 10px; font-weight: 700; color: var(--text-mute); padding: 3px 0; }
+      .cal-day {
+        background: var(--surface); border: 1px solid var(--border);
+        border-radius: 5px; min-height: 48px; padding: 3px 4px;
+        cursor: default; position: relative; transition: border-color .15s;
+      }
+      .cal-day.empty { background: transparent; border-color: transparent; }
+      .cal-day.has-releases { cursor: pointer; }
+      .cal-day.has-releases:hover { border-color: var(--accent2); background: var(--surface2); }
+      .cal-day.today { border-color: var(--cyan) !important; }
+      .cal-day.selected { border-color: var(--accent2) !important; background: var(--surface2); }
+      .cal-day-num { font-size: 11px; font-weight: 600; color: var(--text-dim); line-height: 1; }
+      .cal-day.today .cal-day-num { color: var(--cyan); }
+      .cal-day.selected .cal-day-num { color: var(--accent2); }
+      .cal-dots { display: flex; flex-wrap: wrap; gap: 2px; margin-top: 3px; }
+      .cal-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+      .cal-dot.HIGH { background: var(--red); }
+      .cal-dot.MED  { background: var(--amber); }
+      .cal-dot.LOW  { background: var(--green); }
+      .cal-day-count { position: absolute; top: 2px; right: 3px; font-size: 9px; color: var(--text-mute); font-weight: 700; }
+      .cal-more { font-size: 9px; color: var(--text-mute); align-self: center; }
+      .cal-selected-hdr { font-size: 13px; font-weight: 700; color: var(--cyan); padding: 10px 0 8px; border-bottom: 1px solid var(--border); margin-bottom: 10px; }
+      .cal-hint { color: var(--text-mute); font-size: 13px; padding: 16px 0; text-align: center; }
 
       .card-badges { display: flex; gap: 5px; flex-wrap: wrap; }
       .badge {
@@ -503,17 +545,19 @@
           <div class="filter-group">
             <div class="filter-label">Sort By</div>
             <div class="pill-group" id="sort-pills">
-              <button class="pill active" data-s="date" data-d="asc">Date ▲</button>
-              <button class="pill" data-s="hypeScore" data-d="desc">Hype</button>
+              <button class="pill" data-s="date" data-d="asc">Date ▲</button>
+              <button class="pill active" data-s="hypeScore" data-d="desc">Hype</button>
               <button class="pill" data-s="retail" data-d="desc">Price</button>
               <button class="pill" data-s="confidence" data-d="desc">Conf.</button>
+              <button class="pill p-green" data-s="flipScore" data-d="desc">Flip %</button>
             </div>
           </div>
           <div class="filter-group" style="flex:0">
             <div class="filter-label">View</div>
             <div class="view-toggle">
-              <button class="view-btn active" data-view="cards">⊞</button>
-              <button class="view-btn" data-view="table">☰</button>
+              <button class="view-btn" data-view="cards">⊞</button>
+              <button class="view-btn active" data-view="table">☰</button>
+              <button class="view-btn" data-view="calendar" title="Calendar">📅</button>
             </div>
           </div>
         </div>
@@ -553,8 +597,11 @@
       let allChanges = [];
       let currentPage = 1;
       const PAGE_SIZE = 48;
-      let currentView = 'cards';
-      let sortKey = 'date';
+      let currentView = 'table';
+      let sortKey = 'hypeScore';
+      let sortDir = 'desc';
+      let calDate = (() => { const d = new Date(); d.setDate(1); return d; })();
+      let calSelectedDate = null;
       let sortDir = 'asc';
       let filters = { search: '', hype: '', conf: '', priority: '', brand: '', tagFilter: '', dateFrom: '', dateTo: '' };
 
@@ -661,6 +708,7 @@
             case 'hypeScore':    va = a.hypeScore || 0;    vb = b.hypeScore || 0;    break;
             case 'retail':       va = a.retailPrice || 0;  vb = b.retailPrice || 0;  break;
             case 'confidence':   va = confOrder[a.confidence] ?? 0; vb = confOrder[b.confidence] ?? 0; break;
+            case 'flipScore':    va = a.flipScore ?? -9999; vb = b.flipScore ?? -9999; break;
             default:             va = ''; vb = '';
           }
           if (va < vb) return sortDir === 'asc' ? -1 :  1;
@@ -687,49 +735,59 @@
         const start = (currentPage - 1) * PAGE_SIZE;
         const pageData = filteredReleases.slice(start, start + PAGE_SIZE);
 
+        if (currentView === 'calendar') { renderCalendar(filteredReleases); return; }
         if (currentView === 'cards') renderCards(pageData);
         else renderTable(pageData);
 
         renderPagination(totalPages);
       }
 
+      function flipBadge(r) {
+        if (r.flipScore == null) return '';
+        if (r.flipScore >= 50) return `<span class="flip-pos">+${r.flipScore}% flip</span>`;
+        if (r.flipScore >= 10) return `<span class="flip-warn">+${r.flipScore}% flip</span>`;
+        if (r.flipScore >= 0)  return `<span class="flip-neg">+${r.flipScore}% flip</span>`;
+        return `<span class="flip-neg">${r.flipScore}% vs retail</span>`;
+      }
+
+      function cardHtml(r) {
+        const prioClass = r.priority === 'Must Watch' ? 'pri-mustwatch' : r.priority === 'Watch' ? 'pri-watch' : 'pri-low';
+        const tagBadges = (r.tags || []).map(t => `<span class="tag t-${esc(t)}">${esc(t)}</span>`).join('');
+        const hypeConf = `<span class="badge badge-hype-${esc(r.hype)}">${esc(r.hype)}</span>` +
+                         `<span class="badge badge-conf-${esc(r.confidence)}">CONF: ${esc(r.confidence)}</span>`;
+        const priBadge = r.priority === 'Must Watch'   ? `<span class="badge badge-pri-must">🔥 Must Watch</span>` :
+                         r.priority === 'Watch'        ? `<span class="badge badge-pri-watch">Watch</span>` : '';
+        const imgHtml = r.imageUrl
+          ? `<div class="card-img"><img src="${esc(r.imageUrl)}" alt="${esc(r.shoeName)}" loading="lazy" onerror="this.parentElement.innerHTML='👟'" /></div>`
+          : `<div class="card-img no-img">👟</div>`;
+        const prices = r.retailPrice > 0
+          ? `${fmt(r.retailPrice)}${r.estimatedMarketValue > 0 ? ` <span class="resale">→ ${fmt(r.estimatedMarketValue)}</span>` : ''}${flipBadge(r)}`
+          : `<span style="color:var(--text-mute)">TBD</span>`;
+        const links = [
+          r.releaseUrl ? `<a class="card-link" href="${esc(r.releaseUrl)}" target="_blank" rel="noopener">Buy →</a>` : '',
+          r.imageUrl   ? `<a class="card-link" href="${esc(r.imageUrl)}"   target="_blank" rel="noopener">Image</a>` : '',
+        ].filter(Boolean).join('');
+        return `
+        <div class="release-card ${prioClass}">
+          ${imgHtml}
+          <div class="card-body">
+            <div class="card-brand">${esc(r.brand)}</div>
+            <div class="card-name">${esc(r.shoeName)}</div>
+            <div class="card-date">${fmtDate(r.releaseDate)}</div>
+            <div class="card-price">${prices}</div>
+            <div class="card-badges">${hypeConf}${priBadge}</div>
+            ${tagBadges ? `<div class="card-tags">${tagBadges}</div>` : ''}
+          </div>
+          ${links || r.sourcePrimary ? `
+          <div class="card-footer">
+            ${links}
+            <div class="card-meta">${esc(r.sourcePrimary || '')}${r.matchedSources > 1 ? ` · ${r.matchedSources} sources` : ''}</div>
+          </div>` : ''}
+        </div>`;
+      }
+
       function renderCards(rows) {
-        const html = rows.map(r => {
-          const prioClass = r.priority === 'Must Watch' ? 'pri-mustwatch' : r.priority === 'Watch' ? 'pri-watch' : 'pri-low';
-          const tagBadges = (r.tags || []).map(t => `<span class="tag t-${esc(t)}">${esc(t)}</span>`).join('');
-          const hypeConf = `<span class="badge badge-hype-${esc(r.hype)}">${esc(r.hype)}</span>` +
-                           `<span class="badge badge-conf-${esc(r.confidence)}">CONF: ${esc(r.confidence)}</span>`;
-          const priBadge = r.priority === 'Must Watch'   ? `<span class="badge badge-pri-must">🔥 Must Watch</span>` :
-                           r.priority === 'Watch'        ? `<span class="badge badge-pri-watch">Watch</span>` : '';
-          const imgHtml = r.imageUrl
-            ? `<div class="card-img"><img src="${esc(r.imageUrl)}" alt="${esc(r.shoeName)}" loading="lazy" onerror="this.parentElement.innerHTML='👟'" /></div>`
-            : `<div class="card-img no-img">👟</div>`;
-          const prices = r.retailPrice > 0
-            ? `${fmt(r.retailPrice)}${r.estimatedMarketValue > 0 ? ` <span class="resale">(Resale ~${fmt(r.estimatedMarketValue)})</span>` : ''}`
-            : `<span style="color:var(--text-mute)">TBD</span>`;
-          const links = [
-            r.releaseUrl ? `<a class="card-link" href="${esc(r.releaseUrl)}" target="_blank" rel="noopener">Buy →</a>` : '',
-            r.imageUrl   ? `<a class="card-link" href="${esc(r.imageUrl)}"   target="_blank" rel="noopener">Image</a>` : '',
-          ].filter(Boolean).join('');
-          return `
-          <div class="release-card ${prioClass}">
-            ${imgHtml}
-            <div class="card-body">
-              <div class="card-brand">${esc(r.brand)}</div>
-              <div class="card-name">${esc(r.shoeName)}</div>
-              <div class="card-date">${fmtDate(r.releaseDate)}</div>
-              <div class="card-price">${prices}</div>
-              <div class="card-badges">${hypeConf}${priBadge}</div>
-              ${tagBadges ? `<div class="card-tags">${tagBadges}</div>` : ''}
-            </div>
-            ${links || r.sourcePrimary ? `
-            <div class="card-footer">
-              ${links}
-              <div class="card-meta">${esc(r.sourcePrimary || '')}${r.matchedSources > 1 ? ` · ${r.matchedSources} sources` : ''}</div>
-            </div>` : ''}
-          </div>`;
-        }).join('');
-        $('main-content').innerHTML = `<div class="cards-grid">${html}</div>`;
+        $('main-content').innerHTML = `<div class="cards-grid">${rows.map(cardHtml).join('')}</div>`;
       }
 
       function renderTable(rows) {
@@ -747,7 +805,7 @@
         const headerCells = [
           { k: 'date', l: 'Date' }, { k: 'brand', l: 'Brand' }, { k: null, l: 'Style' },
           { k: 'hypeScore', l: 'Hype' }, { k: 'confidence', l: 'Conf.' }, { k: null, l: 'Priority' },
-          { k: 'retail', l: 'Retail' }, { k: null, l: 'Tags' }, { k: null, l: 'Links' },
+          { k: 'retail', l: 'Retail' }, { k: 'flipScore', l: 'Flip %' }, { k: null, l: 'Tags' }, { k: null, l: 'Links' },
         ];
         const thead = headerCells.map(h => {
           let cls = '';
@@ -758,6 +816,14 @@
 
         const tbody = rows.map(r => {
           const priceStr = r.retailPrice > 0 ? fmt(r.retailPrice) : '–';
+          const flipStr = r.flipScore != null
+            ? (r.flipScore >= 0 ? `+${r.flipScore}%` : `${r.flipScore}%`)
+            : '–';
+          const flipColor = r.flipScore == null ? 'var(--text-mute)'
+            : r.flipScore >= 50 ? 'var(--green)'
+            : r.flipScore >= 10 ? 'var(--amber)'
+            : r.flipScore >= 0  ? 'var(--text-dim)'
+            : 'var(--text-mute)';
           const tagStr = (r.tags || []).join(', ');
           const hypeColor = r.hype === 'HIGH' ? 'var(--red)' : r.hype === 'MED' ? 'var(--amber)' : 'var(--green)';
           const confColor = r.confidence === 'HIGH' ? 'var(--cyan)' : r.confidence === 'MED' ? '#ffd966' : 'var(--text-dim)';
@@ -770,6 +836,7 @@
             <td style="color:${confColor};font-weight:700">${esc(r.confidence)}</td>
             <td style="white-space:nowrap">${esc(r.priority)}</td>
             <td class="td-price">${priceStr}</td>
+            <td style="color:${flipColor};font-weight:700;white-space:nowrap">${flipStr}</td>
             <td style="font-size:11px;color:var(--text-dim)">${esc(tagStr)}</td>
             <td class="td-link">${link}</td>
           </tr>`;
@@ -777,6 +844,76 @@
 
         $('main-content').innerHTML = `<div class="table-wrap"><table><thead><tr>${thead}</tr></thead><tbody>${tbody}</tbody></table></div>`;
       }
+
+      // ── Calendar View ──
+      function renderCalendar(rows) {
+        const byDate = {};
+        rows.forEach(r => {
+          if (!byDate[r.releaseDate]) byDate[r.releaseDate] = [];
+          byDate[r.releaseDate].push(r);
+        });
+        const todayStr = new Date().toISOString().slice(0, 10);
+
+        function buildMonth(year, month) {
+          const firstDow = new Date(year, month, 1).getDay();
+          const daysInMonth = new Date(year, month + 1, 0).getDate();
+          const label = new Date(year, month).toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+          let h = `<div class="cal-month"><div class="cal-month-title">${label}</div><div class="cal-grid">`;
+          ['S','M','T','W','T','F','S'].forEach(d => { h += `<div class="cal-dow">${d}</div>`; });
+          for (let i = 0; i < firstDow; i++) h += `<div class="cal-day empty"></div>`;
+          for (let d = 1; d <= daysInMonth; d++) {
+            const ds = `${year}-${String(month+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+            const rel = byDate[ds] || [];
+            const cls = ['cal-day', ds===todayStr?'today':'', ds===calSelectedDate?'selected':'', rel.length?'has-releases':''].filter(Boolean).join(' ');
+            const dots = rel.slice(0, 7).map(r => `<span class="cal-dot ${esc(r.hype)}" title="${esc(r.shoeName)}"></span>`).join('');
+            const more = rel.length > 7 ? `<span class="cal-more">+${rel.length-7}</span>` : '';
+            const count = rel.length > 1 ? `<div class="cal-day-count">${rel.length}</div>` : '';
+            h += `<div class="${cls}"${rel.length ? ` onclick="calSelectDate('${ds}')"` : ''}>
+              <div class="cal-day-num">${d}</div>
+              ${rel.length ? `<div class="cal-dots">${dots}${more}</div>` : ''}${count}
+            </div>`;
+          }
+          return h + `</div></div>`;
+        }
+
+        const y1 = calDate.getFullYear(), m1 = calDate.getMonth();
+        const y2 = m1 === 11 ? y1+1 : y1, m2 = (m1+1) % 12;
+
+        let html = `<div class="cal-wrap">
+          <div class="cal-nav-row">
+            <button class="cal-nav-btn" onclick="calPrevMonth()">‹</button>
+            <button class="cal-nav-btn" onclick="calNextMonth()">›</button>
+            <span style="font-size:12px;color:var(--text-mute);margin-left:4px">${rows.length} release${rows.length!==1?'s':''} in view</span>
+          </div>
+          <div class="cal-months">${buildMonth(y1,m1)}${buildMonth(y2,m2)}</div>`;
+
+        if (calSelectedDate) {
+          const sel = byDate[calSelectedDate] || [];
+          if (sel.length) {
+            html += `<div class="cal-selected-hdr">${fmtDate(calSelectedDate)} — ${sel.length} release${sel.length!==1?'s':''}</div>
+              <div class="cards-grid">${sel.map(cardHtml).join('')}</div>`;
+          } else {
+            html += `<div class="cal-hint">No releases match your filters on ${fmtDate(calSelectedDate)}</div>`;
+          }
+        } else {
+          html += `<div class="cal-hint">Click a day to see its releases</div>`;
+        }
+        $('main-content').innerHTML = html + `</div>`;
+        $('pagination').style.display = 'none';
+      }
+
+      window.calPrevMonth = function() {
+        calDate = new Date(calDate.getFullYear(), calDate.getMonth() - 1, 1);
+        renderResults();
+      };
+      window.calNextMonth = function() {
+        calDate = new Date(calDate.getFullYear(), calDate.getMonth() + 1, 1);
+        renderResults();
+      };
+      window.calSelectDate = function(ds) {
+        calSelectedDate = calSelectedDate === ds ? null : ds;
+        renderResults();
+      };
 
       function renderPagination(totalPages) {
         const pg = $('pagination');
@@ -912,6 +1049,7 @@
           $('date-from').value = '';
           $('date-to').value = '';
           $('tag-filter').value = '';
+          calSelectedDate = null;
           document.querySelectorAll('#hype-pills .pill, #conf-pills .pill, #pri-pills .pill').forEach((p, i) => {
             p.classList.toggle('active', i % 4 === 0);
           });

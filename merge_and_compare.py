@@ -37,22 +37,24 @@ COLLAB_KEYWORDS = {
     "stussy",
     "patta",
     "futura",
-    # Additional high-profile collabs
+    # High-profile athletes and celebrities
     "virgil abloh",
     "drake",
     "nocta",
     "kendrick lamar",
     "kanye",
     "pharrell",
-    "pigalle",
-    "pigalle",
+    "bad bunny",
+    "j. cole",
+    "deion sanders",
+    "luka doncic",
     "joe freshgoods",
-    "new jop",
     "social status",
     "mache",
     "atmos",
     "cactus plant flea market",
     "cpfm",
+    "cactus jack",
     "sean wotherspoon",
     "ben and jerry",
     "ben & jerry",
@@ -81,7 +83,6 @@ COLLAB_KEYWORDS = {
     "palace",
     "the north face",
     "tnf",
-    "cactus jack",
     "dj khaled",
     "michael b jordan",
     "serena williams",
@@ -105,21 +106,40 @@ COLLAB_KEYWORDS = {
     "aime leon dore",
     "ald",
     "new balance x",
+    # Charity / special programs
+    "doernbecher",
+    "livestrong",
+    # Seasonal specials that consistently command premiums
+    "year of the dragon",
+    "year of the rabbit",
+    "year of the snake",
+    "lunar new year",
+    "chinese new year",
 }
 LIMITED_KEYWORDS = {"limited", "exclusive", "special box", "qs", "pe", "promo", "friends and family", "sample", "lottery", "raffle", "invitation only"}
 HOT_MODELS = {
-    "jordan 1", "jordan 3", "jordan 4", "jordan 5", "jordan 6", "jordan 11", "jordan 12",
+    # Jordan line — high-demand silhouettes
+    "jordan 1", "jordan 2", "jordan 3", "jordan 4", "jordan 5",
+    "jordan 6", "jordan 9", "jordan 10", "jordan 11", "jordan 12", "jordan 13",
+    # Nike
     "dunk", "sb dunk",
-    "air max 95", "air max 97", "air max 1", "air max 90",
-    "kobe", "kobe 6", "kobe 8",
-    "lebron", "lebron 21",
+    "air max 95", "air max 97", "air max 1", "air max 90", "air max 360",
     "air force 1",
+    "kobe", "kobe 4", "kobe 6", "kobe 8", "kobe 9", "kobe protro",
+    "lebron",
+    "blazer mid", "cortez",
+    # Adidas / Yeezy
     "yeezy boost", "yeezy slide", "yeezy foam",
+    "samba", "gazelle", "campus", "handball spezial", "sl 72",
+    "forum low", "superstar",
+    # New Balance
     "new balance 550", "new balance 990", "new balance 2002",
-    "samba", "gazelle", "campus",
+    "new balance 327", "new balance 574", "new balance 1906",
+    # Other notable silhouettes
     "onitsuka tiger",
     "gel-lyte", "gel-kayano",
     "chuck taylor", "one star",
+    "speedcross",
 }
 
 MONTH_WORDS = (
@@ -453,6 +473,11 @@ def score_confidence(record: dict[str, Any]) -> tuple[int, str]:
     elif matched >= 2:
         score += 18
 
+    # A release seen by only one source can never be HIGH confidence —
+    # cap just below threshold regardless of how many fields it has.
+    if matched <= 1:
+        score = min(score, 59)
+
     if score >= 60:
         return score, "HIGH"
     if score >= 32:
@@ -590,6 +615,7 @@ def merge_records(
 
             if existing is None:
                 normalized["matchedSources"] = 1
+                normalized["_sources"] = {normalized["sourcePrimary"]}
                 merged[key] = normalized
                 continue
 
@@ -597,7 +623,8 @@ def merge_records(
             if picked is existing:
                 if normalized["sourcePrimary"] and normalized["sourcePrimary"] != existing.get("sourcePrimary"):
                     existing["sourceSecondary"] = existing.get("sourceSecondary") or normalized["sourcePrimary"]
-                existing["matchedSources"] = int(existing.get("matchedSources", 1)) + 1
+                existing["_sources"].add(normalized["sourcePrimary"])
+                existing["matchedSources"] = len(existing["_sources"])
                 if not existing.get("sourceUrl") and normalized.get("sourceUrl"):
                     existing["sourceUrl"] = normalized["sourceUrl"]
                 if not existing.get("releaseUrl") and normalized.get("releaseUrl"):
@@ -606,13 +633,28 @@ def merge_records(
                     existing["imageUrl"] = normalized["imageUrl"]
                 continue
 
+            # normalized wins — carry over the best fields from existing rather than discarding them
             picked["matchedSources"] = int(existing.get("matchedSources", 1)) + 1
+            picked["_sources"] = existing.get("_sources", {existing.get("sourcePrimary", "")})
+            picked["_sources"].add(picked.get("sourcePrimary", ""))
+            picked["matchedSources"] = len(picked["_sources"])
             if existing.get("sourcePrimary") and existing.get("sourcePrimary") != picked.get("sourcePrimary"):
                 picked["sourceSecondary"] = picked.get("sourceSecondary") or existing["sourcePrimary"]
+            if not picked.get("retailPrice") and existing.get("retailPrice"):
+                picked["retailPrice"] = existing["retailPrice"]
+            if picked.get("estimatedMarketValue") is None and existing.get("estimatedMarketValue") is not None:
+                picked["estimatedMarketValue"] = existing["estimatedMarketValue"]
+            if not picked.get("imageUrl") and existing.get("imageUrl"):
+                picked["imageUrl"] = existing["imageUrl"]
+            if not picked.get("sourceUrl") and existing.get("sourceUrl"):
+                picked["sourceUrl"] = existing["sourceUrl"]
+            if not picked.get("releaseUrl") and existing.get("releaseUrl"):
+                picked["releaseUrl"] = existing["releaseUrl"]
             merged[key] = picked
 
     final_rows: list[dict[str, Any]] = []
     for row in merged.values():
+        row.pop("_sources", None)  # internal tracking only
         hype_score, hype = score_hype(row["brand"], row["shoeName"], row["retailPrice"], row["estimatedMarketValue"])
         confidence_score, confidence = score_confidence(row)
 
@@ -622,6 +664,14 @@ def merge_records(
         row["confidence"] = confidence
         row["priority"] = derive_priority(hype, confidence)
         row["tags"] = derive_tags(row["shoeName"], row.get("brand", ""))
+
+        _retail = row.get("retailPrice") or 0
+        _market = row.get("estimatedMarketValue") or 0
+        row["flipScore"] = (
+            round((_market - _retail) / _retail * 100)
+            if _retail > 0 and _market > 0
+            else None
+        )
 
         row["recordHash"] = hashlib.sha256(
             json.dumps(

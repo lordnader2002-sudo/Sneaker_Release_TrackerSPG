@@ -141,7 +141,8 @@ This gives a real-market proxy for resale potential even before a shoe has offic
 | KicksOnFire | Playwright scraper |
 | Sole Collector | Playwright scraper |
 | SneakerNews | Playwright scraper |
-| eBay (enrichment) | Sold-listing price scraper |
+| StockX (enrichment) | Authenticated sold-listing price scraper (primary market value source) |
+| eBay (enrichment) | Sold-listing price scraper (fills StockX gaps) |
 
 Releases seen on multiple sources get a higher Confidence score. Prices are only extracted when explicitly labeled on a page (to avoid placeholder values); the eBay enrichment step fills in market values separately.
 

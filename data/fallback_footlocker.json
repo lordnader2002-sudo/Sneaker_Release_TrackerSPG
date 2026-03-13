@@ -49,6 +49,18 @@
   },
   {
     "releaseDate": "2026-03-13",
+    "shoeName": "ENTRIES OPEN App entry Jordan Air Jordan 1 Retro Low OG MENS \u2022 SAIL/OFF WHITE/COCONUT MILK",
+    "brand": "Air Jordan",
+    "retailPrice": 0,
+    "estimatedMarketValue": null,
+    "imageUrl": null,
+    "sourcePrimary": "footlocker",
+    "sourceSecondary": "https://www.footlocker.com/release-calendar.html",
+    "sourceUrl": "https://www.footlocker.com/release-calendar.html",
+    "releaseUrl": "https://www.footlocker.com/release-calendar/jordan/F4391100.html"
+  },
+  {
+    "releaseDate": "2026-03-13",
     "shoeName": "ENTRIES OPEN App entry Jordan Grade School Retro 13 True Red BOYS GRADE SCHOOL \u2022 WHITE/BLACK/TRUE RED",
     "brand": "Air Jordan",
     "retailPrice": 0,
@@ -70,18 +82,6 @@
     "sourceSecondary": "https://www.footlocker.com/release-calendar.html",
     "sourceUrl": "https://www.footlocker.com/release-calendar.html",
     "releaseUrl": "https://www.footlocker.com/release-calendar/jordan/14571102.html"
-  },
-  {
-    "releaseDate": "2026-03-13",
-    "shoeName": "Jordan Air Jordan 1 Retro Low OG MENS \u2022 SAIL/OFF WHITE/COCONUT MILK",
-    "brand": "Air Jordan",
-    "retailPrice": 0,
-    "estimatedMarketValue": null,
-    "imageUrl": null,
-    "sourcePrimary": "footlocker",
-    "sourceSecondary": "https://www.footlocker.com/release-calendar.html",
-    "sourceUrl": "https://www.footlocker.com/release-calendar.html",
-    "releaseUrl": "https://www.footlocker.com/release-calendar/jordan/F4391100.html"
   },
   {
     "releaseDate": "2026-03-13",
@@ -157,7 +157,7 @@
   },
   {
     "releaseDate": "2026-03-13",
-    "shoeName": "ENTRIES OPEN App entry Nike Air Max Uptempo '95 MENS \u2022 UNIVERSITY RED/WHITE/BLACK",
+    "shoeName": "App entry Nike Air Max Uptempo '95 MENS \u2022 UNIVERSITY RED/WHITE/BLACK",
     "brand": "Nike",
     "retailPrice": 0,
     "estimatedMarketValue": null,
@@ -370,6 +370,18 @@
     "sourceSecondary": "https://www.footlocker.com/release-calendar.html",
     "sourceUrl": "https://www.footlocker.com/release-calendar.html",
     "releaseUrl": "https://www.footlocker.com/release-calendar/nike/B0018101.html"
+  },
+  {
+    "releaseDate": "2026-03-13",
+    "shoeName": "Nike Kobe III Low Protro In Store Only MENS \u2022 WHITE/PINK",
+    "brand": "Nike",
+    "retailPrice": 0,
+    "estimatedMarketValue": null,
+    "imageUrl": null,
+    "sourcePrimary": "footlocker",
+    "sourceSecondary": "https://www.footlocker.com/release-calendar.html",
+    "sourceUrl": "https://www.footlocker.com/release-calendar.html",
+    "releaseUrl": "https://www.footlocker.com/release-calendar/nike/IF417500.html"
   },
   {
     "releaseDate": "2026-03-13",

@@ -67,25 +67,14 @@
   },
   {
     "releaseDate": "2026-03-14",
-    "shoeName": "Jordan Tiempo Maestro Elite SE Infrared",
+    "shoeName": "Jordan x Teyana Taylor Apparel Collection",
     "brand": "Air Jordan",
     "retailPrice": 0,
     "estimatedMarketValue": null,
     "imageUrl": null,
     "sourcePrimary": "playwright-linkscan",
     "sourceSecondary": "https://www.nike.com/launch",
-    "sourceUrl": "/launch/t/jordan-tiempo-maestro-elite-se-infrared-1"
-  },
-  {
-    "releaseDate": "2026-03-14",
-    "shoeName": "Jordan Tiempo Streetgato Phantom and Infrared",
-    "brand": "Air Jordan",
-    "retailPrice": 0,
-    "estimatedMarketValue": null,
-    "imageUrl": null,
-    "sourcePrimary": "playwright-linkscan",
-    "sourceSecondary": "https://www.nike.com/launch",
-    "sourceUrl": "/launch/t/jordan-tiempo-streetgato-phantom-and-infrared"
+    "sourceUrl": "/launch/t/jordan-teyana-taylor-apparel-collection-static"
   },
   {
     "releaseDate": "2026-03-14",
@@ -163,6 +152,17 @@
     "sourcePrimary": "playwright-linkscan",
     "sourceSecondary": "https://www.nike.com/launch",
     "sourceUrl": "/launch/t/air-max-95-big-bubble-volt-and-university-red"
+  },
+  {
+    "releaseDate": "2026-03-14",
+    "shoeName": "Kobe 3 Low Protro Pink Quartz",
+    "brand": "Nike",
+    "retailPrice": 0,
+    "estimatedMarketValue": null,
+    "imageUrl": null,
+    "sourcePrimary": "playwright-linkscan",
+    "sourceSecondary": "https://www.nike.com/launch",
+    "sourceUrl": "/launch/t/kobe-3-low-protro-pink-quartz"
   },
   {
     "releaseDate": "2026-03-17",

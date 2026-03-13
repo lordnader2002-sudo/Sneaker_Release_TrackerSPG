@@ -363,7 +363,7 @@
     "releaseDate": "2026-03-14",
     "shoeName": "Air Jordan 13 Chicago",
     "brand": "Air Jordan",
-    "retailPrice": 286,
+    "retailPrice": 0,
     "estimatedMarketValue": null,
     "imageUrl": "https://5app.kicksonfire.com/kofapp/upload/events_master_images/thumb_iphone_air-jordan-13-chicago.png",
     "sourcePrimary": "kicksonfire",
@@ -380,8 +380,7 @@
       "hot-model"
     ],
     "flipScore": null,
-    "recordHash": "f571c68a8dfb0b140671a28dcf1269200934e3934931cd6aa4f53bc858e766a8",
-    "retailSource": "https://www.kicksonfire.com/air-jordan-13-chicago"
+    "recordHash": "f571c68a8dfb0b140671a28dcf1269200934e3934931cd6aa4f53bc858e766a8"
   },
   {
     "releaseDate": "2026-03-14",
@@ -1350,7 +1349,7 @@
     "releaseDate": "2026-03-18",
     "shoeName": "Air Jordan 1 Low OG Sail / Off White",
     "brand": "Air Jordan",
-    "retailPrice": 329,
+    "retailPrice": 0,
     "estimatedMarketValue": null,
     "imageUrl": "https://5app.kicksonfire.com/kofapp/upload/events_master_images/thumb_iphone_air-jordan-1-low-og-sail-off-white.png",
     "sourcePrimary": "kicksonfire",
@@ -1368,8 +1367,7 @@
       "retro"
     ],
     "flipScore": null,
-    "recordHash": "5e2fc8f4f65fc6651819a0d0a41893461e6004a768c78a2270e7ce121aa58ac6",
-    "retailSource": "https://www.kicksonfire.com/air-jordan-1-low-og-sail-off-white"
+    "recordHash": "5e2fc8f4f65fc6651819a0d0a41893461e6004a768c78a2270e7ce121aa58ac6"
   },
   {
     "releaseDate": "2026-03-18",
@@ -1948,7 +1946,7 @@
     "releaseDate": "2026-03-20",
     "shoeName": "Nike First Sight Noir WMNS Black / Metallic Dark Grey",
     "brand": "Nike",
-    "retailPrice": 377,
+    "retailPrice": 0,
     "estimatedMarketValue": null,
     "imageUrl": "https://5app.kicksonfire.com/kofapp/upload/events_master_images/thumb_iphone_nike-first-sight-noir-wmns-black-metallic-dark-grey.png",
     "sourcePrimary": "kicksonfire",
@@ -1965,8 +1963,7 @@
       "women"
     ],
     "flipScore": null,
-    "recordHash": "06171354899133952670f42c55ea98d6667226c46d89e00d4b3b6f6618290f71",
-    "retailSource": "https://www.kicksonfire.com/nike-first-sight-noir-wmns-black-metallic-dark-grey"
+    "recordHash": "06171354899133952670f42c55ea98d6667226c46d89e00d4b3b6f6618290f71"
   },
   {
     "releaseDate": "2026-03-20",
@@ -1995,7 +1992,7 @@
     "releaseDate": "2026-03-21",
     "shoeName": "Air Jordan 14 Black / University Blue 2026",
     "brand": "Air Jordan",
-    "retailPrice": 299,
+    "retailPrice": 0,
     "estimatedMarketValue": null,
     "imageUrl": "https://5app.kicksonfire.com/kofapp/upload/events_master_images/thumb_iphone_air-jordan-14-black-university-blue-2026.png",
     "sourcePrimary": "kicksonfire",
@@ -2012,8 +2009,7 @@
       "hot-model"
     ],
     "flipScore": null,
-    "recordHash": "05eb6438c270e9fa194bd9bec268f1d3f3535979d668db5e5f5339bfdc6bd816",
-    "retailSource": "https://www.kicksonfire.com/air-jordan-14-black-university-blue-2026"
+    "recordHash": "05eb6438c270e9fa194bd9bec268f1d3f3535979d668db5e5f5339bfdc6bd816"
   },
   {
     "releaseDate": "2026-03-23",

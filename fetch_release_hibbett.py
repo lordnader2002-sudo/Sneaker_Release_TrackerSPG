@@ -15,6 +15,7 @@ from fetch_release_multisource_common import (
     clean_title,
     extract_image_url,
     find_card_price,
+    find_sibling_date,
     infer_brand,
     normalize_text,
     parse_date_flexible,
@@ -49,30 +50,28 @@ def extract_rows(soup: BeautifulSoup) -> list[dict[str, Any]]:
         if len(title) < 8:
             continue
 
-        container = a.parent
-        blob = ""
-        for _ in range(6):
-            if container is None:
-                break
-            blob = normalize_text(container.get_text(" ", strip=True))
-            if DATE_RE.search(blob):
-                break
-            container = container.parent
+        # Primary: sibling scan — handles split "Mar / 20" date boxes.
+        d, container = find_sibling_date(a, DATE_RE, default_year)
 
-        m = DATE_RE.search(blob)
-        if not m:
+        # Fallback: blob-search up the ancestor tree.
+        if d is None:
+            container = a.parent
+            for _ in range(6):
+                if container is None:
+                    break
+                blob = normalize_text(container.get_text(" ", strip=True))
+                if DATE_RE.search(blob):
+                    m = DATE_RE.search(blob)
+                    month, day, year = m.group(1), m.group(2), m.group(3)
+                    date_text = f"{month} {day} {year}" if year else f"{month} {day}"
+                    d = parse_date_flexible(date_text, default_year=default_year)
+                    if d:
+                        break
+                container = container.parent
+
+        if not d or container is None:
             continue
 
-        month = m.group(1)
-        day = m.group(2)
-        year = m.group(3)
-        date_text = f"{month} {day} {year}" if year else f"{month} {day}"
-
-        d = parse_date_flexible(date_text, default_year=default_year)
-        if not d:
-            continue
-
-        # Labeled-only price from the immediate parent — avoids placeholder $130 pollution
         retail = find_card_price(container)
 
         href = a["href"]

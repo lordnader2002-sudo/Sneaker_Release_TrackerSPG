@@ -413,3 +413,47 @@ def infer_release_method(name: str, context: str = "") -> str:
     if _METHOD_STORE_RE.search(text):
         return "In-Store"
     return ""
+
+
+def find_sibling_date(
+    anchor: Any,
+    date_re: "re.Pattern[str]",
+    default_year: int,
+    max_depth: int = 7,
+    max_sib_text: int = 60,
+) -> "tuple[date | None, Any]":
+    """Locate a release date for *anchor* by scanning preceding siblings.
+
+    Release-calendar pages (Foot Locker, Hibbett, Nike) typically display the
+    date in a compact box that is a *sibling* of the product-details panel, not
+    an ancestor of the product anchor.  Walking straight up and grabbing the
+    entire container text then fails once the container spans multiple cards.
+
+    This function walks up *max_depth* ancestor levels.  At each level it
+    inspects the preceding siblings of the current node.  The first short-text
+    sibling whose text matches *date_re* wins.  Returns ``(date, container)``
+    where *container* is the ancestor element at which the date was found
+    (useful for subsequent price / image extraction), or ``(None, None)``.
+    """
+    node = anchor
+    for _ in range(max_depth):
+        node = node.parent
+        if node is None:
+            break
+        for sib in node.previous_siblings:
+            if not hasattr(sib, "get_text"):
+                continue
+            text = normalize_text(sib.get_text(" ", strip=True))
+            if not text or len(text) > max_sib_text:
+                continue
+            m = date_re.search(text)
+            if not m:
+                continue
+            month = m.group(1)
+            day   = m.group(2)
+            year  = m.group(3) if m.lastindex and m.lastindex >= 3 else None
+            date_str = f"{month} {day} {year}" if year else f"{month} {day}"
+            d = parse_date_flexible(date_str, default_year=default_year)
+            if d:
+                return d, node
+    return None, None

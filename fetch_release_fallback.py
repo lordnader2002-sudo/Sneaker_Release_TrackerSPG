@@ -319,33 +319,86 @@ def normalize_release_from_dict(record: dict[str, Any], source: str) -> dict[str
     }
 
 
+_DATE_PREFIX_RE = re.compile(
+    r"^\s*(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\.?\s+\d{1,2}(?:,?\s*\d{4})?\s+",
+    re.I,
+)
+_MONTH_DAY_RE = re.compile(
+    r"\b(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\.?\s+(\d{1,2})(?:,?\s*(\d{4}))?\b",
+    re.I,
+)
+
+
 def parse_date_from_text(text: str) -> date | None:
     cleaned = text.replace(",", " ")
-    patterns = [
-        r"\b([A-Z][a-z]+ \d{1,2} \d{4})\b",
-        r"\b([A-Z][a-z]+ \d{1,2})\b",
-        r"\b(\d{4}-\d{2}-\d{2})\b",
-    ]
+    default_year = date.today().year
 
-    for pattern in patterns:
-        match = re.search(pattern, cleaned)
-        if not match:
-            continue
+    # ISO date first
+    iso = re.search(r"\b(\d{4}-\d{2}-\d{2})\b", cleaned)
+    if iso:
+        d = parse_date(iso.group(1))
+        if d:
+            return d
 
-        value = match.group(1)
-        parsed = parse_date(value)
-        if parsed is not None:
-            return parsed
+    # "Month Day Year" or "Month Day"
+    m = re.search(r"\b([A-Z][a-z]+ \d{1,2} \d{4})\b", cleaned)
+    if m:
+        d = parse_date(m.group(1))
+        if d:
+            return d
 
-        if re.fullmatch(r"[A-Z][a-z]+ \d{1,2}", value):
-            parsed = parse_date(f"{value} {date.today().year}")
-            if parsed is not None:
-                return parsed
+    m = re.search(r"\b([A-Z][a-z]+ \d{1,2})\b", cleaned)
+    if m:
+        value = m.group(1)
+        candidate = parse_date(f"{value} {default_year}")
+        if candidate:
+            # year-boundary: if >7 days past, try next year
+            if candidate < date.today() - timedelta(days=7):
+                candidate = parse_date(f"{value} {default_year + 1}") or candidate
+            return candidate
 
     return None
 
 
-def normalize_release_from_link(link_text: str, href: str, source: str) -> dict[str, Any] | None:
+def _date_from_anchor_context(anchor: Any) -> date | None:
+    """Look at the anchor's surrounding containers for a date string.
+
+    Handles Nike's split date box (month on one line, day below) by scanning
+    preceding siblings of each ancestor — same strategy as find_sibling_date
+    in the common module, but implemented locally to avoid the import cycle.
+    """
+    default_year = date.today().year
+    node = anchor
+    for _ in range(7):
+        node = node.parent
+        if node is None:
+            break
+        for sib in node.previous_siblings:
+            if not hasattr(sib, "get_text"):
+                continue
+            sib_text = " ".join(sib.get_text(" ", strip=True).split())
+            if not sib_text or len(sib_text) > 60:
+                continue
+            mm = _MONTH_DAY_RE.search(sib_text)
+            if not mm:
+                continue
+            month, day = mm.group(1), mm.group(2)
+            year_str = mm.group(3)
+            date_str = f"{month} {day} {year_str}" if year_str else f"{month} {day}"
+            candidate = parse_date(f"{month} {day} {year_str}") if year_str else parse_date(f"{month} {day} {default_year}")
+            if candidate:
+                if not year_str and candidate < date.today() - timedelta(days=7):
+                    candidate = parse_date(f"{month} {day} {default_year + 1}") or candidate
+                return candidate
+    return None
+
+
+def normalize_release_from_link(
+    link_text: str,
+    href: str,
+    source: str,
+    anchor: Any = None,
+) -> dict[str, Any] | None:
     text = normalize_text(link_text)
     if not text:
         return None
@@ -363,12 +416,24 @@ def normalize_release_from_link(link_text: str, href: str, source: str) -> dict[
     if not any(token in lowered for token in target_tokens):
         return None
 
-    inferred_date = parse_date_from_text(text) or (date.today() + timedelta(days=1))
+    # Try date from anchor text first, then from surrounding DOM context.
+    inferred_date = parse_date_from_text(text)
+    if inferred_date is None and anchor is not None:
+        inferred_date = _date_from_anchor_context(anchor)
+
+    # No date found anywhere — skip rather than polluting with "tomorrow".
+    if inferred_date is None:
+        return None
+
+    # Strip any "Mar 20 " prefix from the shoe name (date leaked into link text).
+    clean_name = _DATE_PREFIX_RE.sub("", text).strip()
+    if not clean_name:
+        clean_name = text
 
     return {
         "releaseDate": inferred_date.isoformat(),
-        "shoeName": text,
-        "brand": infer_brand(text),
+        "shoeName": clean_name,
+        "brand": infer_brand(clean_name),
         "retailPrice": 0,
         "estimatedMarketValue": None,
         "imageUrl": None,
@@ -410,7 +475,7 @@ def scrape_page(page, url: str, timeout_ms: int) -> list[dict[str, Any]]:
         if href.startswith("/"):
             href = "https://www.nike.com" + href
 
-        normalized = normalize_release_from_link(text, href, source=url)
+        normalized = normalize_release_from_link(text, href, source=url, anchor=anchor)
         if normalized is not None:
             releases.append(normalized)
 

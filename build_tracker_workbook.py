@@ -409,6 +409,85 @@ def write_summary_sheet(ws: Any, monthly_rows: list[ReleaseRow]) -> None:
     autosize(ws)
 
 
+def write_legend_sheet(ws: Any) -> None:
+    dark_fill   = PatternFill("solid", fgColor="0B1C3A")
+    header_fill = PatternFill("solid", fgColor="102955")
+    row_fill    = PatternFill("solid", fgColor="173A73")
+    white_bold  = Font(color="FFFFFF", bold=True, size=13)
+    white_font  = Font(color="FFFFFF")
+    thin = Side(style="thin", color="08162E")
+    border = Border(left=thin, right=thin, top=thin, bottom=thin)
+
+    def hdr(r: int, text: str) -> None:
+        ws.merge_cells(f"A{r}:B{r}")
+        c = ws.cell(row=r, column=1, value=text)
+        c.fill = header_fill
+        c.font = white_bold
+        c.alignment = Alignment(horizontal="left", vertical="center")
+
+    def row(r: int, label: str, desc: str, label_color: str = "FFFFFF") -> None:
+        a = ws.cell(row=r, column=1, value=label)
+        b = ws.cell(row=r, column=2, value=desc)
+        for c in (a, b):
+            c.fill = row_fill
+            c.border = border
+            c.alignment = Alignment(horizontal="left", vertical="center", wrap_text=True)
+        a.font = Font(color=label_color, bold=True)
+        b.font = white_font
+
+    ws.merge_cells("A1:B1")
+    title_cell = ws.cell(row=1, column=1, value="How Scores Work")
+    title_cell.fill = dark_fill
+    title_cell.font = Font(color="FFFFFF", bold=True, size=15)
+    title_cell.alignment = Alignment(horizontal="center", vertical="center")
+    ws.row_dimensions[1].height = 28
+
+    # ── Hype Score ──────────────────────────────────────────────────────────────
+    hdr(3, "HYPE SCORE  (0–100+)")
+    row(4,  "Brand Tier",      "HIGH brands (Air Jordan, Nike, Yeezy, New Balance, Adidas): +12 pts\n"
+                                "MID brands (Vans, Converse, Puma, Reebok, ASICS, Saucony, Hoka, Salomon): +7 pts\n"
+                                "Other brands: +3 pts")
+    row(5,  "Collab",          "Any collab keyword (Travis Scott, Off-White, Supreme, Bad Bunny, Kith…): +20 pts")
+    row(6,  "Limited / Rare",  "Limited, Exclusive, QS, PE, Raffle, Friends & Family, Sample…: +10 pts")
+    row(7,  "Hot Model",       "Jordan 1–13, Dunk, Air Max, Kobe, Yeezy Boost, Samba, NB 550/990…: +12 pts")
+    row(8,  "Retro / Heritage","Retro, OG, Original, Vintage, Heritage: +4 pts")
+    row(9,  "Price Signal",    "Retail ≥ $250 OR retail ≤ $110: +3 pts")
+    row(10, "Resale Ratio",    "Market ÷ Retail ≥ 2.5×: +35 pts  |  ≥ 2.0×: +28  |  ≥ 1.5×: +18  |  ≥ 1.2×: +8")
+    row(11, "Resale Spread",   "Market − Retail ≥ $200: +15 pts  |  ≥ $150: +10  |  ≥ $75: +6  |  ≥ $30: +2")
+    row(12, "Hype Level",      "HIGH ≥ 42 pts     MED ≥ 20 pts     LOW < 20 pts",
+        label_color="FF4D4D")
+
+    # ── Confidence Score ────────────────────────────────────────────────────────
+    hdr(14, "CONFIDENCE SCORE  (0–100)")
+    row(15, "Primary Source",   "Release confirmed by primary scraper (GOAT): +25 pts")
+    row(16, "Secondary Source", "Confirmed by at least one additional source: +15 pts")
+    row(17, "Retail Price",     "retailPrice field is populated: +15 pts")
+    row(18, "Image",            "imageUrl field is populated: +10 pts")
+    row(19, "Release URL",      "releaseUrl field is populated: +10 pts")
+    row(20, "Source Count",     "Seen by 3+ sources: +28 pts  |  Seen by 2 sources: +18 pts")
+    row(21, "Single-source cap","Releases seen by only 1 source are capped at 59 (cannot reach HIGH)")
+    row(22, "Confidence Level", "HIGH ≥ 60 pts     MED ≥ 32 pts     LOW < 32 pts",
+        label_color="7CFCFF")
+
+    # ── Priority ────────────────────────────────────────────────────────────────
+    hdr(24, "PRIORITY")
+    row(25, "Must Watch",   "Hype = HIGH  AND  Confidence = HIGH",    label_color="FF8080")
+    row(26, "Watch",        "Hype = HIGH + Confidence = MED, OR Hype = MED + Confidence = HIGH",
+        label_color="FFE699")
+    row(27, "Low Priority", "All other hype / confidence combinations")
+
+    # ── Flip Score ──────────────────────────────────────────────────────────────
+    hdr(29, "FLIP SCORE")
+    row(30, "Formula",  "Flip % = round((Market Value − Retail Price) / Retail Price × 100)")
+    row(31, "Example",  "$150 retail, $225 market  →  Flip % = +50%  (50% above retail)")
+    row(32, "No value", "Shown as blank when retail or market value is missing")
+
+    ws.column_dimensions["A"].width = 22
+    ws.column_dimensions["B"].width = 80
+    for r in range(3, 33):
+        ws.row_dimensions[r].height = 40 if r in (4, 10, 11) else 24
+
+
 def build_workbook(rows: list[ReleaseRow], changes: list[dict[str, Any]], output_path: Path) -> None:
     output_path.parent.mkdir(parents=True, exist_ok=True)
 
@@ -430,6 +509,9 @@ def build_workbook(rows: list[ReleaseRow], changes: list[dict[str, Any]], output
 
     summary = wb.create_sheet("Summary")
     write_summary_sheet(summary, monthly_rows)
+
+    legend = wb.create_sheet("How Scores Work")
+    write_legend_sheet(legend)
 
     wb.save(output_path)
 

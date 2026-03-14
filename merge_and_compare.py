@@ -802,6 +802,24 @@ def main() -> None:
         fuzzy_threshold=float(args.fuzzy_threshold),
         date_fuzz_days=int(args.date_fuzz_days),
     )
+
+    # Carry forward any previous records with releaseDate >= today that the
+    # current scrape missed (prevents same-day drops from disappearing mid-day).
+    if previous_rows:
+        today = date.today()
+        merged_keys = {make_key(row) for row in merged_rows}
+        carried = [
+            row for row in previous_rows
+            if (parse_date(row.get("releaseDate", "")) or date.min) >= today
+            and make_key(row) not in merged_keys
+        ]
+        if carried:
+            print(f"Carried forward from previous: {len(carried)}")
+            merged_rows = sorted(
+                merged_rows + carried,
+                key=lambda i: (i["releaseDate"], i.get("brand", "").lower(), i.get("shoeName", "").lower()),
+            )
+
     changes = compare_changes(previous_rows, merged_rows)
 
     validate_records(merged_rows, min_records=args.min_records)

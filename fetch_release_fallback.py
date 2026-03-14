@@ -406,6 +406,10 @@ def scrape_page(page, url: str, timeout_ms: int) -> list[dict[str, Any]]:
         if "/launch/" not in href and "/t/" not in href:
             continue
 
+        # Absolutize relative Nike URLs so "Buy →" links don't 404 on GitHub Pages
+        if href.startswith("/"):
+            href = "https://www.nike.com" + href
+
         normalized = normalize_release_from_link(text, href, source=url)
         if normalized is not None:
             releases.append(normalized)

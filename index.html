@@ -379,6 +379,36 @@
       .panel-body { display: none; max-height: 380px; overflow-y: auto; }
       .panel.open .panel-body { display: block; }
 
+      /* ── Score Legend ── */
+      .legend-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 16px;
+        padding: 16px;
+      }
+      @media (max-width: 900px) { .legend-grid { grid-template-columns: 1fr; } }
+      .legend-section { }
+      .legend-section-title {
+        font-size: 11px; font-weight: 700; letter-spacing: .08em;
+        color: var(--text-dim); text-transform: uppercase;
+        border-bottom: 1px solid var(--border); padding-bottom: 6px; margin-bottom: 10px;
+      }
+      .legend-row {
+        display: flex; gap: 8px; margin-bottom: 7px; align-items: flex-start;
+      }
+      .legend-label {
+        font-size: 11px; font-weight: 700; color: var(--text-dim);
+        min-width: 90px; flex-shrink: 0; padding-top: 1px;
+      }
+      .legend-desc { font-size: 12px; color: var(--text); line-height: 1.45; }
+      .lv-high  { color: var(--red); }
+      .lv-med   { color: var(--amber); }
+      .lv-low   { color: var(--green); }
+      .lv-cyan  { color: var(--cyan); }
+      .lv-mute  { color: var(--text-mute); }
+      .lv-must  { color: #ff8080; }
+      .lv-watch { color: #ffe699; }
+
       .change-item {
         display: flex; align-items: flex-start; gap: 10px;
         padding: 10px 16px; border-bottom: 1px solid var(--border);
@@ -584,6 +614,58 @@
           <div class="panel-chevron">▼</div>
         </div>
         <div class="panel-body" id="changes-body"></div>
+      </div>
+
+      <!-- ── SCORING LEGEND ── -->
+      <div class="panel" id="legend-panel" style="margin-top:12px">
+        <div class="panel-header" onclick="togglePanel(this.closest('.panel'))">
+          <div class="panel-title">How Scores Work</div>
+          <div class="panel-chevron">▼</div>
+        </div>
+        <div class="panel-body" style="max-height:none">
+          <div class="legend-grid">
+
+            <!-- Hype -->
+            <div class="legend-section">
+              <div class="legend-section-title">Hype Score</div>
+              <div class="legend-row"><span class="legend-label">Brand Tier</span><span class="legend-desc"><span class="lv-high">HIGH</span> brands (Jordan, Nike, Yeezy, NB, Adidas): <b>+12</b> &nbsp; <span class="lv-med">MID</span> brands: <b>+7</b> &nbsp; Other: <b>+3</b></span></div>
+              <div class="legend-row"><span class="legend-label">Collab</span><span class="legend-desc">Travis Scott, Off-White, Supreme, Kith, Bad Bunny…: <b>+20</b></span></div>
+              <div class="legend-row"><span class="legend-label">Limited / Rare</span><span class="legend-desc">Limited, Exclusive, QS, PE, Raffle, Friends &amp; Family…: <b>+10</b></span></div>
+              <div class="legend-row"><span class="legend-label">Hot Model</span><span class="legend-desc">Jordan 1–13, Dunk, Air Max, Kobe, Yeezy Boost, Samba, NB 550/990…: <b>+12</b></span></div>
+              <div class="legend-row"><span class="legend-label">Retro / Heritage</span><span class="legend-desc">Retro, OG, Original, Vintage, Heritage: <b>+4</b></span></div>
+              <div class="legend-row"><span class="legend-label">Price Signal</span><span class="legend-desc">Retail ≥ $250 or ≤ $110: <b>+3</b></span></div>
+              <div class="legend-row"><span class="legend-label">Resale Ratio</span><span class="legend-desc">≥ 2.5×: <b>+35</b> &nbsp; ≥ 2.0×: <b>+28</b> &nbsp; ≥ 1.5×: <b>+18</b> &nbsp; ≥ 1.2×: <b>+8</b></span></div>
+              <div class="legend-row"><span class="legend-label">Resale Spread</span><span class="legend-desc">$200+ above retail: <b>+15</b> &nbsp; $150+: <b>+10</b> &nbsp; $75+: <b>+6</b> &nbsp; $30+: <b>+2</b></span></div>
+              <div class="legend-row" style="margin-top:8px"><span class="legend-label">Levels</span><span class="legend-desc"><span class="lv-high">HIGH</span> ≥ 42 pts &nbsp; <span class="lv-med">MED</span> ≥ 20 &nbsp; <span class="lv-low">LOW</span> &lt; 20</span></div>
+            </div>
+
+            <!-- Confidence -->
+            <div class="legend-section">
+              <div class="legend-section-title">Confidence Score</div>
+              <div class="legend-row"><span class="legend-label">Primary Source</span><span class="legend-desc">Confirmed by primary scraper (GOAT): <b>+25</b></span></div>
+              <div class="legend-row"><span class="legend-label">Secondary Source</span><span class="legend-desc">Confirmed by at least one other source: <b>+15</b></span></div>
+              <div class="legend-row"><span class="legend-label">Retail Price</span><span class="legend-desc">Price is populated: <b>+15</b></span></div>
+              <div class="legend-row"><span class="legend-label">Image</span><span class="legend-desc">Image URL is populated: <b>+10</b></span></div>
+              <div class="legend-row"><span class="legend-label">Release URL</span><span class="legend-desc">Direct product link available: <b>+10</b></span></div>
+              <div class="legend-row"><span class="legend-label">Source Count</span><span class="legend-desc">Seen by 3+ sources: <b>+28</b> &nbsp; 2 sources: <b>+18</b></span></div>
+              <div class="legend-row"><span class="legend-label lv-mute">Single-source cap</span><span class="legend-desc lv-mute">Releases from only 1 source are capped at 59 — can never reach HIGH</span></div>
+              <div class="legend-row" style="margin-top:8px"><span class="legend-label">Levels</span><span class="legend-desc"><span class="lv-cyan">HIGH</span> ≥ 60 pts &nbsp; <span class="lv-med">MED</span> ≥ 32 &nbsp; <span class="lv-low">LOW</span> &lt; 32</span></div>
+            </div>
+
+            <!-- Priority & Flip -->
+            <div class="legend-section">
+              <div class="legend-section-title">Priority &amp; Flip Score</div>
+              <div class="legend-row"><span class="legend-label lv-must">Must Watch</span><span class="legend-desc">Hype = <span class="lv-high">HIGH</span> AND Confidence = <span class="lv-cyan">HIGH</span></span></div>
+              <div class="legend-row"><span class="legend-label lv-watch">Watch</span><span class="legend-desc">HIGH + MED, or MED + HIGH (hype / confidence)</span></div>
+              <div class="legend-row"><span class="legend-label lv-mute">Low Priority</span><span class="legend-desc lv-mute">All other combinations</span></div>
+              <div class="legend-section-title" style="margin-top:16px">Flip Score</div>
+              <div class="legend-row"><span class="legend-label">Formula</span><span class="legend-desc">(Market Value − Retail) ÷ Retail × 100</span></div>
+              <div class="legend-row"><span class="legend-label">Example</span><span class="legend-desc">$150 retail, $225 market → <span class="lv-high">+50%</span></span></div>
+              <div class="legend-row"><span class="legend-label lv-mute">No value</span><span class="legend-desc lv-mute">Shown as blank when retail or market price is missing</span></div>
+            </div>
+
+          </div>
+        </div>
       </div>
 
     </div><!-- /page -->

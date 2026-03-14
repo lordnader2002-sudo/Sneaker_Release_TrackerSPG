@@ -1,322 +1,572 @@
 [
   {
-    "changeType": "REMOVED",
-    "date": "2026-03-13",
-    "brand": "Saucony",
-    "style": "3SIXTEEN x Saucony ProGrid Guide 7 'Graphite'",
-    "fieldChanged": "",
-    "oldValue": "",
-    "newValue": "",
-    "detectedAt": "2026-03-14T04:36:33Z"
+    "changeType": "CONFIDENCE_CHANGED",
+    "date": "2026-03-14",
+    "brand": "Air Jordan",
+    "style": "Jordan Retro 13 BOYS TODDLER \u2022 WHITE/BLACK/TRUE RED",
+    "fieldChanged": "confidence",
+    "oldValue": "HIGH",
+    "newValue": "MED",
+    "detectedAt": "2026-03-14T05:01:56Z"
+  },
+  {
+    "changeType": "PRIORITY_CHANGED",
+    "date": "2026-03-14",
+    "brand": "Air Jordan",
+    "style": "Jordan Retro 13 BOYS TODDLER \u2022 WHITE/BLACK/TRUE RED",
+    "fieldChanged": "priority",
+    "oldValue": "Watch",
+    "newValue": "Low Priority",
+    "detectedAt": "2026-03-14T05:01:56Z"
   },
   {
     "changeType": "REMOVED",
-    "date": "2026-03-13",
-    "brand": "Saucony",
-    "style": "3SIXTEEN x Saucony ProGrid Guide 7 'Lime'",
+    "date": "2026-03-14",
+    "brand": "Air Jordan",
+    "style": "Air Jordan 9 Retro 'Flint Grey' - 2026",
     "fieldChanged": "",
     "oldValue": "",
     "newValue": "",
-    "detectedAt": "2026-03-14T04:36:33Z"
+    "detectedAt": "2026-03-14T05:01:56Z"
   },
   {
     "changeType": "REMOVED",
-    "date": "2026-03-13",
+    "date": "2026-03-14",
     "brand": "Adidas",
-    "style": "adidas Anthony Edwards 2 'Georgia Bulldogs'",
+    "style": "Overkill x adidas Spiritain 2000 'Light Sand'",
     "fieldChanged": "",
     "oldValue": "",
     "newValue": "",
-    "detectedAt": "2026-03-14T04:36:33Z"
-  },
-  {
-    "changeType": "REMOVED",
-    "date": "2026-03-13",
-    "brand": "Nike",
-    "style": "Chet Holmgren x Nike KD 18 \"Camo\"",
-    "fieldChanged": "",
-    "oldValue": "",
-    "newValue": "",
-    "detectedAt": "2026-03-14T04:36:33Z"
-  },
-  {
-    "changeType": "REMOVED",
-    "date": "2026-03-13",
-    "brand": "Nike",
-    "style": "Chet Holmgren x Nike KD 18 \"Thunder & Reign\"",
-    "fieldChanged": "",
-    "oldValue": "",
-    "newValue": "",
-    "detectedAt": "2026-03-14T04:36:33Z"
-  },
-  {
-    "changeType": "REMOVED",
-    "date": "2026-03-13",
-    "brand": "Air Jordan",
-    "style": "Mar 13 Indoor/Court Low-Top Soccer Shoes Jordan Tiempo Streetgato SE",
-    "fieldChanged": "",
-    "oldValue": "",
-    "newValue": "",
-    "detectedAt": "2026-03-14T04:36:33Z"
-  },
-  {
-    "changeType": "REMOVED",
-    "date": "2026-03-13",
-    "brand": "Air Jordan",
-    "style": "Mar 13 Jordan Tiempo Maestro Elite SE Infrared",
-    "fieldChanged": "",
-    "oldValue": "",
-    "newValue": "",
-    "detectedAt": "2026-03-14T04:36:33Z"
-  },
-  {
-    "changeType": "REMOVED",
-    "date": "2026-03-13",
-    "brand": "Nike",
-    "style": "Mar 13 Kobe 3 Low Protro Pink Quartz",
-    "fieldChanged": "",
-    "oldValue": "",
-    "newValue": "",
-    "detectedAt": "2026-03-14T04:36:33Z"
-  },
-  {
-    "changeType": "REMOVED",
-    "date": "2026-03-13",
-    "brand": "Nike",
-    "style": "Nike Air Force 1 \"Easter\"",
-    "fieldChanged": "",
-    "oldValue": "",
-    "newValue": "",
-    "detectedAt": "2026-03-14T04:36:33Z"
-  },
-  {
-    "changeType": "REMOVED",
-    "date": "2026-03-13",
-    "brand": "Nike",
-    "style": "Nike Air Max Uptempo 95",
-    "fieldChanged": "",
-    "oldValue": "",
-    "newValue": "",
-    "detectedAt": "2026-03-14T04:36:33Z"
-  },
-  {
-    "changeType": "REMOVED",
-    "date": "2026-03-13",
-    "brand": "Nike",
-    "style": "Nike Dunk Low \"Easter\"",
-    "fieldChanged": "",
-    "oldValue": "",
-    "newValue": "",
-    "detectedAt": "2026-03-14T04:36:33Z"
-  },
-  {
-    "changeType": "REMOVED",
-    "date": "2026-03-13",
-    "brand": "Nike",
-    "style": "Nike Zoom Kobe 3 Protro \"Mamba Magic\"",
-    "fieldChanged": "",
-    "oldValue": "",
-    "newValue": "",
-    "detectedAt": "2026-03-14T04:36:33Z"
-  },
-  {
-    "changeType": "REMOVED",
-    "date": "2026-03-13",
-    "brand": "Nike",
-    "style": "Skims x Nike Air Rift",
-    "fieldChanged": "",
-    "oldValue": "",
-    "newValue": "",
-    "detectedAt": "2026-03-14T04:36:33Z"
-  },
-  {
-    "changeType": "NEW",
-    "date": "2026-03-14",
-    "brand": "Crocs",
-    "style": "App entry Crocs Classic Clog Zoro One Piece MENS \u2022 GREEN/BLACK",
-    "fieldChanged": "",
-    "oldValue": "",
-    "newValue": "",
-    "detectedAt": "2026-03-14T04:36:33Z"
-  },
-  {
-    "changeType": "NEW",
-    "date": "2026-03-14",
-    "brand": "Air Jordan",
-    "style": "App entry Jordan Grade School Retro 13 True Red BOYS GRADE SCHOOL \u2022 WHITE/BLACK/TRUE RED",
-    "fieldChanged": "",
-    "oldValue": "",
-    "newValue": "",
-    "detectedAt": "2026-03-14T04:36:33Z"
-  },
-  {
-    "changeType": "REMOVED",
-    "date": "2026-03-14",
-    "brand": "Air Jordan",
-    "style": "Air Jordan 13 Chicago",
-    "fieldChanged": "",
-    "oldValue": "",
-    "newValue": "",
-    "detectedAt": "2026-03-14T04:36:33Z"
-  },
-  {
-    "changeType": "REMOVED",
-    "date": "2026-03-14",
-    "brand": "Air Jordan",
-    "style": "Air Jordan 13 Retro White and University Red",
-    "fieldChanged": "",
-    "oldValue": "",
-    "newValue": "",
-    "detectedAt": "2026-03-14T04:36:33Z"
-  },
-  {
-    "changeType": "REMOVED",
-    "date": "2026-03-14",
-    "brand": "Air Jordan",
-    "style": "Air Jordan 14 Retro Black and University Blue",
-    "fieldChanged": "",
-    "oldValue": "",
-    "newValue": "",
-    "detectedAt": "2026-03-14T04:36:33Z"
-  },
-  {
-    "changeType": "REMOVED",
-    "date": "2026-03-14",
-    "brand": "Nike",
-    "style": "Air Max 95 Big Bubble Volt and University Red",
-    "fieldChanged": "",
-    "oldValue": "",
-    "newValue": "",
-    "detectedAt": "2026-03-14T04:36:33Z"
-  },
-  {
-    "changeType": "REMOVED",
-    "date": "2026-03-14",
-    "brand": "Crocs",
-    "style": "ENTRIES OPEN App entry Crocs Classic Clog Zoro One Piece MENS \u2022 GREEN/BLACK",
-    "fieldChanged": "",
-    "oldValue": "",
-    "newValue": "",
-    "detectedAt": "2026-03-14T04:36:33Z"
-  },
-  {
-    "changeType": "REMOVED",
-    "date": "2026-03-14",
-    "brand": "Air Jordan",
-    "style": "ENTRIES OPEN App entry Jordan Grade School Retro 13 True Red BOYS GRADE SCHOOL \u2022 WHITE/BLACK/TRUE RED",
-    "fieldChanged": "",
-    "oldValue": "",
-    "newValue": "",
-    "detectedAt": "2026-03-14T04:36:33Z"
-  },
-  {
-    "changeType": "REMOVED",
-    "date": "2026-03-14",
-    "brand": "Air Jordan",
-    "style": "Jordan x Teyana Taylor Apparel Collection",
-    "fieldChanged": "",
-    "oldValue": "",
-    "newValue": "",
-    "detectedAt": "2026-03-14T04:36:33Z"
+    "detectedAt": "2026-03-14T05:01:56Z"
   },
   {
     "changeType": "SOURCE_CHANGED",
     "date": "2026-03-14",
     "brand": "Air Jordan",
-    "style": "Mar 14 Air Jordan 3 x Teyana Taylor Concrete Rose",
+    "style": "Jordan Retro 13 BOYS TODDLER \u2022 WHITE/BLACK/TRUE RED",
+    "fieldChanged": "sourcePrimary",
+    "oldValue": "thedropdate",
+    "newValue": "footlocker",
+    "detectedAt": "2026-03-14T05:01:56Z"
+  },
+  {
+    "changeType": "SOURCE_CHANGED",
+    "date": "2026-03-14",
+    "brand": "Air Jordan",
+    "style": "Jordan Retro 13 BOYS TODDLER \u2022 WHITE/BLACK/TRUE RED",
     "fieldChanged": "sourceSecondary",
-    "oldValue": "https://www.nike.com/launch",
-    "newValue": "https://www.nike.com/launch/upcoming",
-    "detectedAt": "2026-03-14T04:36:33Z"
+    "oldValue": "https://thedropdate.com/releases",
+    "newValue": "https://www.footlocker.com/release-calendar.html",
+    "detectedAt": "2026-03-14T05:01:56Z"
   },
   {
-    "changeType": "NEW",
-    "date": "2026-03-15",
-    "brand": "Air Jordan",
-    "style": "Air Jordan 13 Retro White and University Red",
-    "fieldChanged": "",
-    "oldValue": "",
-    "newValue": "",
-    "detectedAt": "2026-03-14T04:36:33Z"
-  },
-  {
-    "changeType": "NEW",
-    "date": "2026-03-15",
-    "brand": "Air Jordan",
-    "style": "Air Jordan 14 Retro Black and University Blue",
-    "fieldChanged": "",
-    "oldValue": "",
-    "newValue": "",
-    "detectedAt": "2026-03-14T04:36:33Z"
-  },
-  {
-    "changeType": "NEW",
-    "date": "2026-03-15",
+    "changeType": "REMOVED",
+    "date": "2026-03-16",
     "brand": "Nike",
-    "style": "Air Max 95 Big Bubble Volt and University Red",
+    "style": "Jacquemus x Nike Moon Shoe SP 'Fauna Brown'",
     "fieldChanged": "",
     "oldValue": "",
     "newValue": "",
-    "detectedAt": "2026-03-14T04:36:33Z"
+    "detectedAt": "2026-03-14T05:01:56Z"
   },
   {
-    "changeType": "NEW",
-    "date": "2026-03-15",
+    "changeType": "REMOVED",
+    "date": "2026-03-16",
+    "brand": "Nike",
+    "style": "Jacquemus x Nike Moon Shoe SP 'Soft Pearl'",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-14T05:01:56Z"
+  },
+  {
+    "changeType": "REMOVED",
+    "date": "2026-03-17",
+    "brand": "Adidas",
+    "style": "Adidas Hyperboost Edge Cloud White / Pure Ruby",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-14T05:01:56Z"
+  },
+  {
+    "changeType": "REMOVED",
+    "date": "2026-03-17",
     "brand": "Air Jordan",
-    "style": "Jordan x Teyana Taylor Apparel Collection",
+    "style": "Dashawn Jordan x Nike SB Dunk Low 'Bright Spruce'",
     "fieldChanged": "",
     "oldValue": "",
     "newValue": "",
-    "detectedAt": "2026-03-14T04:36:33Z"
+    "detectedAt": "2026-03-14T05:01:56Z"
   },
   {
-    "changeType": "RETAIL_CHANGED",
+    "changeType": "REMOVED",
+    "date": "2026-03-18",
+    "brand": "Adidas",
+    "style": "adidas Adizero Dropset Elite 'Solar Red'",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-14T05:01:56Z"
+  },
+  {
+    "changeType": "REMOVED",
     "date": "2026-03-18",
     "brand": "Air Jordan",
     "style": "Air Jordan 1 Low OG Sail / Off White",
-    "fieldChanged": "retailPrice",
-    "oldValue": 329,
-    "newValue": 0,
-    "detectedAt": "2026-03-14T04:36:33Z"
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-14T05:01:56Z"
   },
   {
-    "changeType": "RETAIL_CHANGED",
+    "changeType": "REMOVED",
+    "date": "2026-03-18",
+    "brand": "Air Jordan",
+    "style": "Air Jordan 3 'Spring Is In The Air'",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-14T05:01:56Z"
+  },
+  {
+    "changeType": "REMOVED",
+    "date": "2026-03-18",
+    "brand": "Unknown",
+    "style": "Balenciaga 3xl Lace WMNS White / Light Pink",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-14T05:01:56Z"
+  },
+  {
+    "changeType": "REMOVED",
+    "date": "2026-03-18",
+    "brand": "Unknown",
+    "style": "Balenciaga Monday Ultra Brown / White",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-14T05:01:56Z"
+  },
+  {
+    "changeType": "REMOVED",
+    "date": "2026-03-18",
+    "brand": "Unknown",
+    "style": "Balenciaga Monday Ultra Khaki / White",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-14T05:01:56Z"
+  },
+  {
+    "changeType": "REMOVED",
+    "date": "2026-03-18",
+    "brand": "Unknown",
+    "style": "Balenciaga Monday Ultra WMNS Lilac / White",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-14T05:01:56Z"
+  },
+  {
+    "changeType": "REMOVED",
+    "date": "2026-03-18",
+    "brand": "Unknown",
+    "style": "Balenciaga Runner Led Black",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-14T05:01:56Z"
+  },
+  {
+    "changeType": "REMOVED",
+    "date": "2026-03-18",
+    "brand": "Unknown",
+    "style": "Balenciaga Soleless Black / White",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-14T05:01:56Z"
+  },
+  {
+    "changeType": "REMOVED",
+    "date": "2026-03-18",
+    "brand": "Unknown",
+    "style": "Balenciaga Triple S Canvas Black",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-14T05:01:56Z"
+  },
+  {
+    "changeType": "REMOVED",
+    "date": "2026-03-18",
+    "brand": "ASICS",
+    "style": "C.P. Company x ASICS GEL-QUANTUM 360 I 'Black'",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-14T05:01:56Z"
+  },
+  {
+    "changeType": "REMOVED",
+    "date": "2026-03-18",
+    "brand": "Nike",
+    "style": "Fragment x Nike Mind 002 'Particle Grey'",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-14T05:01:56Z"
+  },
+  {
+    "changeType": "REMOVED",
+    "date": "2026-03-18",
+    "brand": "Nike",
+    "style": "Nikes G.t. Cut 4 Pinksicle / Vivid Pink",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-14T05:01:56Z"
+  },
+  {
+    "changeType": "REMOVED",
+    "date": "2026-03-18",
+    "brand": "Crocs",
+    "style": "One Piece x Crocs Classic Clog 'Zoro'",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-14T05:01:56Z"
+  },
+  {
+    "changeType": "REMOVED",
+    "date": "2026-03-18",
+    "brand": "Vans",
+    "style": "Vans LX Old Skool 36 'Pearlised Navy & Black'",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-14T05:01:56Z"
+  },
+  {
+    "changeType": "REMOVED",
+    "date": "2026-03-18",
+    "brand": "Vans",
+    "style": "Vans Premium Classic Slip-On 98 'Pearlized Indigo'",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-14T05:01:56Z"
+  },
+  {
+    "changeType": "REMOVED",
+    "date": "2026-03-19",
+    "brand": "ASICS",
+    "style": "ASICS GEL-CUMULUS 16 'Cream & Beniimo Purple'",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-14T05:01:56Z"
+  },
+  {
+    "changeType": "REMOVED",
+    "date": "2026-03-19",
+    "brand": "ASICS",
+    "style": "C.P. Company x ASICS GEL-QUANTUM 360 I 'Moroccan Blue'",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-14T05:01:56Z"
+  },
+  {
+    "changeType": "REMOVED",
+    "date": "2026-03-19",
+    "brand": "ASICS",
+    "style": "C.P. Company x ASICS GEL-QUANTUM 360 I 'Pure Silver & Caviar'",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-14T05:01:56Z"
+  },
+  {
+    "changeType": "REMOVED",
+    "date": "2026-03-19",
+    "brand": "Nike",
+    "style": "Fragment x Nike Book 2",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-14T05:01:56Z"
+  },
+  {
+    "changeType": "REMOVED",
+    "date": "2026-03-19",
+    "brand": "New Balance",
+    "style": "New Balance 991v1 Made in UK 'Oyster Grey'",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-14T05:01:56Z"
+  },
+  {
+    "changeType": "REMOVED",
+    "date": "2026-03-19",
+    "brand": "Nike",
+    "style": "Nike G.t. Cut 1 Orange Pulse / Persian Violet",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-14T05:01:56Z"
+  },
+  {
+    "changeType": "REMOVED",
+    "date": "2026-03-19",
+    "brand": "Nike",
+    "style": "Nike G.t. Future Unseen Hours",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-14T05:01:56Z"
+  },
+  {
+    "changeType": "REMOVED",
+    "date": "2026-03-19",
+    "brand": "Air Jordan",
+    "style": "Teyana Taylor x Air Jordan 3 SP 'Concrete Rose'",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-14T05:01:56Z"
+  },
+  {
+    "changeType": "REMOVED",
+    "date": "2026-03-20",
+    "brand": "Nike",
+    "style": "Nike Air Force 1 Low White / Blue Tint / Pure Platinum",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-14T05:01:56Z"
+  },
+  {
+    "changeType": "REMOVED",
+    "date": "2026-03-20",
+    "brand": "Nike",
+    "style": "Nike Book 2 Must Be The Denim",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-14T05:01:56Z"
+  },
+  {
+    "changeType": "REMOVED",
+    "date": "2026-03-20",
+    "brand": "Nike",
+    "style": "Nike First Sight Noir WMNS 'Black'",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-14T05:01:56Z"
+  },
+  {
+    "changeType": "REMOVED",
+    "date": "2026-03-20",
+    "brand": "Nike",
+    "style": "Nike First Sight Noir WMNS 'Electric Green'",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-14T05:01:56Z"
+  },
+  {
+    "changeType": "REMOVED",
     "date": "2026-03-20",
     "brand": "Nike",
     "style": "Nike First Sight Noir WMNS Black / Metallic Dark Grey",
-    "fieldChanged": "retailPrice",
-    "oldValue": 377,
-    "newValue": 0,
-    "detectedAt": "2026-03-14T04:36:33Z"
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-14T05:01:56Z"
   },
   {
-    "changeType": "RETAIL_CHANGED",
+    "changeType": "REMOVED",
+    "date": "2026-03-20",
+    "brand": "Nike",
+    "style": "Nike First Sight Noir WMNS Electric Green / Racer Blue",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-14T05:01:56Z"
+  },
+  {
+    "changeType": "REMOVED",
     "date": "2026-03-21",
     "brand": "Air Jordan",
     "style": "Air Jordan 14 Black / University Blue 2026",
-    "fieldChanged": "retailPrice",
-    "oldValue": 299,
-    "newValue": 0,
-    "detectedAt": "2026-03-14T04:36:33Z"
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-14T05:01:56Z"
   },
   {
-    "changeType": "NEW",
+    "changeType": "REMOVED",
+    "date": "2026-03-23",
+    "brand": "Nike",
+    "style": "Nike Air Force 1 Low Team Usa",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-14T05:01:56Z"
+  },
+  {
+    "changeType": "REMOVED",
+    "date": "2026-03-23",
+    "brand": "Nike",
+    "style": "Nike Air Max 95 SE 'England'",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-14T05:01:56Z"
+  },
+  {
+    "changeType": "REMOVED",
+    "date": "2026-03-23",
+    "brand": "Nike",
+    "style": "Nike Air Max Plus 'French Football Federation'",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-14T05:01:56Z"
+  },
+  {
+    "changeType": "REMOVED",
+    "date": "2026-03-23",
+    "brand": "Nike",
+    "style": "Nike Kobe Air Force 1 Low Lower Merion Aces",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-14T05:01:56Z"
+  },
+  {
+    "changeType": "REMOVED",
     "date": "2026-03-23",
     "brand": "Nike",
     "style": "Nike Kobe Air Force 1 Low White / Team Red",
     "fieldChanged": "",
     "oldValue": "",
     "newValue": "",
-    "detectedAt": "2026-03-14T04:36:33Z"
+    "detectedAt": "2026-03-14T05:01:56Z"
+  },
+  {
+    "changeType": "REMOVED",
+    "date": "2026-03-25",
+    "brand": "Nike",
+    "style": "Nike Air Max 90 \u2018Infrared 3M\u2019",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-14T05:01:56Z"
+  },
+  {
+    "changeType": "REMOVED",
+    "date": "2026-03-26",
+    "brand": "Nike",
+    "style": "Fragment Design x Nike Air Liquid Max 'Black'",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-14T05:01:56Z"
+  },
+  {
+    "changeType": "REMOVED",
+    "date": "2026-03-26",
+    "brand": "New Balance",
+    "style": "New Balance 1890 'Star Burst'",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-14T05:01:56Z"
+  },
+  {
+    "changeType": "REMOVED",
+    "date": "2026-03-26",
+    "brand": "Nike",
+    "style": "Nike Air Liquid Max 'Green Apple'",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-14T05:01:56Z"
+  },
+  {
+    "changeType": "REMOVED",
+    "date": "2026-03-26",
+    "brand": "Crocs",
+    "style": "One Piece x Crocs Classic Clog 'Thousand Sunny'",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-14T05:01:56Z"
+  },
+  {
+    "changeType": "REMOVED",
+    "date": "2026-03-26",
+    "brand": "Nike",
+    "style": "Patta x Nike Air Max 1 \u201987 'White & Hyper Crimson'",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-14T05:01:56Z"
+  },
+  {
+    "changeType": "REMOVED",
+    "date": "2026-03-31",
+    "brand": "Puma",
+    "style": "PUMA Arizona Lace 'Chocolate Brown'",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-14T05:01:56Z"
+  },
+  {
+    "changeType": "REMOVED",
+    "date": "2026-03-31",
+    "brand": "Puma",
+    "style": "PUMA Arizona Lace WMNS 'Warm White'",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-14T05:01:56Z"
   },
   {
     "changeType": "REMOVED",
     "date": "2026-04-01",
     "brand": "Nike",
-    "style": "Nike Mind 002 MENS \u2022 GREY/SILVER/ORANGE",
+    "style": "Nike Mind 001 Pregame Mule 'Light Smoke Grey'",
     "fieldChanged": "",
     "oldValue": "",
     "newValue": "",
-    "detectedAt": "2026-03-14T04:36:33Z"
+    "detectedAt": "2026-03-14T05:01:56Z"
+  },
+  {
+    "changeType": "REMOVED",
+    "date": "2026-04-01",
+    "brand": "Nike",
+    "style": "Nike Mind 001 Slide 'Black'",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-14T05:01:56Z"
+  },
+  {
+    "changeType": "REMOVED",
+    "date": "2026-04-01",
+    "brand": "Nike",
+    "style": "Nike Mind 001 WMNS Pregame Mules 'Black'",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-14T05:01:56Z"
   }
 ]

@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import asyncio
 import re
 import time
 from datetime import date, datetime, timedelta
@@ -9,6 +10,12 @@ from typing import Any
 
 from playwright.sync_api import TimeoutError as PlaywrightTimeoutError
 from playwright.sync_api import sync_playwright
+
+try:
+    import httpx as _httpx
+    _HTTPX_AVAILABLE = True
+except ImportError:
+    _HTTPX_AVAILABLE = False
 
 
 def normalize_text(value: Any) -> str:
@@ -69,9 +76,70 @@ _STEALTH_UA = (
     "Chrome/124.0.0.0 Safari/537.36"
 )
 
+# Full browser navigation headers — makes httpx look like a real page load
+_BROWSER_HEADERS = {
+    "User-Agent": _STEALTH_UA,
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
+    "Accept-Language": "en-US,en;q=0.9",
+    "Accept-Encoding": "gzip, deflate, br",
+    "Upgrade-Insecure-Requests": "1",
+    "Sec-Fetch-Dest": "document",
+    "Sec-Fetch-Mode": "navigate",
+    "Sec-Fetch-Site": "none",
+    "Cache-Control": "max-age=0",
+}
+
+
+def _is_bot_challenge(html: str) -> bool:
+    """Return True if the response is a bot-challenge that requires a real browser."""
+    if len(html) < 3_000:
+        return True
+    low = html.lower()
+    # Cloudflare "Just a moment…" interstitial
+    if "just a moment" in low and ("cloudflare" in low or "cf-ray" in low):
+        return True
+    # Generic JS-required gate (very short pages only — real SPAs are long)
+    if "enable javascript" in low and len(html) < 8_000:
+        return True
+    return False
+
+
+async def _httpx_get(url: str, timeout: int) -> str:
+    """Async httpx fetch. Raises on HTTP 4xx/5xx."""
+    async with _httpx.AsyncClient(
+        headers=_BROWSER_HEADERS,
+        follow_redirects=True,
+        timeout=float(timeout),
+        http2=True,
+    ) as client:
+        r = await client.get(url)
+        r.raise_for_status()
+        return r.text
+
 
 def render_html(url: str, timeout_ms: int, retries: int = 2) -> str:
-    """Render a page with Playwright, retrying on timeout."""
+    """
+    Fetch a page and return its rendered HTML.
+
+    Fast path  – httpx (no browser, ~1–3 s):
+        Works for any server-rendered page (Next.js __NEXT_DATA__, static HTML).
+        Skipped automatically when the response is a Cloudflare/bot challenge.
+
+    Slow path  – Playwright Chromium (~15–45 s):
+        Used only when httpx returns a bot-challenge or an HTTP error.
+    """
+    timeout_s = max(timeout_ms // 1000, 10)
+
+    # ── Fast path: plain HTTP ──────────────────────────────────────────────────
+    if _HTTPX_AVAILABLE:
+        try:
+            html = asyncio.run(_httpx_get(url, timeout_s))
+            if not _is_bot_challenge(html):
+                return html
+        except Exception:
+            pass  # fall through to Playwright
+
+    # ── Slow path: Playwright ──────────────────────────────────────────────────
     last_err: Exception | None = None
     for attempt in range(retries + 1):
         try:
@@ -86,14 +154,13 @@ def render_html(url: str, timeout_ms: int, retries: int = 2) -> str:
                     locale="en-US",
                 )
                 page = context.new_page()
-                # Block heavy assets that don't affect content
                 page.route(
                     "**/*.{png,jpg,jpeg,gif,webp,svg,mp4,woff,woff2,ttf,eot}",
                     lambda route: route.abort(),
                 )
                 page.goto(url, wait_until="domcontentloaded", timeout=timeout_ms)
                 try:
-                    page.wait_for_load_state("networkidle", timeout=min(timeout_ms, 12000))
+                    page.wait_for_load_state("networkidle", timeout=min(timeout_ms, 12_000))
                 except PlaywrightTimeoutError:
                     pass
                 html = page.content()
@@ -102,7 +169,7 @@ def render_html(url: str, timeout_ms: int, retries: int = 2) -> str:
         except PlaywrightTimeoutError as e:
             last_err = e
             if attempt < retries:
-                time.sleep(2 ** attempt)  # exponential backoff
+                time.sleep(2 ** attempt)
             continue
         except Exception as e:
             raise
@@ -149,30 +216,22 @@ def infer_brand(name: str) -> str:
     return "Unknown"
 
 
-# ---- price + title cleaning ----
+# ── Price extraction ───────────────────────────────────────────────────────────
 
 _COUNTDOWN_RE = re.compile(r"\b\d{1,3}D:\d{1,2}H:\d{1,2}M:\d{1,2}S\b", re.I)
-
-# Matches both $ and £ prices (GBP scrapers like TheDropDate show £ amounts)
 _PRICE_RE = re.compile(r"(?:USD\s*|GBP\s*)?[$£]\s*([0-9]{2,4})(?:\.[0-9]{2})?", re.I)
-
 _LABELED_PRICE_RE = re.compile(
     r"\b(?:retail\s*price|msrp|price)\b\s*[:\-]?\s*(?:USD\s*|GBP\s*)?[$£]\s*([0-9]{2,4})(?:\.[0-9]{2})?",
     re.I,
 )
-
-# Valid retail sneaker price range (avoids stray page numbers, counts, zip codes)
 _PRICE_MIN = 40
 _PRICE_MAX = 700
 
 
 def extract_retail_price(text: str) -> int:
-    """
-    Returns retail price ONLY if clearly labeled (Retail Price / MSRP / Price).
-    """
+    """Returns retail price ONLY if clearly labeled (Retail Price / MSRP / Price)."""
     if not text:
         return 0
-
     cleaned = text.replace(",", " ")
     m = _LABELED_PRICE_RE.search(cleaned)
     if not m:
@@ -186,21 +245,11 @@ def extract_retail_price(text: str) -> int:
 def extract_price_smart(text: str) -> int:
     """
     Extract retail price from a TIGHT per-card context (≤400 chars).
-
-    Rules:
-    1. Labeled pattern wins immediately (Retail Price: $130 / MSRP £180).
-    2. Otherwise returns the FIRST bare price in [_PRICE_MIN, _PRICE_MAX].
-       Using "first" (not most-common) is intentional: when context is
-       properly scoped to one product card, the first price IS that product's
-       price.  Never pass multi-card blobs here — scope the context first.
-    Returns 0 if nothing plausible found.
+    Labeled pattern wins first; otherwise returns the first bare price in range.
     """
     if not text:
         return 0
-
     cleaned = text.replace(",", " ")
-
-    # Labeled wins immediately
     m = _LABELED_PRICE_RE.search(cleaned)
     if m:
         try:
@@ -209,8 +258,6 @@ def extract_price_smart(text: str) -> int:
                 return val
         except ValueError:
             pass
-
-    # First bare price in valid range
     for m in _PRICE_RE.finditer(cleaned):
         try:
             val = int(m.group(1))
@@ -218,11 +265,10 @@ def extract_price_smart(text: str) -> int:
                 return val
         except ValueError:
             pass
-
     return 0
 
 
-# ---- image extraction ----
+# ── Image extraction ───────────────────────────────────────────────────────────
 
 _IMG_SRC_ATTRS = ("data-src", "src", "data-lazy-src", "data-original", "data-srcset", "srcset")
 _IMG_SKIP = (
@@ -233,55 +279,37 @@ _IMG_SKIP = (
 
 
 def extract_image_url(container: Any, base_url: str = "") -> str | None:
-    """
-    Find the best product image URL from a BeautifulSoup element.
-    Walks up to 7 ancestor levels looking for an <img> tag.
-    Skips SVGs, data URIs, tracking pixels, and tiny icons.
-    Returns an absolute URL or None.
-    """
     if container is None or not hasattr(container, "find"):
         return None
-
     elem = container
     for _ in range(7):
         if elem is None or not hasattr(elem, "find_all"):
             break
-
         for img in elem.find_all("img"):
             for attr in _IMG_SRC_ATTRS:
                 src = img.get(attr) or ""
                 if isinstance(src, list):
                     src = src[0] if src else ""
-                # srcset → take first URL before space/comma
                 src = src.strip().split(",")[0].split(" ")[0].strip()
                 if not src or src.startswith("data:") or src.lower().endswith(".svg"):
                     continue
                 src_lower = src.lower()
                 if any(skip in src_lower for skip in _IMG_SKIP):
                     continue
-                # Resolve relative URLs
                 if src.startswith("//"):
                     return "https:" + src
                 if src.startswith("/") and base_url:
                     return base_url.rstrip("/") + src
                 if src.startswith("http"):
                     return src
-
         elem = elem.parent  # type: ignore[assignment]
-
     return None
 
 
 def purge_placeholder_images(rows: list[Any], max_repeat: int = 3) -> None:
-    """
-    Nullify imageUrl for any URL that appears on more than `max_repeat` rows —
-    those are site-wide placeholders (e.g. Foot Locker's pink silhouette), not
-    product-specific images.  Mutates rows in place.
-    """
+    """Nullify imageUrl for any URL that appears on more than `max_repeat` rows."""
     from collections import Counter
-    counts: Counter[str] = Counter(
-        r["imageUrl"] for r in rows if r.get("imageUrl")
-    )
+    counts: Counter[str] = Counter(r["imageUrl"] for r in rows if r.get("imageUrl"))
     bad = {url for url, n in counts.items() if n > max_repeat}
     for r in rows:
         if r.get("imageUrl") in bad:
@@ -289,25 +317,14 @@ def purge_placeholder_images(rows: list[Any], max_repeat: int = 3) -> None:
 
 
 def clean_title(text: str) -> str:
-    """
-    Removes garbage that sources prepend/append:
-    - leading date like "Mar 07 ..." / "March 7, 2026 ..."
-    - countdowns like "01D:06H:12M:03S"
-    - "COMING SOON"
-    - inline prices like "$130.00"
-    - trailing size markers like "(GS)" "GS" "(PS)" "(TD)" "WMNS"
-    """
+    """Remove dates, countdowns, prices, and size markers from scraped titles."""
     t = normalize_text(text)
     if not t:
         return t
-
     t = _COUNTDOWN_RE.sub(" ", t)
     t = re.sub(r"\bCOMING\s+SOON\b", " ", t, flags=re.I)
-    # Strip both $USD and £GBP price tokens from titles (e.g. "From £ 185", "$130")
     t = re.sub(r"\bfrom\s+[$£]\s*\d{2,4}(?:\.\d{2})?\b", " ", t, flags=re.I)
     t = _PRICE_RE.sub(" ", t)
-
-    # strip leading date text
     t = re.sub(
         r"^\s*(?:"
         r"(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Sept|Oct|Nov|Dec)"
@@ -317,10 +334,7 @@ def clean_title(text: str) -> str:
         t,
         flags=re.I,
     )
-
-    # strip trailing markers
     t = re.sub(r"\(\s*(gs|ps|td|w|wmns|mens|youth|kids)\s*\)\s*$", "", t, flags=re.I)
     t = re.sub(r"\b(gs|ps|td|wmns|womens|mens|youth|kids)\b\s*$", "", t, flags=re.I)
-
     t = normalize_text(t.strip(" -|:•"))
     return t

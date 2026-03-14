@@ -99,23 +99,12 @@ jobs:
         run: |
           python enrich_retail_prices.py data/final_releases.json --max 120 --timeout 25 --sleep 0.2 | tee data/retail_enrich_log.txt || true
 
-      - name: Enrich market values from StockX (best effort)
-        shell: bash
-        run: |
-          python enrich_market_value_stockx.py data/final_releases.json --max 100 --timeout 15 --sleep 0.8 | tee data/stockx_enrich_log.txt || true
-
-      - name: Enrich market values from eBay sold listings — fills StockX gaps (best effort)
-        shell: bash
-        run: |
-          python enrich_market_value_ebay.py data/final_releases.json --max 100 --timeout 15 --sleep 0.6 | tee data/ebay_enrich_log.txt || true
-
-      - name: Build workbooks
+      - name: Build workbook
         run: |
           python build_tracker_workbook.py \
             data/final_releases.json \
             --changes data/changes.json \
-            --weekly-output output/weekly_tracker.xlsx \
-            --monthly-output output/monthly_tracker.xlsx
+            --output output/monthly_tracker.xlsx
             
       - name: Write last-updated timestamp (GitHub Pages)
         shell: bash
@@ -129,8 +118,6 @@ jobs:
           name: sneaker-trackers
           path: |
             data/retail_enrich_log.txt
-            data/stockx_enrich_log.txt
-            data/ebay_enrich_log.txt
             data/primary_releases.json
             data/fallback_nike.json
             data/fallback_sneakernews.json
@@ -139,7 +126,6 @@ jobs:
             data/fallback_solecollector.json
             data/final_releases.json
             data/changes.json
-            output/weekly_tracker.xlsx
             output/monthly_tracker.xlsx
             data/sneakernews_debug.txt
             data/sneakernews_debug.html
@@ -163,7 +149,6 @@ jobs:
             data/fallback_thedropdate.json \
             data/final_releases.json \
             data/changes.json \
-            output/weekly_tracker.xlsx \
             output/monthly_tracker.xlsx \
             archive
           if git diff --cached --quiet; then

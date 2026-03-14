@@ -40,8 +40,7 @@ def parse_args() -> argparse.Namespace:
     p = argparse.ArgumentParser()
     p.add_argument("input_json", type=Path)
     p.add_argument("--changes", type=Path, default=None)
-    p.add_argument("--weekly-output", type=Path, default=Path("output/weekly_tracker.xlsx"))
-    p.add_argument("--monthly-output", type=Path, default=Path("output/monthly_tracker.xlsx"))
+    p.add_argument("--output", type=Path, default=Path("output/monthly_tracker.xlsx"))
     return p.parse_args()
 
 
@@ -158,7 +157,7 @@ def autosize(ws: Any) -> None:
             widths[cell.column] = max(widths.get(cell.column, 0), size)
 
     for col_idx, width in widths.items():
-        bonus = 6 if col_idx in (10, 11, 14, 15) else 2
+        bonus = 6 if col_idx in (11, 12, 15, 16) else 2
         ws.column_dimensions[get_column_letter(col_idx)].width = min(width + bonus, 70)
 
 
@@ -198,16 +197,16 @@ def apply_theme(ws: Any, title: str, end_col: int) -> None:
             cell.border = border
             cell.alignment = Alignment(horizontal="center", vertical="center")
 
-        # Left-align long-text columns: Style (col 10), Tags (col 11), Release URL (col 14), Notes (col 15)
-        for col in (10, 11, 14, 15):
+        # Left-align long-text columns: Style (col 11), Tags (col 12), Release URL (col 15), Notes (col 16)
+        for col in (11, 12, 15, 16):
             ws.cell(row=row, column=col).alignment = Alignment(horizontal="left", vertical="center")
 
-        # Col 4 = Hype label, Col 5 = Hype Score, Col 6 = Confidence label, Col 7 = Conf Score, Col 8 = Priority
-        hype_cell = ws.cell(row=row, column=4)
-        hype_score_cell = ws.cell(row=row, column=5)
-        confidence_cell = ws.cell(row=row, column=6)
-        conf_score_cell = ws.cell(row=row, column=7)
-        priority_cell = ws.cell(row=row, column=8)
+        # Col 5 = Hype label, Col 6 = Hype Score, Col 7 = Confidence label, Col 8 = Conf Score, Col 9 = Priority
+        hype_cell = ws.cell(row=row, column=5)
+        hype_score_cell = ws.cell(row=row, column=6)
+        confidence_cell = ws.cell(row=row, column=7)
+        conf_score_cell = ws.cell(row=row, column=8)
+        priority_cell = ws.cell(row=row, column=9)
 
         hype_value = str(hype_cell.value or "").upper()
         confidence_value = str(confidence_cell.value or "").upper()
@@ -369,12 +368,10 @@ def write_high_hype_sheet(ws: Any, rows: list[ReleaseRow]) -> None:
     write_tracker_sheet(ws, "High Hype Releases", [r for r in rows if r.hype.upper() == "HIGH"])
 
 
-def write_summary_sheet(ws: Any, weekly_rows: list[ReleaseRow], monthly_rows: list[ReleaseRow]) -> None:
+def write_summary_sheet(ws: Any, monthly_rows: list[ReleaseRow]) -> None:
     ws["A1"] = "Summary"
-    ws["A3"] = "Weekly Releases"
-    ws["B3"] = len(weekly_rows)
-    ws["A4"] = "Monthly Releases"
-    ws["B4"] = len(monthly_rows)
+    ws["A3"] = "Monthly Releases"
+    ws["B3"] = len(monthly_rows)
 
     by_brand: dict[str, int] = {}
     by_hype: dict[str, int] = {}
@@ -412,19 +409,15 @@ def write_summary_sheet(ws: Any, weekly_rows: list[ReleaseRow], monthly_rows: li
     autosize(ws)
 
 
-def build_workbook(rows: list[ReleaseRow], changes: list[dict[str, Any]], output_path: Path, days: int) -> None:
+def build_workbook(rows: list[ReleaseRow], changes: list[dict[str, Any]], output_path: Path) -> None:
     output_path.parent.mkdir(parents=True, exist_ok=True)
 
-    filtered_rows = filter_window(rows, days)
+    monthly_rows = filter_window(rows, 35)
     wb = Workbook()
 
     tracker = wb.active
     tracker.title = "Tracker"
-    write_tracker_sheet(tracker, make_title(filtered_rows), filtered_rows)
-
-    monthly = wb.create_sheet("Monthly")
-    monthly_rows = filter_window(rows, 35)
-    write_tracker_sheet(monthly, make_title(monthly_rows), monthly_rows)
+    write_tracker_sheet(tracker, make_title(monthly_rows), monthly_rows)
 
     changes_ws = wb.create_sheet("Changes")
     write_changes_sheet(changes_ws, changes)
@@ -433,10 +426,10 @@ def build_workbook(rows: list[ReleaseRow], changes: list[dict[str, Any]], output
     write_raw_sheet(raw, rows)
 
     high_hype = wb.create_sheet("High Hype")
-    write_high_hype_sheet(high_hype, filtered_rows)
+    write_high_hype_sheet(high_hype, monthly_rows)
 
     summary = wb.create_sheet("Summary")
-    write_summary_sheet(summary, filter_window(rows, 14), monthly_rows)
+    write_summary_sheet(summary, monthly_rows)
 
     wb.save(output_path)
 
@@ -448,13 +441,11 @@ def main() -> None:
 
     rows = [r for r in (normalize_row(item) for item in raw_rows) if r]
 
-    build_workbook(rows, change_rows, args.weekly_output, 14)
-    build_workbook(rows, change_rows, args.monthly_output, 35)
+    build_workbook(rows, change_rows, args.output)
 
     print(f"Loaded rows: {len(raw_rows)}")
     print(f"Normalized rows: {len(rows)}")
-    print(f"Saved weekly workbook: {args.weekly_output.resolve()}")
-    print(f"Saved monthly workbook: {args.monthly_output.resolve()}")
+    print(f"Saved workbook: {args.output.resolve()}")
 
 
 if __name__ == "__main__":

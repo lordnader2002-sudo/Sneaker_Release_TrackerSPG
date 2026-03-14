@@ -375,44 +375,169 @@ def write_high_hype_sheet(ws: Any, rows: list[ReleaseRow]) -> None:
 
 
 def write_summary_sheet(ws: Any, monthly_rows: list[ReleaseRow]) -> None:
-    ws["A1"] = "Summary"
-    ws["A3"] = "Monthly Releases"
-    ws["B3"] = len(monthly_rows)
+    dark_fill   = PatternFill("solid", fgColor="0B1C3A")
+    header_fill = PatternFill("solid", fgColor="102955")
+    row_fill    = PatternFill("solid", fgColor="173A73")
+    accent_fill = PatternFill("solid", fgColor="0E2246")
+    thin = Side(style="thin", color="08162E")
+    border = Border(left=thin, right=thin, top=thin, bottom=thin)
+
+    def _cell(r: int, c: int, value: Any, fill: Any = None, font: Any = None, align: str = "left", wrap: bool = False) -> Any:
+        cell = ws.cell(row=r, column=c, value=value)
+        cell.fill = fill or row_fill
+        cell.font = font or Font(color="FFFFFF")
+        cell.border = border
+        cell.alignment = Alignment(horizontal=align, vertical="center", wrap_text=wrap)
+        return cell
+
+    # ── Title ──────────────────────────────────────────────────────────────────
+    ws.merge_cells("A1:D1")
+    t = ws.cell(row=1, column=1, value="RELEASE SUMMARY")
+    t.fill = dark_fill
+    t.font = Font(color="FFFFFF", bold=True, size=16)
+    t.alignment = Alignment(horizontal="center", vertical="center")
+    ws.row_dimensions[1].height = 30
+
+    ws.merge_cells("A2:D2")
+    sub = ws.cell(row=1, column=1)  # placeholder; actual subtitle below
+    sub = ws.cell(row=2, column=1,
+                  value=f"Next 35 Days  ·  {len(monthly_rows)} releases")
+    sub.fill = header_fill
+    sub.font = Font(color="A8C4F0", bold=False, size=11)
+    sub.alignment = Alignment(horizontal="center", vertical="center")
+    ws.row_dimensions[2].height = 20
+
+    # ── Computed stats ─────────────────────────────────────────────────────────
+    must_watch  = sum(1 for r in monthly_rows if r.priority == "Must Watch")
+    watch       = sum(1 for r in monthly_rows if r.priority == "Watch")
+    high_hype   = sum(1 for r in monthly_rows if r.hype.upper() == "HIGH")
+    high_conf   = sum(1 for r in monthly_rows if r.confidence.upper() == "HIGH")
+    priced      = [r.retail for r in monthly_rows if r.retail > 0]
+    avg_retail  = round(sum(priced) / len(priced)) if priced else None
+    flippable   = [r for r in monthly_rows if r.estimated_market_value and r.retail > 0]
+    avg_flip    = round(sum((r.estimated_market_value - r.retail) / r.retail * 100 for r in flippable) / len(flippable)) if flippable else None
 
     by_brand: dict[str, int] = {}
-    by_hype: dict[str, int] = {}
-    by_conf: dict[str, int] = {}
+    by_hype:  dict[str, int] = {}
+    by_conf:  dict[str, int] = {}
+    by_method: dict[str, int] = {}
 
     for r in monthly_rows:
         by_brand[r.brand] = by_brand.get(r.brand, 0) + 1
-        by_hype[r.hype] = by_hype.get(r.hype, 0) + 1
-        by_conf[r.confidence] = by_conf.get(r.confidence, 0) + 1
+        by_hype[r.hype.upper()] = by_hype.get(r.hype.upper(), 0) + 1
+        by_conf[r.confidence.upper()] = by_conf.get(r.confidence.upper(), 0) + 1
+        if r.release_method:
+            by_method[r.release_method] = by_method.get(r.release_method, 0) + 1
 
-    row = 6
-    ws.cell(row=row, column=1, value="By Brand")
-    row += 1
-    for brand, count in sorted(by_brand.items(), key=lambda x: (-x[1], x[0])):
-        ws.cell(row=row, column=1, value=brand)
-        ws.cell(row=row, column=2, value=count)
-        row += 1
+    # ── Stats at a glance (row 4-11) ───────────────────────────────────────────
+    ws.merge_cells("A4:D4")
+    h = ws.cell(row=4, column=1, value="STATS AT A GLANCE")
+    h.fill = header_fill
+    h.font = Font(color="FFFFFF", bold=True, size=11)
+    h.alignment = Alignment(horizontal="left", vertical="center")
+    ws.row_dimensions[4].height = 22
 
-    row += 1
-    ws.cell(row=row, column=1, value="Hype Breakdown")
-    row += 1
+    stats = [
+        ("Total Releases",   len(monthly_rows),                           "FFFFFF"),
+        ("Must Watch",       must_watch,                                   "FF8080"),
+        ("Watch",            watch,                                        "FFE699"),
+        ("High Hype",        high_hype,                                    "FF4D4D"),
+        ("High Confidence",  high_conf,                                    "7CFCFF"),
+        ("Avg Retail Price", f"${avg_retail}" if avg_retail else "N/A",   "A8C4F0"),
+        ("Avg Flip %",       f"+{avg_flip}%" if avg_flip is not None else "N/A", "00E676"),
+    ]
+    for idx, (label, value, color) in enumerate(stats, start=5):
+        _cell(idx, 1, label, font=Font(color="A8C4F0", bold=True), align="left")
+        _cell(idx, 2, value, font=Font(color=color, bold=True, size=12), align="center")
+        # Merge cols 3-4 as empty spacer with same fill
+        ws.cell(row=idx, column=3).fill = row_fill
+        ws.cell(row=idx, column=3).border = border
+        ws.cell(row=idx, column=4).fill = row_fill
+        ws.cell(row=idx, column=4).border = border
+        ws.row_dimensions[idx].height = 20
+
+    # ── Spacer ─────────────────────────────────────────────────────────────────
+    cur = 5 + len(stats) + 1  # row after stats + blank line
+
+    # ── Hype & Confidence side-by-side (cols A-B and C-D) ──────────────────────
+    ws.merge_cells(f"A{cur}:B{cur}")
+    h2 = ws.cell(row=cur, column=1, value="HYPE BREAKDOWN")
+    h2.fill = header_fill
+    h2.font = Font(color="FFFFFF", bold=True, size=11)
+    h2.alignment = Alignment(horizontal="left", vertical="center")
+    ws.row_dimensions[cur].height = 22
+
+    ws.merge_cells(f"C{cur}:D{cur}")
+    h3 = ws.cell(row=cur, column=3, value="CONFIDENCE BREAKDOWN")
+    h3.fill = header_fill
+    h3.font = Font(color="FFFFFF", bold=True, size=11)
+    h3.alignment = Alignment(horizontal="left", vertical="center")
+    cur += 1
+
+    hype_colors = {"HIGH": "FF4D4D", "MED": "FFC000", "LOW": "00E676"}
+    conf_colors = {"HIGH": "7CFCFF", "MED": "FFD966", "LOW": "AAAAAA"}
+
     for label in ("HIGH", "MED", "LOW"):
-        ws.cell(row=row, column=1, value=label)
-        ws.cell(row=row, column=2, value=by_hype.get(label, 0))
-        row += 1
+        _cell(cur, 1, label, font=Font(color=hype_colors[label], bold=True), align="center")
+        _cell(cur, 2, by_hype.get(label, 0), font=Font(color=hype_colors[label], bold=True, size=12), align="center")
+        _cell(cur, 3, label, font=Font(color=conf_colors[label], bold=True), align="center")
+        _cell(cur, 4, by_conf.get(label, 0), font=Font(color=conf_colors[label], bold=True, size=12), align="center")
+        ws.row_dimensions[cur].height = 20
+        cur += 1
 
-    row += 1
-    ws.cell(row=row, column=1, value="Confidence Breakdown")
-    row += 1
-    for label in ("HIGH", "MED", "LOW"):
-        ws.cell(row=row, column=1, value=label)
-        ws.cell(row=row, column=2, value=by_conf.get(label, 0))
-        row += 1
+    cur += 1  # blank spacer row
 
-    autosize(ws)
+    # ── Release Method Breakdown ────────────────────────────────────────────────
+    if by_method:
+        ws.merge_cells(f"A{cur}:D{cur}")
+        hm = ws.cell(row=cur, column=1, value="WHERE / RELEASE METHOD")
+        hm.fill = header_fill
+        hm.font = Font(color="FFFFFF", bold=True, size=11)
+        hm.alignment = Alignment(horizontal="left", vertical="center")
+        ws.row_dimensions[cur].height = 22
+        cur += 1
+
+        method_colors = {"App": "7CFCFF", "Raffle": "FFC000", "Online": "6EA8FF", "In-Store": "00E676"}
+        for method, count in sorted(by_method.items(), key=lambda x: -x[1]):
+            color = method_colors.get(method, "FFFFFF")
+            _cell(cur, 1, method, font=Font(color=color, bold=True), align="left")
+            _cell(cur, 2, count, font=Font(color=color, bold=True, size=12), align="center")
+            ws.cell(row=cur, column=3).fill = row_fill
+            ws.cell(row=cur, column=3).border = border
+            ws.cell(row=cur, column=4).fill = row_fill
+            ws.cell(row=cur, column=4).border = border
+            ws.row_dimensions[cur].height = 20
+            cur += 1
+        cur += 1
+
+    # ── Top Brands ──────────────────────────────────────────────────────────────
+    ws.merge_cells(f"A{cur}:D{cur}")
+    hb = ws.cell(row=cur, column=1, value="TOP BRANDS")
+    hb.fill = header_fill
+    hb.font = Font(color="FFFFFF", bold=True, size=11)
+    hb.alignment = Alignment(horizontal="left", vertical="center")
+    ws.row_dimensions[cur].height = 22
+    cur += 1
+
+    top_brands = sorted(by_brand.items(), key=lambda x: (-x[1], x[0]))[:12]
+    max_count = top_brands[0][1] if top_brands else 1
+    for brand, count in top_brands:
+        bar_len = max(1, round(count / max_count * 20))
+        bar = "█" * bar_len
+        _cell(cur, 1, brand, font=Font(color="FFFFFF", bold=True), align="left")
+        _cell(cur, 2, count, font=Font(color="A8C4F0", bold=True), align="center")
+        bar_cell = _cell(cur, 3, bar, fill=accent_fill, font=Font(color="1F5BD6"), align="left")
+        bar_cell.alignment = Alignment(horizontal="left", vertical="center")
+        ws.cell(row=cur, column=4).fill = row_fill
+        ws.cell(row=cur, column=4).border = border
+        ws.row_dimensions[cur].height = 18
+        cur += 1
+
+    # ── Column widths ───────────────────────────────────────────────────────────
+    ws.column_dimensions["A"].width = 22
+    ws.column_dimensions["B"].width = 14
+    ws.column_dimensions["C"].width = 24
+    ws.column_dimensions["D"].width = 14
 
 
 def write_legend_sheet(ws: Any) -> None:

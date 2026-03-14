@@ -58,6 +58,16 @@ _GENDER_PAT   = re.compile(r"\b(MENS|WOMENS|BOYS|GIRLS|GRADE\s+SCHOOL|GS|PRE.SCH
 _PRICE_IN_NAME_PAT = re.compile(r"\bFrom\s+[$£]\s*\d+\b", re.I)
 
 
+def _name_words(name: str) -> set[str]:
+    """Return significant words (length ≥ 4) from a shoe name, lowercased."""
+    return {w for w in name.lower().split() if len(w) >= 4}
+
+
+def _has_name_overlap(query: str, result_name: str) -> bool:
+    """Return True if query and result share at least one significant word."""
+    return bool(_name_words(query) & _name_words(result_name))
+
+
 def _clean_name_for_sdb(name: str) -> str:
     """Strip colorway, gender markers, and noise from shoe names before API query."""
     name = _COLORWAY_PAT.sub("", name)       # "Air Max 95 • BLACK/WHITE" → "Air Max 95"
@@ -109,6 +119,11 @@ async def _sdb_lookup(
             except (ValueError, TypeError):
                 continue
             if not (min_price <= price <= max_price):
+                continue
+
+            # Reject results that share no significant words with our query
+            result_name = str(item.get("name") or item.get("title") or "")
+            if result_name and not _has_name_overlap(shoe_name, result_name):
                 continue
 
             if target_date:

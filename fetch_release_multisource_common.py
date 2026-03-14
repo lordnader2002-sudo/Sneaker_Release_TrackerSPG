@@ -32,12 +32,16 @@ def parse_date_flexible(text: str, default_year: int | None = None) -> date | No
     if not s:
         return None
 
+    # Strip ordinal suffixes so "March 5th", "April 1st" etc. parse cleanly
+    s = re.sub(r"(\d)(st|nd|rd|th)\b", r"\1", s, flags=re.I)
+
     try:
         return datetime.fromisoformat(s.replace("Z", "+00:00")).date()
     except ValueError:
         pass
 
-    for fmt in ("%B %d %Y", "%b %d %Y", "%B %d %y", "%b %d %y", "%Y-%m-%d"):
+    for fmt in ("%B %d %Y", "%b %d %Y", "%B %d %y", "%b %d %y", "%Y-%m-%d",
+                "%m/%d/%Y", "%m/%d/%y"):
         try:
             return datetime.strptime(s, fmt).date()
         except ValueError:
@@ -47,7 +51,12 @@ def parse_date_flexible(text: str, default_year: int | None = None) -> date | No
         for fmt in ("%B %d", "%b %d"):
             try:
                 d = datetime.strptime(s, fmt).date()
-                return date(default_year, d.month, d.day)
+                candidate = date(default_year, d.month, d.day)
+                # If the candidate is more than 7 days in the past, the date likely
+                # wraps into next year (e.g. "Jan 5" scraped in late December).
+                if candidate < date.today() - timedelta(days=7):
+                    candidate = date(default_year + 1, d.month, d.day)
+                return candidate
             except ValueError:
                 continue
 

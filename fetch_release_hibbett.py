@@ -51,11 +51,11 @@ def extract_rows(soup: BeautifulSoup) -> list[dict[str, Any]]:
 
         container = a.parent
         blob = ""
-        for _ in range(4):
+        for _ in range(6):
             if container is None:
                 break
             blob = normalize_text(container.get_text(" ", strip=True))
-            if blob:
+            if DATE_RE.search(blob):
                 break
             container = container.parent
 

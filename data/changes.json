@@ -1,22 +1,82 @@
 [
   {
-    "changeType": "NEW",
-    "date": "2026-03-18",
+    "changeType": "CONFIDENCE_CHANGED",
+    "date": "2026-03-14",
     "brand": "Air Jordan",
-    "style": "Mar 18 Air Jordan 1 Low OG Sail and Coconut Milk",
-    "fieldChanged": "",
-    "oldValue": "",
-    "newValue": "",
-    "detectedAt": "2026-03-14T10:23:02Z"
+    "style": "Jordan Retro 14 BOYS GRADE SCHOOL \u2022 BLACK/WHITE/UNIVERSITY BLUE",
+    "fieldChanged": "confidence",
+    "oldValue": "HIGH",
+    "newValue": "MED",
+    "detectedAt": "2026-03-14T10:57:13Z"
   },
   {
     "changeType": "NEW",
-    "date": "2026-03-21",
-    "brand": "Air Jordan",
-    "style": "Mar 21 Baby/Toddler Shoes Jordan 14 Retro",
+    "date": "2026-03-14",
+    "brand": "Unknown",
+    "style": "Contact Us",
     "fieldChanged": "",
     "oldValue": "",
     "newValue": "",
-    "detectedAt": "2026-03-14T10:23:02Z"
+    "detectedAt": "2026-03-14T10:57:13Z"
+  },
+  {
+    "changeType": "NEW",
+    "date": "2026-03-14",
+    "brand": "Unknown",
+    "style": "Launched",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-14T10:57:13Z"
+  },
+  {
+    "changeType": "NEW",
+    "date": "2026-03-14",
+    "brand": "Unknown",
+    "style": "Order Status",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-14T10:57:13Z"
+  },
+  {
+    "changeType": "NEW",
+    "date": "2026-03-14",
+    "brand": "Unknown",
+    "style": "Returns-Exchanges",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-14T10:57:13Z"
+  },
+  {
+    "changeType": "NEW",
+    "date": "2026-03-14",
+    "brand": "Unknown",
+    "style": "Shipping Info",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-14T10:57:13Z"
+  },
+  {
+    "changeType": "NEW",
+    "date": "2026-03-14",
+    "brand": "Unknown",
+    "style": "Store Pickup",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-14T10:57:13Z"
+  },
+  {
+    "changeType": "NEW",
+    "date": "2026-03-14",
+    "brand": "Unknown",
+    "style": "Upcoming",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-14T10:57:13Z"
   }
 ]

@@ -1,15 +1,19 @@
 # file: fetch_releases_primary.py
 #
-# Replaces fetch_releases_primary.js (sneaks-api / StockX blocked unauthenticated calls).
-# Scrapes GOAT's sneaker release calendar using Playwright + network interception.
-# GOAT calls Algolia for product data and their own API for release-calendar items;
-# we intercept those JSON responses to get structured data without scraping HTML.
+# Primary sneaker release scraper for GOAT.
 #
-# Fallback: if API interception yields nothing, parse the page's __NEXT_DATA__ JSON blob.
+# Fast path  – httpx (no browser, ~2 s):
+#   Fetches GOAT pages directly and extracts __NEXT_DATA__ JSON embedded in the HTML.
+#   Works as long as GOAT serves server-rendered content (Next.js).
+#
+# Slow path  – Playwright + network interception (~45 s):
+#   Used only when the httpx path returns no records.
+#   Intercepts Algolia + GOAT API responses from within a real browser session.
 
 from __future__ import annotations
 
 import argparse
+import asyncio
 import json
 import re
 import time
@@ -20,12 +24,19 @@ from typing import Any
 from playwright.sync_api import Response, TimeoutError as PlaywrightTimeoutError, sync_playwright
 
 from fetch_release_multisource_common import (
+    _BROWSER_HEADERS,
+    _STEALTH_UA,
     infer_brand,
     normalize_text,
     parse_date_flexible,
     window_filter,
-    _STEALTH_UA,
 )
+
+try:
+    import httpx as _httpx
+    _HTTPX_AVAILABLE = True
+except ImportError:
+    _HTTPX_AVAILABLE = False
 
 SOURCE_NAME = "goat"
 SOURCE_URL  = "https://www.goat.com/sneakers"
@@ -223,9 +234,55 @@ def dedupe(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
     return sorted(best.values(), key=lambda x: (x["releaseDate"], x.get("brand", ""), x["shoeName"].lower()))
 
 
-# ── Playwright fetch ──────────────────────────────────────────────────────────
+# ── httpx fast path ───────────────────────────────────────────────────────────
+
+_GOAT_URLS = [
+    "https://www.goat.com/sneakers?sort=release_date_desc&priceRange=0-5000",
+    "https://www.goat.com/sneakers",
+]
+
+
+async def _goat_httpx(timeout: int) -> list[dict[str, Any]]:
+    """
+    Attempt to retrieve GOAT releases via plain HTTP (no browser).
+    GOAT is a Next.js app — the server renders release data into __NEXT_DATA__
+    which is readable from the raw HTML without executing any JavaScript.
+    Returns [] if the page is blocked or yields nothing useful.
+    """
+    async with _httpx.AsyncClient(
+        headers=_BROWSER_HEADERS,
+        follow_redirects=True,
+        timeout=float(timeout),
+        http2=True,
+    ) as client:
+        for url in _GOAT_URLS:
+            try:
+                r = await client.get(url)
+                if r.status_code >= 400 or len(r.text) < 5_000:
+                    continue
+                records = _extract_from_next_data(r.text)
+                if records:
+                    print(f"GOAT httpx: {len(records)} records from {url} (no browser)")
+                    return records
+            except Exception:
+                continue
+    return []
+
+
+# ── Playwright fetch ───────────────────────────────────────────────────────────
 
 def fetch_goat(timeout_ms: int, limit: int) -> list[dict[str, Any]]:
+    # ── Fast path: httpx (no browser) ─────────────────────────────────────────
+    if _HTTPX_AVAILABLE:
+        try:
+            records = asyncio.run(_goat_httpx(timeout=min(timeout_ms // 1000, 20)))
+            if records:
+                return records[:limit]
+        except Exception:
+            pass
+    print("GOAT: httpx returned nothing — falling back to Playwright network interception...")
+
+    # ── Slow path: Playwright ──────────────────────────────────────────────────
     intercepted: list[dict[str, Any]] = []
 
     def on_response(response: Response) -> None:
@@ -262,13 +319,9 @@ def fetch_goat(timeout_ms: int, limit: int) -> list[dict[str, Any]]:
         )
         page.on("response", on_response)
 
-        # ── Page 1: upcoming/new releases ──
-        target_urls = [
-            "https://www.goat.com/sneakers?sort=release_date_desc&priceRange=0-5000",
-            "https://www.goat.com/sneakers",
-        ]
+        # ── Pages: try each GOAT URL until we get intercepted data ──
         page_html = ""
-        for url in target_urls:
+        for url in _GOAT_URLS:
             try:
                 page.goto(url, wait_until="domcontentloaded", timeout=timeout_ms)
                 try:

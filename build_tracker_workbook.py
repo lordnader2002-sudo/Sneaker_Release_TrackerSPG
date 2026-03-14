@@ -28,6 +28,7 @@ class ReleaseRow:
     source_secondary: str
     source_count: int
     release_url: str
+    release_method: str
     image_url: str
     notes: str
     hype_score: int
@@ -112,6 +113,7 @@ def normalize_row(record: dict[str, Any]) -> ReleaseRow | None:
         source_secondary=normalize_text(record.get("sourceSecondary")),
         source_count=source_count,
         release_url=normalize_text(record.get("releaseUrl") or record.get("sourceUrl")),
+        release_method=normalize_text(record.get("releaseMethod")),
         image_url=normalize_text(record.get("imageUrl")),
         notes=normalize_text(record.get("notes")),
         hype_score=parse_int(record.get("hypeScore")),
@@ -157,7 +159,7 @@ def autosize(ws: Any) -> None:
             widths[cell.column] = max(widths.get(cell.column, 0), size)
 
     for col_idx, width in widths.items():
-        bonus = 6 if col_idx in (11, 12, 15, 16) else 2
+        bonus = 6 if col_idx in (11, 12, 16, 17) else 2
         ws.column_dimensions[get_column_letter(col_idx)].width = min(width + bonus, 70)
 
 
@@ -197,8 +199,8 @@ def apply_theme(ws: Any, title: str, end_col: int) -> None:
             cell.border = border
             cell.alignment = Alignment(horizontal="center", vertical="center")
 
-        # Left-align long-text columns: Style (col 11), Tags (col 12), Release URL (col 15), Notes (col 16)
-        for col in (11, 12, 15, 16):
+        # Left-align long-text columns: Style (col 11), Tags (col 12), Release URL (col 16), Notes (col 17)
+        for col in (11, 12, 16, 17):
             ws.cell(row=row, column=col).alignment = Alignment(horizontal="left", vertical="center")
 
         # Col 5 = Hype label, Col 6 = Hype Score, Col 7 = Confidence label, Col 8 = Conf Score, Col 9 = Priority
@@ -244,6 +246,7 @@ def write_tracker_sheet(ws: Any, title: str, rows: list[ReleaseRow]) -> None:
         "Brand",
         "Style",
         "Tags",
+        "Where",
         "Source Primary",
         "Source Count",
         "Release URL",
@@ -271,6 +274,7 @@ def write_tracker_sheet(ws: Any, title: str, rows: list[ReleaseRow]) -> None:
             row.brand,
             row.style,
             row.tags,
+            row.release_method,
             row.source_primary,
             row.source_count,
             row.release_url,
@@ -323,6 +327,7 @@ def write_raw_sheet(ws: Any, rows: list[ReleaseRow]) -> None:
         "Brand",
         "Style",
         "Tags",
+        "Where",
         "Source Primary",
         "Source Secondary",
         "Source Count",
@@ -346,6 +351,7 @@ def write_raw_sheet(ws: Any, rows: list[ReleaseRow]) -> None:
             row.brand,
             row.style,
             row.tags,
+            row.release_method,
             row.source_primary,
             row.source_secondary,
             row.source_count,

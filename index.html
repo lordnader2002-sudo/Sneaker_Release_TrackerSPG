@@ -231,6 +231,7 @@
       .card-brand { font-size: 11px; font-weight: 700; color: var(--text-dim); text-transform: uppercase; letter-spacing: .6px; }
       .card-name { font-size: 14px; font-weight: 600; line-height: 1.35; color: var(--text); }
       .card-date { font-size: 12px; color: var(--cyan); font-weight: 600; }
+      .where-badge { display: inline-block; margin-left: 6px; padding: 1px 6px; border-radius: 4px; font-size: 10px; font-weight: 700; background: rgba(255,255,255,.08); color: var(--text-dim); letter-spacing: .4px; text-transform: uppercase; }
       .card-price { font-size: 13px; font-weight: 700; color: var(--text); }
       .card-price .resale { font-size: 11px; color: var(--text-dim); font-weight: 400; }
       .flip-pos { font-size: 11px; font-weight: 700; color: var(--green); margin-left: 5px; }
@@ -853,7 +854,7 @@
           <div class="card-body">
             <div class="card-brand">${esc(r.brand)}</div>
             <div class="card-name">${esc(r.shoeName)}</div>
-            <div class="card-date">${fmtDate(r.releaseDate)}</div>
+            <div class="card-date">${fmtDate(r.releaseDate)}${r.releaseMethod ? ` <span class="where-badge">${esc(r.releaseMethod)}</span>` : ''}</div>
             <div class="card-price">${prices}</div>
             <div class="card-badges">${hypeConf}${priBadge}</div>
             ${tagBadges ? `<div class="card-tags">${tagBadges}</div>` : ''}
@@ -885,7 +886,8 @@
         const headerCells = [
           { k: 'date', l: 'Date' }, { k: 'brand', l: 'Brand' }, { k: null, l: 'Style' },
           { k: 'hypeScore', l: 'Hype' }, { k: 'confidence', l: 'Conf.' }, { k: null, l: 'Priority' },
-          { k: 'retail', l: 'Retail' }, { k: 'flipScore', l: 'Flip %' }, { k: null, l: 'Tags' }, { k: null, l: 'Links' },
+          { k: 'retail', l: 'Retail' }, { k: 'flipScore', l: 'Flip %' }, { k: null, l: 'Tags' },
+          { k: null, l: 'Where' }, { k: null, l: 'Links' },
         ];
         const thead = headerCells.map(h => {
           let cls = '';
@@ -908,6 +910,8 @@
           const hypeColor = r.hype === 'HIGH' ? 'var(--red)' : r.hype === 'MED' ? 'var(--amber)' : 'var(--green)';
           const confColor = r.confidence === 'HIGH' ? 'var(--cyan)' : r.confidence === 'MED' ? '#ffd966' : 'var(--text-dim)';
           const link = r.releaseUrl ? `<a href="${esc(r.releaseUrl)}" target="_blank" rel="noopener">Buy →</a>` : '–';
+          const whereStr = r.releaseMethod || '';
+          const whereColor = whereStr === 'App' ? 'var(--cyan)' : whereStr === 'Raffle' ? 'var(--amber)' : whereStr === 'Online' ? 'var(--accent2)' : whereStr === 'In-Store' ? 'var(--green)' : 'var(--text-mute)';
           return `<tr>
             <td class="td-date">${fmtDate(r.releaseDate)}</td>
             <td class="td-brand">${esc(r.brand)}</td>
@@ -918,6 +922,7 @@
             <td class="td-price">${priceStr}</td>
             <td style="color:${flipColor};font-weight:700;white-space:nowrap">${flipStr}</td>
             <td style="font-size:11px;color:var(--text-dim)">${esc(tagStr)}</td>
+            <td style="font-size:11px;font-weight:600;color:${whereColor};white-space:nowrap">${whereStr || '–'}</td>
             <td class="td-link">${link}</td>
           </tr>`;
         }).join('');

@@ -53,7 +53,7 @@ jobs:
           python fetch_release_solecollector.py --days 35 --output data/fallback_solecollector.json &  PID_SC=$!
           python fetch_release_hibbett.py       --days 35 --output data/fallback_hibbett.json       &  PID_HBT=$!
           python fetch_release_sneakernews.py   --days 35 --output data/fallback_sneakernews.json   &  PID_SNN=$!
-          python fetch_release_thedropdate.py   --days 35 --output data/fallback_thedropdate.json   &  PID_TDD=$!
+          python fetch_release_finishline.py     --days 35 --output data/fallback_finishline.json     &  PID_FL2=$!
 
           # Wait for all and capture exit codes (failures are non-fatal)
           wait $PID_NIKE  || echo "⚠ Nike scraper failed (non-fatal)"
@@ -62,12 +62,12 @@ jobs:
           wait $PID_SC    || echo "⚠ Sole Collector scraper failed (non-fatal)"
           wait $PID_HBT   || echo "⚠ Hibbett scraper failed (non-fatal)"
           wait $PID_SNN   || echo "⚠ SneakerNews scraper failed (non-fatal)"
-          wait $PID_TDD   || echo "⚠ The Drop Date scraper failed (non-fatal)"
+          wait $PID_FL2   || echo "⚠ Finish Line scraper failed (non-fatal)"
 
           # Ensure fallback files exist (empty array if scraper failed)
           for f in data/fallback_nike.json data/fallback_footlocker.json data/fallback_kicksonfire.json \
                    data/fallback_solecollector.json data/fallback_hibbett.json data/fallback_sneakernews.json \
-                   data/fallback_thedropdate.json; do
+                   data/fallback_finishline.json; do
             [ -f "$f" ] || echo "[]" > "$f"
           done
 
@@ -81,7 +81,7 @@ jobs:
             --fallback data/fallback_footlocker.json \
             --fallback data/fallback_hibbett.json \
             --fallback data/fallback_sneakernews.json \
-            --fallback data/fallback_thedropdate.json \
+            --fallback data/fallback_finishline.json \
             --previous data/final_releases.json \
             --output data/final_releases.json \
             --changes data/changes.json \
@@ -123,7 +123,7 @@ jobs:
             data/primary_releases.json
             data/fallback_nike.json
             data/fallback_sneakernews.json
-            data/fallback_thedropdate.json
+            data/fallback_finishline.json
             data/fallback_kicksonfire.json
             data/fallback_solecollector.json
             data/final_releases.json
@@ -148,7 +148,7 @@ jobs:
             data/fallback_solecollector.json \
             data/fallback_hibbett.json \
             data/fallback_sneakernews.json \
-            data/fallback_thedropdate.json \
+            data/fallback_finishline.json \
             data/final_releases.json \
             data/changes.json \
             output/monthly_tracker.xlsx \

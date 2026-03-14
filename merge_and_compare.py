@@ -11,6 +11,8 @@ from difflib import SequenceMatcher
 from pathlib import Path
 from typing import Any
 
+from fetch_release_multisource_common import infer_release_method
+
 
 HIGH_BRANDS = {"air jordan", "nike", "yeezy", "new balance", "adidas"}
 COLLAB_KEYWORDS = {
@@ -567,6 +569,7 @@ def normalize_record(row: dict[str, Any], default_source: str) -> dict[str, Any]
         "sourceSecondary": normalize_text(row.get("sourceSecondary")) or None,
         "sourceUrl": normalize_text(row.get("sourceUrl")) or None,
         "releaseUrl": normalize_text(row.get("releaseUrl") or row.get("sourceUrl")) or None,
+        "releaseMethod": normalize_text(row.get("releaseMethod")) or "",
     }
 
 
@@ -650,6 +653,8 @@ def merge_records(
                 picked["sourceUrl"] = existing["sourceUrl"]
             if not picked.get("releaseUrl") and existing.get("releaseUrl"):
                 picked["releaseUrl"] = existing["releaseUrl"]
+            if not picked.get("releaseMethod") and existing.get("releaseMethod"):
+                picked["releaseMethod"] = existing["releaseMethod"]
             merged[key] = picked
 
     final_rows: list[dict[str, Any]] = []
@@ -664,6 +669,10 @@ def merge_records(
         row["confidence"] = confidence
         row["priority"] = derive_priority(hype, confidence)
         row["tags"] = derive_tags(row["shoeName"], row.get("brand", ""))
+
+        # releaseMethod: keep scraper value if present, otherwise infer from name
+        if not row.get("releaseMethod"):
+            row["releaseMethod"] = infer_release_method(row["shoeName"])
 
         _retail = row.get("retailPrice") or 0
         _market = row.get("estimatedMarketValue") or 0

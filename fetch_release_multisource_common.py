@@ -381,3 +381,26 @@ def clean_title(text: str) -> str:
     t = re.sub(r"\b(gs|ps|td|wmns|womens|mens|youth|kids)\b\s*$", "", t, flags=re.I)
     t = normalize_text(t.strip(" -|:•"))
     return t
+
+
+_METHOD_APP_RE    = re.compile(r"\b(SNKRS|app\s+entr(?:y|ies)|app\s+exclusive|entries\s+open|app\s+only|Nike\s+app)\b", re.I)
+_METHOD_RAFFLE_RE = re.compile(r"\b(raffle|draw|lottery|ballot)\b", re.I)
+_METHOD_ONLINE_RE = re.compile(r"\b(online[\s-]+only|online[\s-]+exclusive|web[\s-]+only|e[\s-]?raffle)\b", re.I)
+_METHOD_STORE_RE  = re.compile(r"\b(in[\s-]+store[\s-]+only|in[\s-]+store[\s-]+exclusive|select\s+stores?|retail\s+only)\b", re.I)
+
+
+def infer_release_method(name: str, context: str = "") -> str:
+    """Infer release channel from shoe name / context text.
+
+    Returns one of: "App", "Raffle", "Online", "In-Store", or "" (unknown).
+    """
+    text = name + " " + context
+    if _METHOD_APP_RE.search(text):
+        return "App"
+    if _METHOD_RAFFLE_RE.search(text):
+        return "Raffle"
+    if _METHOD_ONLINE_RE.search(text):
+        return "Online"
+    if _METHOD_STORE_RE.search(text):
+        return "In-Store"
+    return ""

@@ -1,1 +1,86 @@
-[]
+[
+  {
+    "releaseDate": "2026-03-15",
+    "shoeName": "adidas DON Issue 7 \"Best Of Adi\"",
+    "brand": "Adidas",
+    "retailPrice": 0,
+    "estimatedMarketValue": null,
+    "imageUrl": null,
+    "sourcePrimary": "sneakernews",
+    "sourceSecondary": "https://sneakernews.com/release-dates/",
+    "sourceUrl": "https://sneakernews.com/release-dates/",
+    "releaseUrl": "https://sneakernews.com/2026/02/26/adidas-don-issue-7-black-gold-jq9435"
+  },
+  {
+    "releaseDate": "2026-03-16",
+    "shoeName": "Jacquemus x Nike Moon Shoe",
+    "brand": "Nike",
+    "retailPrice": 0,
+    "estimatedMarketValue": null,
+    "imageUrl": null,
+    "sourcePrimary": "sneakernews",
+    "sourceSecondary": "https://sneakernews.com/release-dates/",
+    "sourceUrl": "https://sneakernews.com/release-dates/",
+    "releaseUrl": "https://sneakernews.com/2025/10/10/jacquemus-nike-moon-shoe-spring-2026"
+  },
+  {
+    "releaseDate": "2026-03-17",
+    "shoeName": "Dashawn Jordan x Nike SB Dunk Low \"Diamondbacks\"",
+    "brand": "Air Jordan",
+    "retailPrice": 0,
+    "estimatedMarketValue": null,
+    "imageUrl": null,
+    "sourcePrimary": "sneakernews",
+    "sourceSecondary": "https://sneakernews.com/release-dates/",
+    "sourceUrl": "https://sneakernews.com/release-dates/",
+    "releaseUrl": "https://sneakernews.com/2026/02/18/dashawn-jordan-nike-sb-dunk-low-copperhead-ib6208-200/"
+  },
+  {
+    "releaseDate": "2026-03-18",
+    "shoeName": "Nike Zoom GT Cut 4 \"Think Pink\"",
+    "brand": "Nike",
+    "retailPrice": 0,
+    "estimatedMarketValue": null,
+    "imageUrl": null,
+    "sourcePrimary": "sneakernews",
+    "sourceSecondary": "https://sneakernews.com/release-dates/",
+    "sourceUrl": "https://sneakernews.com/release-dates/",
+    "releaseUrl": "https://sneakernews.com/2026/01/12/nike-zoom-gt-cut-4-think-pink-kay-yow-io8116-600"
+  },
+  {
+    "releaseDate": "2026-03-19",
+    "shoeName": "Fragment Design x Nike Book 2",
+    "brand": "Nike",
+    "retailPrice": 0,
+    "estimatedMarketValue": null,
+    "imageUrl": "https://s3.amazonaws.com/images.kicksfinder.com/products/thumbs/89230f46018b76e4f9b802663c124080_1769803648.webp",
+    "sourcePrimary": "sneakernews",
+    "sourceSecondary": "https://sneakernews.com/release-dates/",
+    "sourceUrl": "https://sneakernews.com/release-dates/",
+    "releaseUrl": "https://sneakernews.com/2026/01/28/fragment-design-nike-book-2-io9950-900"
+  },
+  {
+    "releaseDate": "2026-03-19",
+    "shoeName": "Fragment Design x Nike Mind 001",
+    "brand": "Nike",
+    "retailPrice": 0,
+    "estimatedMarketValue": null,
+    "imageUrl": "https://s3.amazonaws.com/images.kicksfinder.com/products/thumbs/63594afa8c9c063216f1d0e1bcac4b37_1773326960.webp",
+    "sourcePrimary": "sneakernews",
+    "sourceSecondary": "https://sneakernews.com/release-dates/",
+    "sourceUrl": "https://sneakernews.com/release-dates/",
+    "releaseUrl": "https://sneakernews.com/2026/03/12/fragment-design-nike-liquid-max-mind-001/"
+  },
+  {
+    "releaseDate": "2026-03-19",
+    "shoeName": "Fragment Design x Nike Mind 002",
+    "brand": "Nike",
+    "retailPrice": 0,
+    "estimatedMarketValue": null,
+    "imageUrl": "https://s3.amazonaws.com/images.kicksfinder.com/products/thumbs/68e075e7a1112fd2282a514c21dd000a_1773437567.webp",
+    "sourcePrimary": "sneakernews",
+    "sourceSecondary": "https://sneakernews.com/release-dates/",
+    "sourceUrl": "https://sneakernews.com/release-dates/",
+    "releaseUrl": "https://sneakernews.com/2026/03/12/fragment-design-nike-liquid-max-mind-001/"
+  }
+]

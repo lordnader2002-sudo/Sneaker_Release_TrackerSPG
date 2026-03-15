@@ -41,7 +41,7 @@
     "brand": "Nike",
     "retailPrice": 0,
     "estimatedMarketValue": null,
-    "imageUrl": null,
+    "imageUrl": "https://s3.amazonaws.com/images.kicksfinder.com/products/thumbs/4a1c66575467445342b9085cc4510900_1772681368.webp",
     "sourcePrimary": "sneakernews",
     "sourceSecondary": "https://sneakernews.com/release-dates/",
     "sourceUrl": "https://sneakernews.com/release-dates/",

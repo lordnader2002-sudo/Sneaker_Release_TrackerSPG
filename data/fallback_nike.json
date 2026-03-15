@@ -42,5 +42,16 @@
     "sourcePrimary": "playwright-linkscan",
     "sourceSecondary": "https://www.nike.com/launch/upcoming",
     "sourceUrl": "https://www.nike.com/launch/t/air-jordan-14-retro-black-and-university-blue"
+  },
+  {
+    "releaseDate": "2026-03-26",
+    "shoeName": "Air Max 95 Big Bubble Volt and University Red",
+    "brand": "Nike",
+    "retailPrice": 0,
+    "estimatedMarketValue": null,
+    "imageUrl": null,
+    "sourcePrimary": "playwright-linkscan",
+    "sourceSecondary": "https://www.nike.com/launch/upcoming",
+    "sourceUrl": "https://www.nike.com/launch/t/air-max-95-big-bubble-volt-and-university-red"
   }
 ]

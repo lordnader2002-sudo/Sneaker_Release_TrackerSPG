@@ -253,6 +253,18 @@
   },
   {
     "releaseDate": "2026-03-18",
+    "shoeName": "Nike Kobe V Protro MENS \u2022 METALLIC SILVER/TEAM RED/WHITE",
+    "brand": "Nike",
+    "retailPrice": 210,
+    "estimatedMarketValue": null,
+    "imageUrl": null,
+    "sourcePrimary": "footlocker",
+    "sourceSecondary": "https://www.footlocker.com/release-calendar.html",
+    "sourceUrl": "https://www.footlocker.com/release-calendar.html",
+    "releaseUrl": "https://www.footlocker.com/release-calendar/nike/M0557001.html"
+  },
+  {
+    "releaseDate": "2026-03-18",
     "shoeName": "Nike LeBron XXIII BOYS GRADE SCHOOL \u2022 BLACK/BLACK/MEDIUM ASH",
     "brand": "Nike",
     "retailPrice": 210,

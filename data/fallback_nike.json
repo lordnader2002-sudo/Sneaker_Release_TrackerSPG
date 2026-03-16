@@ -23,7 +23,7 @@
   },
   {
     "releaseDate": "2026-03-21",
-    "shoeName": "Baby/Toddler Shoes Jordan 14 Retro",
+    "shoeName": "Baby/Toddler Shoes Jordan 14 Retro \"Black/University Blue\"",
     "brand": "Air Jordan",
     "retailPrice": 0,
     "estimatedMarketValue": null,
@@ -44,14 +44,14 @@
     "sourceUrl": "https://www.nike.com/launch/t/air-jordan-14-retro-black-and-university-blue"
   },
   {
-    "releaseDate": "2026-03-26",
-    "shoeName": "Air Max 95 Big Bubble Volt and University Red",
+    "releaseDate": "2026-03-23",
+    "shoeName": "Kobe 5 Protro Metallic Silver and Team Red",
     "brand": "Nike",
     "retailPrice": 0,
     "estimatedMarketValue": null,
     "imageUrl": null,
     "sourcePrimary": "playwright-linkscan",
     "sourceSecondary": "https://www.nike.com/launch/upcoming",
-    "sourceUrl": "https://www.nike.com/launch/t/air-max-95-big-bubble-volt-and-university-red"
+    "sourceUrl": "https://www.nike.com/launch/t/kobe-5-protro-metallic-silver-and-team-red"
   }
 ]

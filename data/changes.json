@@ -1,82 +1,62 @@
 [
   {
-    "changeType": "REMOVED",
-    "date": "2026-03-15",
+    "changeType": "NEW",
+    "date": "2026-03-16",
     "brand": "Adidas",
-    "style": "adidas DON Issue 7 \"Best Of Adi\"",
+    "style": "adidas Fear Of God Athletics III",
     "fieldChanged": "",
     "oldValue": "",
     "newValue": "",
-    "detectedAt": "2026-03-16T08:00:07Z"
-  },
-  {
-    "changeType": "REMOVED",
-    "date": "2026-03-15",
-    "brand": "Air Jordan",
-    "style": "Air Jordan 13 Retro White and University Red",
-    "fieldChanged": "",
-    "oldValue": "",
-    "newValue": "",
-    "detectedAt": "2026-03-16T08:00:07Z"
-  },
-  {
-    "changeType": "REMOVED",
-    "date": "2026-03-15",
-    "brand": "Air Jordan",
-    "style": "Air Jordan 14 Retro Black and University Blue",
-    "fieldChanged": "",
-    "oldValue": "",
-    "newValue": "",
-    "detectedAt": "2026-03-16T08:00:07Z"
-  },
-  {
-    "changeType": "REMOVED",
-    "date": "2026-03-15",
-    "brand": "Nike",
-    "style": "Air Max 95 Big Bubble Volt and University Red",
-    "fieldChanged": "",
-    "oldValue": "",
-    "newValue": "",
-    "detectedAt": "2026-03-16T08:00:07Z"
-  },
-  {
-    "changeType": "REMOVED",
-    "date": "2026-03-15",
-    "brand": "Air Jordan",
-    "style": "Jordan x Teyana Taylor Apparel Collection",
-    "fieldChanged": "",
-    "oldValue": "",
-    "newValue": "",
-    "detectedAt": "2026-03-16T08:00:07Z"
+    "detectedAt": "2026-03-16T19:37:34Z"
   },
   {
     "changeType": "NEW",
-    "date": "2026-03-19",
-    "brand": "Nike",
-    "style": "Nike Air Max 90 QS",
+    "date": "2026-03-17",
+    "brand": "Adidas",
+    "style": "adidas HyperBOOST Edge",
     "fieldChanged": "",
     "oldValue": "",
     "newValue": "",
-    "detectedAt": "2026-03-16T08:00:07Z"
+    "detectedAt": "2026-03-16T19:37:34Z"
   },
   {
     "changeType": "NEW",
-    "date": "2026-03-19",
-    "brand": "Nike",
-    "style": "Nike GT Future",
+    "date": "2026-03-17",
+    "brand": "Converse",
+    "style": "Thug Club x Converse Chuck 70",
     "fieldChanged": "",
     "oldValue": "",
     "newValue": "",
-    "detectedAt": "2026-03-16T08:00:07Z"
+    "detectedAt": "2026-03-16T19:37:34Z"
   },
   {
     "changeType": "NEW",
-    "date": "2026-03-19",
+    "date": "2026-03-18",
     "brand": "Nike",
-    "style": "Nike Ja 3 \"At Dawn\"",
+    "style": "Nike Kobe V Protro MENS \u2022 METALLIC SILVER/TEAM RED/WHITE",
     "fieldChanged": "",
     "oldValue": "",
     "newValue": "",
-    "detectedAt": "2026-03-16T08:00:07Z"
+    "detectedAt": "2026-03-16T19:37:34Z"
+  },
+  {
+    "changeType": "NEW",
+    "date": "2026-03-21",
+    "brand": "Air Jordan",
+    "style": "Baby/Toddler Shoes Jordan 14 Retro \"Black/University Blue\"",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-16T19:37:34Z"
+  },
+  {
+    "changeType": "NEW",
+    "date": "2026-03-23",
+    "brand": "Nike",
+    "style": "Kobe 5 Protro Metallic Silver and Team Red",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-16T19:37:34Z"
   }
 ]

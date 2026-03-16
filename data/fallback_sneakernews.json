@@ -1,15 +1,39 @@
 [
   {
     "releaseDate": "2026-03-16",
-    "shoeName": "Jacquemus x Nike Moon Shoe",
-    "brand": "Nike",
+    "shoeName": "adidas Fear Of God Athletics III",
+    "brand": "Adidas",
     "retailPrice": 0,
     "estimatedMarketValue": null,
     "imageUrl": null,
     "sourcePrimary": "sneakernews",
     "sourceSecondary": "https://sneakernews.com/release-dates/",
     "sourceUrl": "https://sneakernews.com/release-dates/",
+    "releaseUrl": "https://sneakernews.com/2026/03/02/adidas-fear-of-god-athletics-iii-kj5967"
+  },
+  {
+    "releaseDate": "2026-03-16",
+    "shoeName": "Jacquemus x Nike Moon Shoe",
+    "brand": "Nike",
+    "retailPrice": 0,
+    "estimatedMarketValue": null,
+    "imageUrl": "https://s3.amazonaws.com/images.kicksfinder.com/products/thumbs/2606b3ba58d54a083c894b52edcd3cad_1773072526.webp",
+    "sourcePrimary": "sneakernews",
+    "sourceSecondary": "https://sneakernews.com/release-dates/",
+    "sourceUrl": "https://sneakernews.com/release-dates/",
     "releaseUrl": "https://sneakernews.com/2025/10/10/jacquemus-nike-moon-shoe-spring-2026"
+  },
+  {
+    "releaseDate": "2026-03-17",
+    "shoeName": "adidas HyperBOOST Edge",
+    "brand": "Adidas",
+    "retailPrice": 0,
+    "estimatedMarketValue": null,
+    "imageUrl": null,
+    "sourcePrimary": "sneakernews",
+    "sourceSecondary": "https://sneakernews.com/release-dates/",
+    "sourceUrl": "https://sneakernews.com/release-dates/",
+    "releaseUrl": "https://sneakernews.com/2026/03/16/adidas-hyperboost-edge-running-shoes/"
   },
   {
     "releaseDate": "2026-03-17",
@@ -24,12 +48,24 @@
     "releaseUrl": "https://sneakernews.com/2026/02/18/dashawn-jordan-nike-sb-dunk-low-copperhead-ib6208-200/"
   },
   {
+    "releaseDate": "2026-03-17",
+    "shoeName": "Thug Club x Converse Chuck 70",
+    "brand": "Converse",
+    "retailPrice": 0,
+    "estimatedMarketValue": null,
+    "imageUrl": null,
+    "sourcePrimary": "sneakernews",
+    "sourceSecondary": "https://sneakernews.com/release-dates/",
+    "sourceUrl": "https://sneakernews.com/release-dates/",
+    "releaseUrl": "javascript:void(0)"
+  },
+  {
     "releaseDate": "2026-03-18",
     "shoeName": "Nike Zoom GT Cut 4 \"Think Pink\"",
     "brand": "Nike",
     "retailPrice": 0,
     "estimatedMarketValue": null,
-    "imageUrl": null,
+    "imageUrl": "https://s3.amazonaws.com/images.kicksfinder.com/products/thumbs/4a1c66575467445342b9085cc4510900_1772681368.webp",
     "sourcePrimary": "sneakernews",
     "sourceSecondary": "https://sneakernews.com/release-dates/",
     "sourceUrl": "https://sneakernews.com/release-dates/",
@@ -41,7 +77,7 @@
     "brand": "Nike",
     "retailPrice": 0,
     "estimatedMarketValue": null,
-    "imageUrl": null,
+    "imageUrl": "https://s3.amazonaws.com/images.kicksfinder.com/products/thumbs/89230f46018b76e4f9b802663c124080_1769803648.webp",
     "sourcePrimary": "sneakernews",
     "sourceSecondary": "https://sneakernews.com/release-dates/",
     "sourceUrl": "https://sneakernews.com/release-dates/",
@@ -53,58 +89,10 @@
     "brand": "Nike",
     "retailPrice": 0,
     "estimatedMarketValue": null,
-    "imageUrl": null,
+    "imageUrl": "https://s3.amazonaws.com/images.kicksfinder.com/products/thumbs/63594afa8c9c063216f1d0e1bcac4b37_1773326960.webp",
     "sourcePrimary": "sneakernews",
     "sourceSecondary": "https://sneakernews.com/release-dates/",
     "sourceUrl": "https://sneakernews.com/release-dates/",
     "releaseUrl": "https://sneakernews.com/2026/03/12/fragment-design-nike-liquid-max-mind-001/"
-  },
-  {
-    "releaseDate": "2026-03-19",
-    "shoeName": "Fragment Design x Nike Mind 002",
-    "brand": "Nike",
-    "retailPrice": 0,
-    "estimatedMarketValue": null,
-    "imageUrl": null,
-    "sourcePrimary": "sneakernews",
-    "sourceSecondary": "https://sneakernews.com/release-dates/",
-    "sourceUrl": "https://sneakernews.com/release-dates/",
-    "releaseUrl": "https://sneakernews.com/2026/03/12/fragment-design-nike-liquid-max-mind-001/"
-  },
-  {
-    "releaseDate": "2026-03-19",
-    "shoeName": "Nike Air Max 90 QS",
-    "brand": "Nike",
-    "retailPrice": 0,
-    "estimatedMarketValue": null,
-    "imageUrl": null,
-    "sourcePrimary": "sneakernews",
-    "sourceSecondary": "https://sneakernews.com/release-dates/",
-    "sourceUrl": "https://sneakernews.com/release-dates/",
-    "releaseUrl": "https://sneakernews.com/2026/01/09/nike-air-max-90-infrared-reflective-iu1055-100"
-  },
-  {
-    "releaseDate": "2026-03-19",
-    "shoeName": "Nike GT Future",
-    "brand": "Nike",
-    "retailPrice": 0,
-    "estimatedMarketValue": null,
-    "imageUrl": "https://s3.amazonaws.com/images.kicksfinder.com/products/thumbs/c264dc68428eb4e5705b62d784b539d9_1772126870.webp",
-    "sourcePrimary": "sneakernews",
-    "sourceSecondary": "https://sneakernews.com/release-dates/",
-    "sourceUrl": "https://sneakernews.com/release-dates/",
-    "releaseUrl": "https://sneakernews.com/2026/02/12/nike-gt-future-unseen-hours-iv0521-500/"
-  },
-  {
-    "releaseDate": "2026-03-19",
-    "shoeName": "Nike Ja 3 \"At Dawn\"",
-    "brand": "Nike",
-    "retailPrice": 0,
-    "estimatedMarketValue": null,
-    "imageUrl": "https://s3.amazonaws.com/images.kicksfinder.com/products/thumbs/9d847ec5e59f85e83b260ce145e30a48_1772038180.webp",
-    "sourcePrimary": "sneakernews",
-    "sourceSecondary": "https://sneakernews.com/release-dates/",
-    "sourceUrl": "https://sneakernews.com/release-dates/",
-    "releaseUrl": "https://sneakernews.com/2026/02/18/nike-ja-3-at-dawn-iq6705-001-release-date/"
   }
 ]

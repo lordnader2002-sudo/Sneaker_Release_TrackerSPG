@@ -1,12 +1,52 @@
 [
   {
-    "changeType": "NEW",
-    "date": "2026-03-18",
-    "brand": "Nike",
-    "style": "ENTRIES OPEN App entry Nike Kobe V Protro MENS \u2022 METALLIC SILVER/TEAM RED/WHITE",
+    "changeType": "REMOVED",
+    "date": "2026-03-17",
+    "brand": "Adidas",
+    "style": "adidas HyperBOOST Edge",
     "fieldChanged": "",
     "oldValue": "",
     "newValue": "",
-    "detectedAt": "2026-03-17T19:39:04Z"
+    "detectedAt": "2026-03-18T07:39:06Z"
+  },
+  {
+    "changeType": "REMOVED",
+    "date": "2026-03-17",
+    "brand": "Converse",
+    "style": "Converse x Anonymous Club Chuck 70",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-18T07:39:06Z"
+  },
+  {
+    "changeType": "REMOVED",
+    "date": "2026-03-17",
+    "brand": "Air Jordan",
+    "style": "Dashawn Jordan x Nike SB Dunk Low \"Diamondbacks\"",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-18T07:39:06Z"
+  },
+  {
+    "changeType": "REMOVED",
+    "date": "2026-03-17",
+    "brand": "Converse",
+    "style": "Thug Club x Converse Chuck 70",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-18T07:39:06Z"
+  },
+  {
+    "changeType": "NEW",
+    "date": "2026-03-18",
+    "brand": "Air Jordan",
+    "style": "App entry Jordan Air Jordan 1 Retro Low OG MENS \u2022 SAIL/OFF WHITE/COCONUT MILK",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-18T07:39:06Z"
   }
 ]

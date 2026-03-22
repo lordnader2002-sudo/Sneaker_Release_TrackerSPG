@@ -1,1 +1,32 @@
-[]
+[
+  {
+    "changeType": "REMOVED",
+    "date": "2026-03-21",
+    "brand": "Air Jordan",
+    "style": "Baby/Toddler Shoes Jordan 14 Retro \"Black/University Blue\"",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-22T06:34:29Z"
+  },
+  {
+    "changeType": "REMOVED",
+    "date": "2026-03-21",
+    "brand": "Air Jordan",
+    "style": "Shoes Air Jordan 14 Retro",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-22T06:34:29Z"
+  },
+  {
+    "changeType": "NEW",
+    "date": "2026-03-26",
+    "brand": "Nike",
+    "style": "Air Max 95 Big Bubble Multi-Color",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-22T06:34:29Z"
+  }
+]

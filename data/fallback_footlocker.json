@@ -337,6 +337,30 @@
   },
   {
     "releaseDate": "2026-04-01",
+    "shoeName": "Nike JA 3 MENS \u2022 ANTHRACITE/BRIGHT CRIMSON/YELLOW OCHER",
+    "brand": "Nike",
+    "retailPrice": 150,
+    "estimatedMarketValue": null,
+    "imageUrl": null,
+    "sourcePrimary": "footlocker",
+    "sourceSecondary": "https://www.footlocker.com/release-calendar.html",
+    "sourceUrl": "https://www.footlocker.com/release-calendar.html",
+    "releaseUrl": "https://www.footlocker.com/release-calendar/nike/U7240001.html"
+  },
+  {
+    "releaseDate": "2026-04-01",
+    "shoeName": "Nike JA 3 MENS \u2022 GREEN SPARK/BLACK/UNIVERSITY RED",
+    "brand": "Nike",
+    "retailPrice": 150,
+    "estimatedMarketValue": null,
+    "imageUrl": null,
+    "sourcePrimary": "footlocker",
+    "sourceSecondary": "https://www.footlocker.com/release-calendar.html",
+    "sourceUrl": "https://www.footlocker.com/release-calendar.html",
+    "releaseUrl": "https://www.footlocker.com/release-calendar/nike/U7240300.html"
+  },
+  {
+    "releaseDate": "2026-04-01",
     "shoeName": "Nike Mind 001 Mule MENS \u2022 LIGHT SMOKE GREY/CHROME/PHOTON DUST",
     "brand": "Nike",
     "retailPrice": 150,
@@ -349,6 +373,18 @@
   },
   {
     "releaseDate": "2026-04-01",
+    "shoeName": "Nike Mind 002 MENS \u2022 BLUE/PLATINUM/BLUE",
+    "brand": "Nike",
+    "retailPrice": 150,
+    "estimatedMarketValue": null,
+    "imageUrl": null,
+    "sourcePrimary": "footlocker",
+    "sourceSecondary": "https://www.footlocker.com/release-calendar.html",
+    "sourceUrl": "https://www.footlocker.com/release-calendar.html",
+    "releaseUrl": "https://www.footlocker.com/release-calendar/nike/Q4308400.html"
+  },
+  {
+    "releaseDate": "2026-04-01",
     "shoeName": "Nike Sabrina 3 GIRLS GRADE SCHOOL \u2022 IGLOO/HOT LAVA/BLUE CRYSTAL",
     "brand": "Nike",
     "retailPrice": 150,
@@ -358,6 +394,18 @@
     "sourceSecondary": "https://www.footlocker.com/release-calendar.html",
     "sourceUrl": "https://www.footlocker.com/release-calendar.html",
     "releaseUrl": "https://www.footlocker.com/release-calendar/nike/R3208300.html"
+  },
+  {
+    "releaseDate": "2026-04-01",
+    "shoeName": "Nike Zoom Huarache 2K4 OT MENS \u2022 BLACK/BLACK",
+    "brand": "Nike",
+    "retailPrice": 150,
+    "estimatedMarketValue": null,
+    "imageUrl": null,
+    "sourcePrimary": "footlocker",
+    "sourceSecondary": "https://www.footlocker.com/release-calendar.html",
+    "sourceUrl": "https://www.footlocker.com/release-calendar.html",
+    "releaseUrl": "https://www.footlocker.com/release-calendar/nike/IV329001.html"
   },
   {
     "releaseDate": "2026-04-01",

@@ -1,12 +1,202 @@
 [
   {
     "changeType": "NEW",
-    "date": "2026-03-26",
-    "brand": "Nike",
-    "style": "App Entry Nike Air Max 95 WOMENS \u2022 BLACK/PINK/WHITE",
+    "date": "2026-03-27",
+    "brand": "Unknown",
+    "style": "Contact Us",
     "fieldChanged": "",
     "oldValue": "",
     "newValue": "",
-    "detectedAt": "2026-03-26T07:46:21Z"
+    "detectedAt": "2026-03-26T19:40:31Z"
+  },
+  {
+    "changeType": "NEW",
+    "date": "2026-03-27",
+    "brand": "Air Jordan",
+    "style": "ENTRIES OPEN App Entry Jordan Air Jordan 3 Retro OG MENS \u2022 SAIL/JADE AURA/YELLOW",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-26T19:40:31Z"
+  },
+  {
+    "changeType": "NEW",
+    "date": "2026-03-27",
+    "brand": "Air Jordan",
+    "style": "ENTRIES OPEN App Entry Jordan Grade School Retro 3 BOYS GRADE SCHOOL \u2022 WHITE/PINK/GREEN",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-26T19:40:31Z"
+  },
+  {
+    "changeType": "NEW",
+    "date": "2026-03-27",
+    "brand": "Nike",
+    "style": "ENTRIES OPEN App Entry Nike Air Foamposite Pro MENS \u2022 UNIVERSITY BLUE/MIDNIGHT NAVY",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-26T19:40:31Z"
+  },
+  {
+    "changeType": "NEW",
+    "date": "2026-03-27",
+    "brand": "Nike",
+    "style": "ENTRIES OPEN App Entry Nike Grade School Little Posite Pro BOYS GRADE SCHOOL \u2022 UNIVERSITY BLUE/WHITE/MIDNIGHT NAVY",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-26T19:40:31Z"
+  },
+  {
+    "changeType": "NEW",
+    "date": "2026-03-27",
+    "brand": "Air Jordan",
+    "style": "Jordan Retro 3 BOYS PRE-SCHOOL \u2022 WHITE/PINK/GREEN",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-26T19:40:31Z"
+  },
+  {
+    "changeType": "NEW",
+    "date": "2026-03-27",
+    "brand": "Air Jordan",
+    "style": "Jordan Retro 3 BOYS TODDLER \u2022 WHITE/PINK/GREEN",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-26T19:40:31Z"
+  },
+  {
+    "changeType": "NEW",
+    "date": "2026-03-27",
+    "brand": "Unknown",
+    "style": "Launched",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-26T19:40:31Z"
+  },
+  {
+    "changeType": "NEW",
+    "date": "2026-03-27",
+    "brand": "Nike",
+    "style": "Nike Little Posite Pro BOYS PRE-SCHOOL \u2022 UNIVERSITY BLUE/WHITE/MIDNIGHT NAVY",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-26T19:40:31Z"
+  },
+  {
+    "changeType": "NEW",
+    "date": "2026-03-27",
+    "brand": "Unknown",
+    "style": "Order Status",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-26T19:40:31Z"
+  },
+  {
+    "changeType": "NEW",
+    "date": "2026-03-27",
+    "brand": "Puma",
+    "style": "PUMA MB.05 Melo World BOYS GRADE SCHOOL \u2022 AQUATIC GREEN/FOR ALL TIME RED",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-26T19:40:31Z"
+  },
+  {
+    "changeType": "NEW",
+    "date": "2026-03-27",
+    "brand": "Puma",
+    "style": "PUMA MB.05 Melo World MENS \u2022 TEAL/RED",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-26T19:40:31Z"
+  },
+  {
+    "changeType": "NEW",
+    "date": "2026-03-27",
+    "brand": "ASICS",
+    "style": "Reebok Angel Reese 1 GIRLS GRADE SCHOOL \u2022 GREEN/PURPLE",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-26T19:40:31Z"
+  },
+  {
+    "changeType": "NEW",
+    "date": "2026-03-27",
+    "brand": "ASICS",
+    "style": "Reebok Angel Reese 1 MENS \u2022 ATOMIC AQUA/DREAM PURPLE",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-26T19:40:31Z"
+  },
+  {
+    "changeType": "NEW",
+    "date": "2026-03-27",
+    "brand": "Unknown",
+    "style": "Returns-Exchanges",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-26T19:40:31Z"
+  },
+  {
+    "changeType": "NEW",
+    "date": "2026-03-27",
+    "brand": "Unknown",
+    "style": "Shipping Info",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-26T19:40:31Z"
+  },
+  {
+    "changeType": "NEW",
+    "date": "2026-03-27",
+    "brand": "Unknown",
+    "style": "Skip To Main",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-26T19:40:31Z"
+  },
+  {
+    "changeType": "NEW",
+    "date": "2026-03-27",
+    "brand": "Unknown",
+    "style": "Store Pickup",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-26T19:40:31Z"
+  },
+  {
+    "changeType": "NEW",
+    "date": "2026-03-27",
+    "brand": "Unknown",
+    "style": "Upcoming",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-26T19:40:31Z"
+  },
+  {
+    "changeType": "NEW",
+    "date": "2026-04-01",
+    "brand": "Nike",
+    "style": "Sabrina 3 \"What The?\" Igloo and Blue Crystal",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-26T19:40:31Z"
   }
 ]

@@ -99,6 +99,17 @@
     "sourceUrl": "https://www.nike.com/launch/t/note-manchester-nike-sb-dunk-low-flax-and-summit-white"
   },
   {
+    "releaseDate": "2026-04-01",
+    "shoeName": "Sabrina 3 \"What The?\" Igloo and Blue Crystal",
+    "brand": "Nike",
+    "retailPrice": 0,
+    "estimatedMarketValue": null,
+    "imageUrl": null,
+    "sourcePrimary": "playwright-linkscan",
+    "sourceSecondary": "https://www.nike.com/launch/upcoming",
+    "sourceUrl": "https://www.nike.com/launch/t/sabrina-3-what-the-igloo-and-blue-crystal"
+  },
+  {
     "releaseDate": "2026-04-03",
     "shoeName": "Basketball Shoes LeBron XXIII Elite \"Good Intentions\"",
     "brand": "Nike",

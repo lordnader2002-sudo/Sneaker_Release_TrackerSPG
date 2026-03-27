@@ -1,38 +1,5 @@
 [
   {
-    "releaseDate": "2026-03-26",
-    "shoeName": "Air Max 90 Vast Grey and Cool Grey",
-    "brand": "Nike",
-    "retailPrice": 0,
-    "estimatedMarketValue": null,
-    "imageUrl": null,
-    "sourcePrimary": "playwright-linkscan",
-    "sourceSecondary": "https://www.nike.com/launch/upcoming",
-    "sourceUrl": "https://www.nike.com/launch/t/air-max-90-vast-grey-and-cool-grey"
-  },
-  {
-    "releaseDate": "2026-03-26",
-    "shoeName": "Air Max 95 Big Bubble Multi-Color",
-    "brand": "Nike",
-    "retailPrice": 0,
-    "estimatedMarketValue": null,
-    "imageUrl": null,
-    "sourcePrimary": "playwright-linkscan",
-    "sourceSecondary": "https://www.nike.com/launch/upcoming",
-    "sourceUrl": "https://www.nike.com/launch/t/air-max-95-big-bubble-multi-color"
-  },
-  {
-    "releaseDate": "2026-03-26",
-    "shoeName": "Air Max 95 Big Bubble Volt and University Red",
-    "brand": "Nike",
-    "retailPrice": 0,
-    "estimatedMarketValue": null,
-    "imageUrl": null,
-    "sourcePrimary": "playwright-linkscan",
-    "sourceSecondary": "https://www.nike.com/launch/upcoming",
-    "sourceUrl": "https://www.nike.com/launch/t/air-max-95-big-bubble-volt-and-university-red"
-  },
-  {
     "releaseDate": "2026-03-27",
     "shoeName": "Converse x Noah Chuck 70",
     "brand": "Converse",

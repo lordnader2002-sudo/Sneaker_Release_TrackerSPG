@@ -1,38 +1,5 @@
 [
   {
-    "releaseDate": "2026-03-27",
-    "shoeName": "Converse x Noah Chuck 70",
-    "brand": "Converse",
-    "retailPrice": 0,
-    "estimatedMarketValue": null,
-    "imageUrl": null,
-    "sourcePrimary": "playwright-linkscan",
-    "sourceSecondary": "https://www.nike.com/launch/upcoming",
-    "sourceUrl": "https://www.nike.com/launch/t/converse-noah-chuck-70"
-  },
-  {
-    "releaseDate": "2026-03-27",
-    "shoeName": "Air Zoom G.T. Cut Orange Pulse and Persian Violet",
-    "brand": "Nike",
-    "retailPrice": 0,
-    "estimatedMarketValue": null,
-    "imageUrl": null,
-    "sourcePrimary": "playwright-linkscan",
-    "sourceSecondary": "https://www.nike.com/launch/upcoming",
-    "sourceUrl": "https://www.nike.com/launch/t/air-zoom-gt-cut-orange-pulse-and-persian-violet-1"
-  },
-  {
-    "releaseDate": "2026-03-27",
-    "shoeName": "Baby/Toddler Shoes Nike Little Posite Pro",
-    "brand": "Nike",
-    "retailPrice": 0,
-    "estimatedMarketValue": null,
-    "imageUrl": null,
-    "sourcePrimary": "playwright-linkscan",
-    "sourceSecondary": "https://www.nike.com/launch/upcoming",
-    "sourceUrl": "https://www.nike.com/launch/t/air-foamposite-pro-university-blue-and-white"
-  },
-  {
     "releaseDate": "2026-03-28",
     "shoeName": "Baby/Toddler Shoes Jordan 3 Retro \"Sail and Jade Aura\"",
     "brand": "Air Jordan",

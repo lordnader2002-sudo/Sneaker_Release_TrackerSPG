@@ -1,262 +1,262 @@
 [
   {
-    "changeType": "NEW",
-    "date": "2026-03-28",
+    "changeType": "REMOVED",
+    "date": "2026-03-27",
+    "brand": "Nike",
+    "style": "Air Zoom G.T. Cut Orange Pulse and Persian Violet",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-28T07:29:21Z"
+  },
+  {
+    "changeType": "REMOVED",
+    "date": "2026-03-27",
+    "brand": "Nike",
+    "style": "App Entry Nike Air Foamposite Pro MENS \u2022 UNIVERSITY BLUE/MIDNIGHT NAVY",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-28T07:29:21Z"
+  },
+  {
+    "changeType": "REMOVED",
+    "date": "2026-03-27",
+    "brand": "Nike",
+    "style": "App Entry Nike Grade School Little Posite Pro BOYS GRADE SCHOOL \u2022 UNIVERSITY BLUE/WHITE/MIDNIGHT NAVY",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-28T07:29:21Z"
+  },
+  {
+    "changeType": "REMOVED",
+    "date": "2026-03-27",
+    "brand": "Nike",
+    "style": "Baby/Toddler Shoes Nike Little Posite Pro",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-28T07:29:21Z"
+  },
+  {
+    "changeType": "REMOVED",
+    "date": "2026-03-27",
     "brand": "Unknown",
     "style": "Contact Us",
     "fieldChanged": "",
     "oldValue": "",
     "newValue": "",
-    "detectedAt": "2026-03-27T18:38:30Z"
+    "detectedAt": "2026-03-28T07:29:21Z"
   },
   {
-    "changeType": "NEW",
-    "date": "2026-03-28",
+    "changeType": "REMOVED",
+    "date": "2026-03-27",
+    "brand": "Converse",
+    "style": "Converse x Noah Chuck 70",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-28T07:29:21Z"
+  },
+  {
+    "changeType": "REMOVED",
+    "date": "2026-03-27",
     "brand": "Air Jordan",
     "style": "ENTRIES OPEN App Entry Jordan Air Jordan 3 Retro OG MENS \u2022 SAIL/JADE AURA/YELLOW",
     "fieldChanged": "",
     "oldValue": "",
     "newValue": "",
-    "detectedAt": "2026-03-27T18:38:30Z"
+    "detectedAt": "2026-03-28T07:29:21Z"
   },
   {
-    "changeType": "NEW",
-    "date": "2026-03-28",
+    "changeType": "REMOVED",
+    "date": "2026-03-27",
     "brand": "Air Jordan",
     "style": "ENTRIES OPEN App Entry Jordan Grade School Retro 3 BOYS GRADE SCHOOL \u2022 WHITE/PINK/GREEN",
     "fieldChanged": "",
     "oldValue": "",
     "newValue": "",
-    "detectedAt": "2026-03-27T18:38:30Z"
+    "detectedAt": "2026-03-28T07:29:21Z"
   },
   {
-    "changeType": "NEW",
-    "date": "2026-03-28",
+    "changeType": "REMOVED",
+    "date": "2026-03-27",
+    "brand": "Nike",
+    "style": "ENTRIES OPEN App Entry Nike Air Foamposite Pro MENS \u2022 UNIVERSITY BLUE/MIDNIGHT NAVY",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-28T07:29:21Z"
+  },
+  {
+    "changeType": "REMOVED",
+    "date": "2026-03-27",
+    "brand": "Nike",
+    "style": "ENTRIES OPEN App Entry Nike Grade School Little Posite Pro BOYS GRADE SCHOOL \u2022 UNIVERSITY BLUE/WHITE/MIDNIGHT NAVY",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-28T07:29:21Z"
+  },
+  {
+    "changeType": "REMOVED",
+    "date": "2026-03-27",
     "brand": "Air Jordan",
     "style": "Jordan Retro 3 BOYS PRE-SCHOOL \u2022 WHITE/PINK/GREEN",
     "fieldChanged": "",
     "oldValue": "",
     "newValue": "",
-    "detectedAt": "2026-03-27T18:38:30Z"
+    "detectedAt": "2026-03-28T07:29:21Z"
   },
   {
-    "changeType": "NEW",
-    "date": "2026-03-28",
+    "changeType": "REMOVED",
+    "date": "2026-03-27",
     "brand": "Air Jordan",
     "style": "Jordan Retro 3 BOYS TODDLER \u2022 WHITE/PINK/GREEN",
     "fieldChanged": "",
     "oldValue": "",
     "newValue": "",
-    "detectedAt": "2026-03-27T18:38:30Z"
+    "detectedAt": "2026-03-28T07:29:21Z"
   },
   {
-    "changeType": "NEW",
-    "date": "2026-03-28",
+    "changeType": "REMOVED",
+    "date": "2026-03-27",
     "brand": "Unknown",
     "style": "Launched",
     "fieldChanged": "",
     "oldValue": "",
     "newValue": "",
-    "detectedAt": "2026-03-27T18:38:30Z"
+    "detectedAt": "2026-03-28T07:29:21Z"
   },
   {
-    "changeType": "NEW",
-    "date": "2026-03-28",
+    "changeType": "REMOVED",
+    "date": "2026-03-27",
+    "brand": "Nike",
+    "style": "Nike Little Posite Pro BOYS PRE-SCHOOL \u2022 UNIVERSITY BLUE/WHITE/MIDNIGHT NAVY",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-28T07:29:21Z"
+  },
+  {
+    "changeType": "REMOVED",
+    "date": "2026-03-27",
     "brand": "Unknown",
     "style": "Order Status",
     "fieldChanged": "",
     "oldValue": "",
     "newValue": "",
-    "detectedAt": "2026-03-27T18:38:30Z"
+    "detectedAt": "2026-03-28T07:29:21Z"
   },
   {
-    "changeType": "NEW",
-    "date": "2026-03-28",
+    "changeType": "REMOVED",
+    "date": "2026-03-27",
+    "brand": "Puma",
+    "style": "PUMA MB.05 Melo World BOYS GRADE SCHOOL \u2022 AQUATIC GREEN/FOR ALL TIME RED",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-28T07:29:21Z"
+  },
+  {
+    "changeType": "REMOVED",
+    "date": "2026-03-27",
+    "brand": "Puma",
+    "style": "PUMA MB.05 Melo World MENS \u2022 TEAL/RED",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-28T07:29:21Z"
+  },
+  {
+    "changeType": "REMOVED",
+    "date": "2026-03-27",
+    "brand": "ASICS",
+    "style": "Reebok Angel Reese 1 GIRLS GRADE SCHOOL \u2022 GREEN/PURPLE",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-28T07:29:21Z"
+  },
+  {
+    "changeType": "REMOVED",
+    "date": "2026-03-27",
+    "brand": "ASICS",
+    "style": "Reebok Angel Reese 1 MENS \u2022 ATOMIC AQUA/DREAM PURPLE",
+    "fieldChanged": "",
+    "oldValue": "",
+    "newValue": "",
+    "detectedAt": "2026-03-28T07:29:21Z"
+  },
+  {
+    "changeType": "REMOVED",
+    "date": "2026-03-27",
     "brand": "Unknown",
     "style": "Returns-Exchanges",
     "fieldChanged": "",
     "oldValue": "",
     "newValue": "",
-    "detectedAt": "2026-03-27T18:38:30Z"
+    "detectedAt": "2026-03-28T07:29:21Z"
   },
   {
-    "changeType": "NEW",
-    "date": "2026-03-28",
+    "changeType": "REMOVED",
+    "date": "2026-03-27",
     "brand": "Unknown",
     "style": "Shipping Info",
     "fieldChanged": "",
     "oldValue": "",
     "newValue": "",
-    "detectedAt": "2026-03-27T18:38:30Z"
+    "detectedAt": "2026-03-28T07:29:21Z"
   },
   {
-    "changeType": "NEW",
-    "date": "2026-03-28",
+    "changeType": "REMOVED",
+    "date": "2026-03-27",
     "brand": "Unknown",
     "style": "Skip To Main",
     "fieldChanged": "",
     "oldValue": "",
     "newValue": "",
-    "detectedAt": "2026-03-27T18:38:30Z"
+    "detectedAt": "2026-03-28T07:29:21Z"
   },
   {
-    "changeType": "NEW",
-    "date": "2026-03-28",
+    "changeType": "REMOVED",
+    "date": "2026-03-27",
     "brand": "Unknown",
     "style": "Store Pickup",
     "fieldChanged": "",
     "oldValue": "",
     "newValue": "",
-    "detectedAt": "2026-03-27T18:38:30Z"
+    "detectedAt": "2026-03-28T07:29:21Z"
   },
   {
-    "changeType": "NEW",
-    "date": "2026-03-28",
+    "changeType": "REMOVED",
+    "date": "2026-03-27",
     "brand": "Unknown",
     "style": "Upcoming",
     "fieldChanged": "",
     "oldValue": "",
     "newValue": "",
-    "detectedAt": "2026-03-27T18:38:30Z"
+    "detectedAt": "2026-03-28T07:29:21Z"
   },
   {
     "changeType": "NEW",
-    "date": "2026-04-01",
+    "date": "2026-03-28",
     "brand": "Air Jordan",
-    "style": "Jordan AJ 1 Retro High OG FC MENS \u2022 BLACK/UNIVERSITY RED/SAIL",
+    "style": "App Entry Jordan Air Jordan 3 Retro OG MENS \u2022 SAIL/JADE AURA/YELLOW",
     "fieldChanged": "",
     "oldValue": "",
     "newValue": "",
-    "detectedAt": "2026-03-27T18:38:30Z"
+    "detectedAt": "2026-03-28T07:29:21Z"
   },
   {
     "changeType": "NEW",
-    "date": "2026-04-01",
-    "brand": "Nike",
-    "style": "Nike Ja 3 JP BOYS GRADE SCHOOL \u2022 ANTHRACITE/BRIGHT CRIMSON/YELLOW OCHRE",
+    "date": "2026-03-28",
+    "brand": "Air Jordan",
+    "style": "App Entry Jordan Grade School Retro 3 BOYS GRADE SCHOOL \u2022 WHITE/PINK/GREEN",
     "fieldChanged": "",
     "oldValue": "",
     "newValue": "",
-    "detectedAt": "2026-03-27T18:38:30Z"
-  },
-  {
-    "changeType": "NEW",
-    "date": "2026-04-01",
-    "brand": "Nike",
-    "style": "Nike Ja 3 JP BOYS GRADE SCHOOL \u2022 GREEN SPARK/BLACK/UNIVERSITY RED",
-    "fieldChanged": "",
-    "oldValue": "",
-    "newValue": "",
-    "detectedAt": "2026-03-27T18:38:30Z"
-  },
-  {
-    "changeType": "NEW",
-    "date": "2026-04-01",
-    "brand": "Nike",
-    "style": "Nike Ja 3 JP BOYS PRE-SCHOOL \u2022 ARNTHRACITE/BRIGHT CRIMSON",
-    "fieldChanged": "",
-    "oldValue": "",
-    "newValue": "",
-    "detectedAt": "2026-03-27T18:38:30Z"
-  },
-  {
-    "changeType": "RETAIL_CHANGED",
-    "date": "2026-04-01",
-    "brand": "Air Jordan",
-    "style": "Jordan Grade School Retro 3 GIRLS GRADE SCHOOL \u2022 PINK/ORANGE/BLUE",
-    "fieldChanged": "retailPrice",
-    "oldValue": 150,
-    "newValue": 155,
-    "detectedAt": "2026-03-27T18:38:30Z"
-  },
-  {
-    "changeType": "RETAIL_CHANGED",
-    "date": "2026-04-01",
-    "brand": "Air Jordan",
-    "style": "Jordan Luka 5 MENS \u2022 BLACK/WHITE/GREY",
-    "fieldChanged": "retailPrice",
-    "oldValue": 150,
-    "newValue": 155,
-    "detectedAt": "2026-03-27T18:38:30Z"
-  },
-  {
-    "changeType": "RETAIL_CHANGED",
-    "date": "2026-04-01",
-    "brand": "Air Jordan",
-    "style": "Jordan Pre-School Retro 3 GIRLS PRE-SCHOOL \u2022 PINK/ORANGE/BLUE",
-    "fieldChanged": "retailPrice",
-    "oldValue": 150,
-    "newValue": 155,
-    "detectedAt": "2026-03-27T18:38:30Z"
-  },
-  {
-    "changeType": "RETAIL_CHANGED",
-    "date": "2026-04-01",
-    "brand": "Air Jordan",
-    "style": "Jordan Retro 4 WOMENS \u2022 ICED CARMINE/MILK",
-    "fieldChanged": "retailPrice",
-    "oldValue": 150,
-    "newValue": 155,
-    "detectedAt": "2026-03-27T18:38:30Z"
-  },
-  {
-    "changeType": "RETAIL_CHANGED",
-    "date": "2026-04-01",
-    "brand": "Nike",
-    "style": "Nike Mind 001 Mule MENS \u2022 LIGHT SMOKE GREY/CHROME/PHOTON DUST",
-    "fieldChanged": "retailPrice",
-    "oldValue": 150,
-    "newValue": 155,
-    "detectedAt": "2026-03-27T18:38:30Z"
-  },
-  {
-    "changeType": "RETAIL_CHANGED",
-    "date": "2026-04-01",
-    "brand": "Nike",
-    "style": "Nike Mind 002 MENS \u2022 BLUE/PLATINUM/BLUE",
-    "fieldChanged": "retailPrice",
-    "oldValue": 150,
-    "newValue": 155,
-    "detectedAt": "2026-03-27T18:38:30Z"
-  },
-  {
-    "changeType": "RETAIL_CHANGED",
-    "date": "2026-04-01",
-    "brand": "Nike",
-    "style": "Nike Sabrina 3 GIRLS GRADE SCHOOL \u2022 IGLOO/HOT LAVA/BLUE CRYSTAL",
-    "fieldChanged": "retailPrice",
-    "oldValue": 150,
-    "newValue": 155,
-    "detectedAt": "2026-03-27T18:38:30Z"
-  },
-  {
-    "changeType": "RETAIL_CHANGED",
-    "date": "2026-04-01",
-    "brand": "Nike",
-    "style": "Nike Zoom Huarache 2K4 OT MENS \u2022 BLACK/BLACK",
-    "fieldChanged": "retailPrice",
-    "oldValue": 150,
-    "newValue": 155,
-    "detectedAt": "2026-03-27T18:38:30Z"
-  },
-  {
-    "changeType": "RETAIL_CHANGED",
-    "date": "2026-04-01",
-    "brand": "Vans",
-    "style": "Vans LX Authentic 44 Archive WOMENS \u2022 BLACK/BLUE",
-    "fieldChanged": "retailPrice",
-    "oldValue": 150,
-    "newValue": 155,
-    "detectedAt": "2026-03-27T18:38:30Z"
-  },
-  {
-    "changeType": "RETAIL_CHANGED",
-    "date": "2026-04-01",
-    "brand": "Vans",
-    "style": "Vans LX Authentic Pony WOMENS \u2022 MARSH/LEOPARD",
-    "fieldChanged": "retailPrice",
-    "oldValue": 150,
-    "newValue": 155,
-    "detectedAt": "2026-03-27T18:38:30Z"
+    "detectedAt": "2026-03-28T07:29:21Z"
   }
 ]
